@@ -9,16 +9,16 @@ export interface Line {
 
 export class SensorLine extends Sprite implements Line {
   static TAG = "sensorLine";
+
+  element = document.createElement("div");
   tags = [SensorLine.TAG];
+
   position: Position;
 
   constructor(public p1: Point, public p2: Point) {
     super();
 
-    const element = document.createElement("div");
-    this.element = element;
-
-    element.style.position = "absolute";
+    this.position = new Position(this, p1.x, p1.y);
 
     const width = Math.sqrt(
       Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
@@ -26,33 +26,17 @@ export class SensorLine extends Sprite implements Line {
 
     const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
 
-    element.style.setProperty("width", `${width}px`);
-    element.style.setProperty("height", "1px");
+    const style = this.element.style;
 
-    element.style.setProperty("background-color", "red");
-    element.style.setProperty("transform", `rotate(${angle}rad)`);
-    element.style.setProperty("transform-origin", "0 0");
+    style.setProperty("position", "absolute");
+    style.setProperty("height", "1px");
 
-    element.style.setProperty("left", `${p1.x}px`);
-    element.style.setProperty("top", `${p1.y}px`);
+    style.setProperty("background-color", "red");
+    style.setProperty("transform-origin", "0 0");
 
-    this.position = new Position(this, p1.x, p1.y);
-  }
-
-  public distance(point: Point): number {
-    const { p1, p2 } = this;
-    const { x: x1, y: y1 } = p1;
-
-    const x2 = p2.x - x1;
-    const y2 = p2.y - y1;
-
-    const x0 = point.x;
-    const y0 = point.y;
-
-    const numerator = Math.abs(y2 * x0 - x2 * y0 + p2.x * p1.y - p2.y * p1.x);
-    const denominator = Math.sqrt(y2 ** 2 + x2 ** 2);
-
-    const distance = numerator / denominator;
-    return distance;
+    style.setProperty("width", `${width}px`);
+    style.setProperty("transform", `rotate(${angle}rad)`);
+    style.setProperty("left", `${p1.x}px`);
+    style.setProperty("top", `${p1.y}px`);
   }
 }
