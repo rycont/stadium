@@ -4,6 +4,7 @@ import { Stage } from "./stage";
 import harang from "./asset/harang";
 import eth from "./asset/eth.png";
 import { SensorLine } from "./sensorLine";
+import { Studio } from "./studio/stage";
 
 const element = document.getElementById("stage")!;
 
@@ -34,6 +35,15 @@ stage.nearnessDetector.addRule({
     target.destroy();
   },
 });
+
+const useStudio = document.getElementById("use_studio") as HTMLButtonElement;
+
+useStudio.addEventListener("click", () => {
+  const studio = new Studio(stage);
+});
+
+// const studio = new Studio(stage);
+// harangSprite.position.moveBy(80, 0);
 
 addEventListener("keydown", (e) => {
   const key = e.key;

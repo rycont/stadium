@@ -18,6 +18,7 @@ export class Sprite {
   onMount(stage: Stage, id: string) {
     this.id = id;
     this.stage = stage;
+    this.element.id = id;
   }
 
   toJSON() {
@@ -53,12 +54,14 @@ export class ImageSprite extends Sprite {
     element.style.position = "absolute";
     element.style.setProperty("width", `${width}px`);
     element.style.setProperty("height", `${height}px`);
+    element.style.setProperty("transform", "translate(-50%, -50%)");
 
     if (typeof image === "string") {
       this.setImage(image);
     } else {
       this.loopSpriteImage = new LoopSpriteImage(this, image);
     }
+
     this.position = new MovableImageSpritePosition(this, x, y);
   }
 
@@ -74,53 +77,6 @@ export class ImageSprite extends Sprite {
     });
   }
 }
-
-// export class Sprite {
-//   element: HTMLImageElement;
-//   tags: string[] = [];
-
-//   loopSpriteImage?: LoopSpriteImage;
-//   stage?: Stage;
-//   id?: string;
-
-//   constructor(
-//     public image: SpriteSheet | string,
-//     public width: number,
-//     public height: number,
-//     x: number = 0,
-//     y: number = 0
-//   ) {
-//     const element = document.createElement("img");
-//     this.element = element;
-
-//     element.style.position = "absolute";
-//     element.style.setProperty("width", `${width}px`);
-//     element.style.setProperty("height", `${height}px`);
-
-//     if (typeof image === "string") {
-//       this.setImage(image);
-//     } else {
-//       this.loopSpriteImage = new LoopSpriteImage(this, image);
-//     }
-//     this.position = new Position(this, x, y);
-//   }
-
-//   setImage(image: string) {
-//     this.element.src = image;
-//   }
-
-//   onMount(stage: Stage, id: string) {
-//     this.id = id;
-//     this.stage = stage;
-//   }
-
-//   toJSON() {
-//     return {
-//       ...this,
-//       type: this.constructor.name,
-//     };
-//   }
-// }
 
 export const SpriteSheet = z.intersection(
   z.record(z.string().array()),

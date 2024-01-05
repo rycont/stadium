@@ -1,3 +1,6 @@
+import Moveable, { MoveableOptions } from "moveable";
+import Selecto from "selecto";
+
 import { Line, SensorLine } from "../sensorLine";
 import { Sprite } from "../sprite";
 import { MoveTo } from "../sprite/position";
@@ -6,10 +9,12 @@ import { nearnessDetector } from "./nearnessDetector";
 
 export class Stage {
   onSpriteMoveEventListeners: ((move: MoveTo) => void)[] = [];
+  onSpriteAddEventListeners: ((sprite: Sprite) => void)[] = [];
+
   nearnessDetector = new nearnessDetector(this);
   sprites: Sprite[] = [];
 
-  constructor(public element: HTMLElement) {
+  constructor(public element: HTMLDivElement) {
     this.element.style.setProperty("position", "relative");
   }
 
@@ -18,10 +23,14 @@ export class Stage {
     this.sprites.push(sprite);
     sprite.onMount(this, crypto.randomUUID());
     this.nearnessDetector.addSprite(sprite);
+    this.onSpriteAddEventListeners.forEach((listener) => listener(sprite));
+  }
+
+  onSpriteAdd(listener: (sprite: Sprite) => void) {
+    this.onSpriteAddEventListeners.push(listener);
   }
 
   canMoveTo(sprite: Sprite, to: Point) {
-    // const from = sprite.position!;
     const movingLine: Line = {
       p1: sprite.position!,
       p2: to,

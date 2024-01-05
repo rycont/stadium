@@ -40,6 +40,10 @@ export class Position implements Point {
       listener({ x, y, animationDuration: 0 })
     );
   }
+
+  setDirectly(x: number, y: number) {
+    this.set(x, y);
+  }
 }
 
 export class MovableImageSpritePosition extends Position {
@@ -51,7 +55,7 @@ export class MovableImageSpritePosition extends Position {
     super(sprite, x, y);
     this.sprite = sprite;
 
-    this.set(x, y, 0);
+    this.setDirectly(x, y);
   }
 
   set(
@@ -61,6 +65,18 @@ export class MovableImageSpritePosition extends Position {
   ) {
     this.targets.push({ x, y, animationDuration });
     if (!this.isMoving) this.runMovingQueue();
+  }
+
+  setDirectly(x: number, y: number): void {
+    this.x = x;
+    this.y = y;
+
+    this.sprite.element.style.setProperty("left", `${x}px`);
+    this.sprite.element.style.setProperty("top", `${y}px`);
+
+    this.onMoveEventListeners.forEach((listener) =>
+      listener({ x, y, animationDuration: 0 })
+    );
   }
 
   private async runMovingQueue() {
@@ -92,19 +108,17 @@ export class MovableImageSpritePosition extends Position {
     const animation = this.sprite.element.animate(
       [
         {
-          transform: `translate(${this.x - this.sprite.width / 2}px, ${
-            this.y - this.sprite.height / 2
-          }px)`,
+          left: `${this.x}px`,
+          top: `${this.y}px`,
         },
         {
-          transform: `translate(${target.x - this.sprite.width / 2}px, ${
-            target.y - this.sprite.height / 2
-          }px)`,
+          left: `${target.x}px`,
+          top: `${target.y}px`,
         },
       ],
       {
         duration: target.animationDuration,
-        fill: "forwards",
+        // fill: "forwards",
         easing: "ease-in-out",
       }
     );
@@ -114,6 +128,9 @@ export class MovableImageSpritePosition extends Position {
         this.x = target.x;
         this.y = target.y;
         this.onMoveEventListeners.forEach((listener) => listener(target));
+
+        this.sprite.element.style.setProperty("left", `${target.x}px`);
+        this.sprite.element.style.setProperty("top", `${target.y}px`);
 
         resolve();
       });
