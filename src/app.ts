@@ -10,9 +10,10 @@ import { Animate } from "../lib/hook/animate";
 import harang from "./harang";
 
 const element = document.getElementById("stage")! as HTMLDivElement;
-const stage = new Stage(element, 900, 400);
-
-// 무대의 크기를 800 x 640으로 가정한다
+const stage = new Stage(element, {
+  width: 800,
+  height: 640,
+});
 
 const line = new SensorLine({ left: 40, top: 50 }, { left: 320, top: 120 });
 const harangSprite = new ImageSprite(harang.idle[0], 80, 80, 40, 40);
