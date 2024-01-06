@@ -37,7 +37,7 @@ animate.moveBy(0, 80);
 animate.moveBy(80, 0);
 ```
 
-## Document
+## Quick Tour
 
 ### Stadium 초기화하기
 
@@ -123,13 +123,61 @@ stage.addSprite(line)
 
 1. **Animate**   
 ImageSprite의 위치를 부드럽게 조작할 수 있습니다.
+```typescript
+const animate = new Animate();
+sprite.use([animate])
+animate.moveBy(80, 0);
+```
 2. **LineCrossingDetector**   
 ImageSprite가 SensorLine을 지났는지 검사하고, 이동을 제한하거나 특정 동작을 실행할 수 있습니다.
+```typescript
+line.tags.push(LineCrossingDetector.LINE_TAG);
+
+const lineCrossingDetector = new LineCrossingDetector({
+  blockMove: true,
+  clearMovePathAfterBlocking: true,
+});
+
+lineCrossingDetector.pubsub.sub("blocked", () => {
+  console.log("Blocked by line");
+});
+
+sprite.use([ lineCrossingDetector ])
+```
 3. **LoopSprite**   
 ImageSprite에 여러 이미지를 반복적으로 표시할 수 있습니다.
+```typescript
+const loopSprite = new LoopSprite(spriteSheet)
+
+sprite.use([
+  loopSprite,
+])
+
+loopSprite.state = "laugh"
+```
 4. **LoopSpriteByDirection** (Inherits LoopSprite)   
 Animate Hook을 사용해 ImageSprite의 위치를 조작할 때, 이동 방향에 알맞은 스프라이트를 표시할 수 있습니다. (오른쪽으로 이동하는 이미지, 왼쪽으로 이동하는 이미지 등..)
+```typescript
+sprite.use([
+  new LoopSpriteByDirection(spriteSheet),
+])
+```
 5. **MoveableSprite** (powered by [daybrush/moveable](https://github.com/daybrush/moveable))   
 ImageSprite의 위치를 드래그앤 드랍으로 이동할 수 있게 합니다.
+```typescript
+sprite.use([
+  new MoveableSprite()
+])
+```
 6. **Nearness**   
 스프라이트가 다른 스프라이트에 근접했는지를 확인하고, 특정 동작을 실행할 수 있습니다.
+```typescript
+const tags = ["block"]
+const threshold = 10
+
+const onNear = (source: Sprite, target: Sprite) => {}
+
+sprite.use([
+  new Nearness(tags, threshold, onNear)
+])
+```
