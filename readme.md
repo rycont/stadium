@@ -40,6 +40,7 @@ animate.moveBy(80, 0);
 ## Quick Tour
 
 ### Stadium 초기화하기
+[Stadium 자세히 알아보기](./docs/stadium.md)
 
 > Path: /lib/stadium/index.ts
 
