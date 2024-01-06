@@ -4,18 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #stage {
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
     <div id="stage"></div>
     <script type="module">
-      import { Stage, SensorLine } from "./dist/stadium.js";
+      import {
+        Stage,
+        SensorLine,
+        ImageSprite,
+        MoveableSprite,
+        Animate,
+        LineCrossingDetector,
+      } from "./dist/stadium.js";
 
       const element = document.getElementById("stage");
-      const stage = new Stage(element);
-      const line = new SensorLine(
-        { left: 40, top: 50 },
-        { left: 320, top: 120 }
-      );
+      const stage = new Stage(element, {
+        width: 400,
+        height: 300,
+      });
+
+      const lines = [
+        new SensorLine({ left: 40, top: 40 }, { left: 120, top: 40 }),
+        new SensorLine({ left: 120, top: 40 }, { left: 120, top: 120 }),
+        new SensorLine({ left: 120, top: 120 }, { left: 40, top: 120 }),
+        new SensorLine({ left: 40, top: 120 }, { left: 40, top: 40 }),
+      ];
+
+      for (const line of lines) {
+        line.tags.push(LineCrossingDetector.LINE_TAG);
+        stage.addSprite(line);
+      }
+
+      const me = new ImageSprite("/asset/eth.png", 40, 40, 80, 80);
+      const animateMe = new Animate();
+
+      me.use([
+        new LineCrossingDetector({
+          blockMove: true,
+        }),
+        animateMe,
+      ]);
+      stage.addSprite(me);
+
+      addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "ArrowUp":
+            animateMe.moveBy(0, -10);
+            break;
+          case "ArrowDown":
+            animateMe.moveBy(0, 10);
+            break;
+          case "ArrowLeft":
+            animateMe.moveBy(-10, 0);
+            break;
+          case "ArrowRight":
+            animateMe.moveBy(10, 0);
+            break;
+        }
+      });
     </script>
   </body>
 </html>
