@@ -1,14 +1,13 @@
 import { z } from "zod";
-import { Stage } from "../stage";
-import { Point } from "../type";
 import { Hook, HookManager } from "../hook/hook";
 import { Locator } from "../hook/locator";
 import { PubSub } from "../pubsub";
+import { Stage } from "../stage";
 import { Position } from "./position";
 export const DEFAULT_SPRITE_STATE = "idle";
 
 export abstract class Sprite {
-  abstract element: HTMLElement;
+  element: HTMLElement = document.createElement("div");
   tags: string[] = [];
 
   pubsub = new PubSub(["move"] as const);
@@ -17,7 +16,9 @@ export abstract class Sprite {
   stage?: Stage;
   id?: string;
 
-  constructor(public position: Position) {}
+  constructor(public position: Position) {
+    this.element.classList.add("sprite");
+  }
 
   onMount(stage: Stage, id: string) {
     this.id = id;
@@ -70,8 +71,8 @@ export class ImageSprite extends Sprite {
     const element = this.element;
     const style = element.style;
 
-    style.setProperty("width", `${this.width}px`);
-    style.setProperty("height", `${this.height}px`);
+    style.setProperty("width", `calc(var(--x-ratio) * ${this.width}px)`);
+    style.setProperty("height", `calc(var(--y-ratio) * ${this.height}px)`);
 
     element.src = this.image;
   }

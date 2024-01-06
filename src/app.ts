@@ -7,17 +7,17 @@ import { MoveableSprite } from "../lib/hook/moveable";
 import { Nearness } from "../lib/hook/nearness";
 import { SensorLine } from "../lib/sensorLine";
 import { Animate } from "../lib/hook/animate";
-import harang from "../lib/asset/harang";
-import eth from "../lib/asset/eth.png";
+import harang from "./harang";
 
 const element = document.getElementById("stage")! as HTMLDivElement;
+const stage = new Stage(element, 900, 400);
 
-const stage = new Stage(element);
+// 무대의 크기를 800 x 640으로 가정한다
 
 const line = new SensorLine({ left: 40, top: 50 }, { left: 320, top: 120 });
 const harangSprite = new ImageSprite(harang.idle[0], 80, 80, 40, 40);
-const ethSprite1 = new ImageSprite(eth, 40, 40, 200, 200);
-const ethSprite2 = new ImageSprite(eth, 40, 40, 360, 200);
+const ethSprite1 = new ImageSprite("/asset/eth.png", 40, 40, 200, 200);
+const ethSprite2 = new ImageSprite("/asset/eth.png", 40, 40, 360, 200);
 
 ethSprite1.tags.push("eth");
 ethSprite2.tags.push("eth");

@@ -24,11 +24,24 @@ export class SensorLine extends Sprite implements Line {
   draw(): void {
     const { p1, p2 } = this;
 
+    const xRatio = this.stage!.element.style.getPropertyValue("--x-ratio");
+    const yRatio = this.stage!.element.style.getPropertyValue("--y-ratio");
+
+    const r1 = {
+      left: p1.left * Number(xRatio),
+      top: p1.top * Number(yRatio),
+    };
+
+    const r2 = {
+      left: p2.left * Number(xRatio),
+      top: p2.top * Number(yRatio),
+    };
+
     const width = Math.sqrt(
-      Math.pow(p2.left - p1.left, 2) + Math.pow(p2.top - p1.top, 2)
+      Math.pow(r2.left - r1.left, 2) + Math.pow(r2.top - r1.top, 2)
     );
 
-    const angle = Math.atan2(p2.top - p1.top, p2.left - p1.left);
+    const angle = Math.atan2(r2.top - r1.top, r2.left - r1.left);
 
     const style = this.element.style;
 
@@ -39,8 +52,10 @@ export class SensorLine extends Sprite implements Line {
     style.setProperty("transform-origin", "0 0");
 
     style.setProperty("width", `${width}px`);
+
     style.setProperty("transform", `rotate(${angle}rad)`);
-    style.setProperty("left", `${p1.left}px`);
-    style.setProperty("top", `${p1.top}px`);
+
+    style.setProperty("left", `${r1.left}px`);
+    style.setProperty("top", `${r1.top}px`);
   }
 }

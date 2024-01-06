@@ -19,8 +19,15 @@ export class Locator extends Hook {
   onDraw() {
     const { element, position } = this.sprite;
 
-    element.style.setProperty("left", `${position.left}px`);
-    element.style.setProperty("top", `${position.top}px`);
+    element.style.setProperty(
+      "left",
+      `calc(var(--x-ratio) * ${position.left}px)`
+    );
+
+    element.style.setProperty(
+      "top",
+      `calc(var(--y-ratio) * ${position.top}px)`
+    );
 
     this.sprite.pubsub.pub("move", [this.sprite]);
   }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="stage"></div>
+    <script type="module">
+      import { Stage, SensorLine } from "./dist/stadium.js";
+
+      const element = document.getElementById("stage");
+      const stage = new Stage(element);
+      const line = new SensorLine(
+        { left: 40, top: 50 },
+        { left: 320, top: 120 }
+      );
+    </script>
+  </body>
+</html>

@@ -88,12 +88,12 @@ export class Animate extends Hook {
     const animate = this.sprite.element.animate(
       [
         {
-          left: `${this.sprite.position.left}px`,
-          top: `${this.sprite.position.top}px`,
+          left: `calc(var(--x-ratio) * ${this.sprite.position.left}px)`,
+          top: `calc(var(--y-ratio) * ${this.sprite.position.top}px)`,
         },
         {
-          left: `${target.left}px`,
-          top: `${target.top}px`,
+          left: `calc(var(--x-ratio) * ${target.left}px)`,
+          top: `calc(var(--y-ratio) * ${target.top}px)`,
         },
       ],
       {

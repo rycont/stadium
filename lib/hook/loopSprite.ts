@@ -79,7 +79,7 @@ export class LoopSpriteByDirection extends LoopSprite {
       this.state = this.getDirection(from, to);
     });
 
-    animate.pubsub.sub("end", (from: Point, to: Point) => {
+    animate.pubsub.sub("end", () => {
       this.state = "idle";
     });
   }
