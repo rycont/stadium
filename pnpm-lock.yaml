@@ -8,9 +8,6 @@ dependencies:
   moveable:
     specifier: ^0.53.0
     version: 0.53.0
-  selecto:
-    specifier: ^1.26.3
-    version: 1.26.3
   zod:
     specifier: ^3.22.4
     version: 3.22.4

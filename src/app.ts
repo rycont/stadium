@@ -43,8 +43,9 @@ harangSprite.use([
   new MoveableSprite(),
   lineCrossingDetector,
   animate,
-  new Nearness(["eth"], 10, () => {
+  new Nearness(["eth"], 10, (_, target) => {
     console.log("이더리움을 획득했습니다!");
+    target.destroy();
   }),
   new Nearness(["block"], 10, () => {
     console.log("차단선에 가까워짐");
