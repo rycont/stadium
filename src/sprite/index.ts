@@ -1,24 +1,30 @@
 import { z } from "zod";
 import { Stage } from "../stage";
-import { LoopSpriteImage } from "./loopSpriteImage";
-import { MovableImageSpritePosition, Position } from "./position";
-
+import { Point } from "../type";
+import { Hook, HookManager } from "../hook";
+import { Locator } from "../hook/locator";
+import { PubSub } from "../pubsub";
+import { Position } from "./position";
 export const DEFAULT_SPRITE_STATE = "idle";
 
-export class Sprite {
-  element: HTMLElement = document.createElement("div");
+export abstract class Sprite {
+  abstract element: HTMLElement;
   tags: string[] = [];
 
-  position?: Position;
+  pubsub = new PubSub(["move"] as const);
+  hookManager = new HookManager(this);
+
   stage?: Stage;
   id?: string;
 
-  constructor() {}
+  constructor(public position: Position) {}
 
   onMount(stage: Stage, id: string) {
     this.id = id;
     this.stage = stage;
     this.element.id = id;
+
+    this.draw();
   }
 
   toJSON() {
@@ -29,52 +35,46 @@ export class Sprite {
   }
 
   destroy() {
-    this.stage?.removeSprite(this);
     this.element.remove();
   }
+
+  use(hooks: Hook[]) {
+    this.hookManager.use(hooks);
+  }
+
+  get mounted() {
+    return !!this.id;
+  }
+
+  abstract draw(): void;
 }
 
 export class ImageSprite extends Sprite {
-  loopSpriteImage?: LoopSpriteImage;
-  position: MovableImageSpritePosition;
-  element: HTMLImageElement;
+  element = document.createElement("img");
 
   constructor(
     public image: SpriteSheet | string,
     public width: number,
     public height: number,
-    x: number = 0,
-    y: number = 0
+    left: number = 0,
+    top: number = 0
   ) {
-    super();
+    super(new Position(left, top));
 
-    const element = document.createElement("img");
-    this.element = element;
-
-    element.style.position = "absolute";
-    element.style.setProperty("width", `${width}px`);
-    element.style.setProperty("height", `${height}px`);
-    element.style.setProperty("transform", "translate(-50%, -50%)");
-
-    if (typeof image === "string") {
-      this.setImage(image);
-    } else {
-      this.loopSpriteImage = new LoopSpriteImage(this, image);
-    }
-
-    this.position = new MovableImageSpritePosition(this, x, y);
+    this.use([new Locator()]);
   }
 
-  setImage(image: string) {
-    this.element.src = image;
-  }
+  draw(): void {
+    const element = this.element;
+    const style = element.style;
 
-  onMount(stage: Stage, id: string): void {
-    super.onMount(stage, id);
+    style.setProperty("width", `${this.width}px`);
+    style.setProperty("height", `${this.height}px`);
 
-    this.position.onMove((move) => {
-      stage.onSpriteMoveEventListeners.forEach((listener) => listener(move));
-    });
+    element.src =
+      typeof this.image === "string"
+        ? this.image
+        : this.image[DEFAULT_SPRITE_STATE][0];
   }
 }
 

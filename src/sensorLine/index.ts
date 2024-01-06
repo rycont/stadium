@@ -1,11 +1,14 @@
+import { z } from "zod";
 import { Sprite } from "../sprite";
 import { Position } from "../sprite/position";
 import { Point } from "../type";
 
-export interface Line {
-  p1: Point;
-  p2: Point;
-}
+export const Line = z.object({
+  p1: Point,
+  p2: Point,
+});
+
+export type Line = z.infer<typeof Line>;
 
 export class SensorLine extends Sprite implements Line {
   static TAG = "sensorLine";
@@ -13,18 +16,19 @@ export class SensorLine extends Sprite implements Line {
   element = document.createElement("div");
   tags = [SensorLine.TAG];
 
-  position: Position;
-
   constructor(public p1: Point, public p2: Point) {
-    super();
+    const center = new Position((p1.left + p2.top) / 2, (p1.left + p2.top) / 2);
+    super(center);
+  }
 
-    this.position = new Position(this, p1.x, p1.y);
+  draw(): void {
+    const { p1, p2 } = this;
 
     const width = Math.sqrt(
-      Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
+      Math.pow(p2.left - p1.left, 2) + Math.pow(p2.top - p1.top, 2)
     );
 
-    const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+    const angle = Math.atan2(p2.top - p1.top, p2.left - p1.left);
 
     const style = this.element.style;
 
@@ -36,7 +40,7 @@ export class SensorLine extends Sprite implements Line {
 
     style.setProperty("width", `${width}px`);
     style.setProperty("transform", `rotate(${angle}rad)`);
-    style.setProperty("left", `${p1.x}px`);
-    style.setProperty("top", `${p1.y}px`);
+    style.setProperty("left", `${p1.left}px`);
+    style.setProperty("top", `${p1.top}px`);
   }
 }

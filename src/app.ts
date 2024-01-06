@@ -1,60 +1,65 @@
 import { ImageSprite } from "./sprite";
 import { Stage } from "./stage";
 
+import { MoveableSprite } from "./hook/moveable";
+import { Nearness } from "./hook/nearness";
+import { SensorLine } from "./sensorLine";
+import { Animate } from "./hook/animate";
 import harang from "./asset/harang";
 import eth from "./asset/eth.png";
-import { SensorLine } from "./sensorLine";
-import { Studio } from "./studio/stage";
+import { LineCrossingDetector } from "./hook/lineCrossingDetector";
 
-const element = document.getElementById("stage")!;
+const element = document.getElementById("stage")! as HTMLDivElement;
 
 const stage = new Stage(element);
+
+const line = new SensorLine({ left: 40, top: 50 }, { left: 320, top: 120 });
 const harangSprite = new ImageSprite(harang, 80, 80, 40, 40);
-
 const ethSprite1 = new ImageSprite(eth, 40, 40, 200, 200);
-ethSprite1.tags.push("eth");
-
 const ethSprite2 = new ImageSprite(eth, 40, 40, 360, 200);
+
+ethSprite1.tags.push("eth");
 ethSprite2.tags.push("eth");
+line.tags.push(LineCrossingDetector.LINE_TAG);
 
 stage.addSprite(harangSprite);
 stage.addSprite(ethSprite1);
 stage.addSprite(ethSprite2);
-
-const line = new SensorLine({ x: 40, y: 50 }, { x: 320, y: 120 });
-line.tags.push("block");
-
 stage.addSprite(line);
 
-stage.nearnessDetector.addRule({
-  distance: 10,
-  source: harangSprite,
-  targetTag: "eth",
-  callback(_, target) {
-    alert("이더리움을 획득했습니다!");
-    target.destroy();
-  },
+const lineCrossingDetector = new LineCrossingDetector({
+  blockMove: true,
+  clearMovePathAfterBlocking: true,
 });
 
-const useStudio = document.getElementById("use_studio") as HTMLButtonElement;
-
-useStudio.addEventListener("click", () => {
-  const studio = new Studio(stage);
+lineCrossingDetector.pubsub.sub("blocked", () => {
+  console.log("Blocked by line");
 });
 
-// const studio = new Studio(stage);
-// harangSprite.position.moveBy(80, 0);
+harangSprite.use([
+  new MoveableSprite(),
+  lineCrossingDetector,
+  new Animate(),
+  new Nearness(["eth"], 10, () => {
+    console.log("이더리움을 획득했습니다!");
+  }),
+  new Nearness(["block"], 10, () => {
+    console.log("차단선에 가까워짐");
+  }),
+]);
+
+const harangAnimate = harangSprite.hookManager.get(Animate.name) as Animate;
 
 addEventListener("keydown", (e) => {
   const key = e.key;
 
   if (key === "ArrowUp") {
-    harangSprite.position.moveBy(0, -80);
+    harangAnimate.moveBy(0, -80);
   } else if (key === "ArrowDown") {
-    harangSprite.position.moveBy(0, 80);
+    harangAnimate.moveBy(0, 80);
   } else if (key === "ArrowLeft") {
-    harangSprite.position.moveBy(-80, 0);
+    harangAnimate.moveBy(-80, 0);
   } else if (key === "ArrowRight") {
-    harangSprite.position.moveBy(80, 0);
+    harangAnimate.moveBy(80, 0);
   }
 });

@@ -1,14 +1,8 @@
-export type Result<S, R> =
-  | {
-      type: "success";
-      value: S;
-    }
-  | {
-      type: "fail";
-      value: R;
-    };
+import { z } from "zod";
 
-export interface Point {
-  x: number;
-  y: number;
-}
+export const Point = z.object({
+  left: z.number(),
+  top: z.number(),
+});
+
+export type Point = z.infer<typeof Point>;
