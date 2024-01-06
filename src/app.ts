@@ -1,14 +1,14 @@
-import { ImageSprite } from "./sprite";
-import { Stage } from "./stage";
+import { ImageSprite } from "../lib/sprite";
+import { Stage } from "../lib/stage";
 
-import { LineCrossingDetector } from "./hook/lineCrossingDetector";
-import { LoopSpriteByDirection } from "./hook/loopSprite";
-import { MoveableSprite } from "./hook/moveable";
-import { Nearness } from "./hook/nearness";
-import { SensorLine } from "./sensorLine";
-import { Animate } from "./hook/animate";
-import harang from "./asset/harang";
-import eth from "./asset/eth.png";
+import { LineCrossingDetector } from "../lib/hook/lineCrossingDetector";
+import { LoopSpriteByDirection } from "../lib/hook/loopSprite";
+import { MoveableSprite } from "../lib/hook/moveable";
+import { Nearness } from "../lib/hook/nearness";
+import { SensorLine } from "../lib/sensorLine";
+import { Animate } from "../lib/hook/animate";
+import harang from "../lib/asset/harang";
+import eth from "../lib/asset/eth.png";
 
 const element = document.getElementById("stage")! as HTMLDivElement;
 

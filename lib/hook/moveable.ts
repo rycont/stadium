@@ -1,5 +1,5 @@
 import Moveable, { OnDrag } from "moveable";
-import { Hook } from ".";
+import { Hook } from "./hook";
 import { Sprite } from "../sprite";
 
 export class MoveableSprite extends Hook {

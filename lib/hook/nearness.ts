@@ -1,4 +1,4 @@
-import { Hook } from ".";
+import { Hook } from "./hook";
 import { SensorLine } from "../sensorLine";
 import { ImageSprite, Sprite } from "../sprite";
 import { Point } from "../type";

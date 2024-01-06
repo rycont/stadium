@@ -1,4 +1,4 @@
-import { Hook } from ".";
+import { Hook } from "./hook";
 import { Sprite } from "../sprite";
 
 export class Locator extends Hook {

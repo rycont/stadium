@@ -1,4 +1,4 @@
-import { Hook } from ".";
+import { Hook } from "./hook";
 import { PubSub } from "../pubsub";
 import { Line } from "../sensorLine";
 import { Sprite } from "../sprite";

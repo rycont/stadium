@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Stage } from "../stage";
 import { Point } from "../type";
-import { Hook, HookManager } from "../hook";
+import { Hook, HookManager } from "../hook/hook";
 import { Locator } from "../hook/locator";
 import { PubSub } from "../pubsub";
 import { Position } from "./position";
