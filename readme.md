@@ -70,11 +70,13 @@ Stadium을 초기화하면 `element`에는 다음과 같은 변화가 생깁니�
 
 ### Sprite 추가하기
 
+[Sprite 자세히 알아보기](./docs/sprite.md)
 > Path: /lib/sprite/index.ts
 
 Sprite는 맵에 표시되는 각 개체입니다.
 
 #### ImageSprite
+[ImageSprite 자세히 알아보기](./docs/sprite.md#imagesprite)
 이미지를 표시할 수 있는 스프라이트입니다.
 
 ```typescript
@@ -103,6 +105,7 @@ stage.addSprite(image)
 
 #### SensorLine
 
+[SensorLine 자세히 알아보기](./docs/sprite.md#sensorline)
 맵에 선을 그을 수 있습니다. 다양한 상호작용을 구현하기 위해 사용합니다. 
 
 ```typescript
@@ -120,6 +123,7 @@ stage.addSprite(line)
 
 ### Hook 이해하기
 
+[Hook 자세히 알아보기](./docs/hook.md)
 `Hook`으로 ImageSprite의 기능을 확장합니다. 다음과 같은 Hook이 제공됩니다.
 
 1. **Animate**   
