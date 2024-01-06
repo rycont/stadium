@@ -2,13 +2,13 @@ import { ImageSprite } from "./sprite";
 import { Stage } from "./stage";
 
 import { LineCrossingDetector } from "./hook/lineCrossingDetector";
+import { LoopSpriteByDirection } from "./hook/loopSprite";
 import { MoveableSprite } from "./hook/moveable";
 import { Nearness } from "./hook/nearness";
 import { SensorLine } from "./sensorLine";
 import { Animate } from "./hook/animate";
 import harang from "./asset/harang";
 import eth from "./asset/eth.png";
-import { LoopSprite, LoopSpriteByDirection } from "./hook/loopSprite";
 
 const element = document.getElementById("stage")! as HTMLDivElement;
 
@@ -37,10 +37,12 @@ lineCrossingDetector.pubsub.sub("blocked", () => {
   console.log("Blocked by line");
 });
 
+const animate = new Animate();
+
 harangSprite.use([
   new MoveableSprite(),
   lineCrossingDetector,
-  new Animate(),
+  animate,
   new Nearness(["eth"], 10, () => {
     console.log("이더리움을 획득했습니다!");
   }),
@@ -50,18 +52,16 @@ harangSprite.use([
   new LoopSpriteByDirection(harang),
 ]);
 
-const harangAnimate = harangSprite.hookManager.get(Animate.name) as Animate;
-
 addEventListener("keydown", (e) => {
   const key = e.key;
 
   if (key === "ArrowUp") {
-    harangAnimate.moveBy(0, -80);
+    animate.moveBy(0, -80);
   } else if (key === "ArrowDown") {
-    harangAnimate.moveBy(0, 80);
+    animate.moveBy(0, 80);
   } else if (key === "ArrowLeft") {
-    harangAnimate.moveBy(-80, 0);
+    animate.moveBy(-80, 0);
   } else if (key === "ArrowRight") {
-    harangAnimate.moveBy(80, 0);
+    animate.moveBy(80, 0);
   }
 });

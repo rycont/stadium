@@ -18,6 +18,4 @@ export class Stage {
       this.pubsub.pub("spriteMove", [sprite]);
     });
   }
-
-  removeSprite(sprite: Sprite) {}
 }
