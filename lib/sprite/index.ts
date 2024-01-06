@@ -2,7 +2,7 @@ import { z } from "zod";
 import { Hook, HookManager } from "../hook/hook";
 import { Locator } from "../hook/locator";
 import { PubSub } from "../pubsub";
-import { Stage } from "../stage";
+import { Stadium } from "../stadium";
 import { Position } from "./position";
 export const DEFAULT_SPRITE_STATE = "idle";
 
@@ -13,16 +13,16 @@ export abstract class Sprite {
   pubsub = new PubSub(["move"] as const);
   hookManager = new HookManager(this);
 
-  stage?: Stage;
+  stadium?: Stadium;
   id?: string;
 
   constructor(public position: Position) {
     this.element.classList.add("sprite");
   }
 
-  onMount(stage: Stage, id: string) {
+  onMount(stadium: Stadium, id: string) {
     this.id = id;
-    this.stage = stage;
+    this.stadium = stadium;
     this.element.id = id;
 
     this.draw();

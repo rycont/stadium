@@ -1,4 +1,4 @@
-export { Stage } from "./stage";
+export { Stadium } from "./stadium";
 export { ImageSprite } from "./sprite";
 export { SensorLine } from "./sensorLine";
 export * from "./hook";

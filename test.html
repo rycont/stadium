@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      #stage {
+      #stadium {
         border: 1px solid black;
       }
     </style>
   </head>
   <body>
-    <div id="stage"></div>
+    <div id="stadium"></div>
     <script type="module">
       import {
-        Stage,
+        Stadium,
         SensorLine,
         ImageSprite,
         MoveableSprite,
@@ -22,8 +22,8 @@
         LineCrossingDetector,
       } from "./dist/stadium.js";
 
-      const element = document.getElementById("stage");
-      const stage = new Stage(element, {
+      const element = document.getElementById("stadium");
+      const stadium = new Stadium(element, {
         width: 400,
         height: 300,
       });
@@ -37,7 +37,7 @@
 
       for (const line of lines) {
         line.tags.push(LineCrossingDetector.LINE_TAG);
-        stage.addSprite(line);
+        stadium.addSprite(line);
       }
 
       const me = new ImageSprite("/asset/eth.png", 40, 40, 80, 80);
@@ -49,7 +49,7 @@
         }),
         animateMe,
       ]);
-      stage.addSprite(me);
+      stadium.addSprite(me);
 
       addEventListener("keydown", (e) => {
         switch (e.key) {

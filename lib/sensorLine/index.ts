@@ -24,8 +24,8 @@ export class SensorLine extends Sprite implements Line {
   draw(): void {
     const { p1, p2 } = this;
 
-    const xRatio = this.stage!.element.style.getPropertyValue("--x-ratio");
-    const yRatio = this.stage!.element.style.getPropertyValue("--y-ratio");
+    const xRatio = this.stadium!.element.style.getPropertyValue("--x-ratio");
+    const yRatio = this.stadium!.element.style.getPropertyValue("--y-ratio");
 
     const r1 = {
       left: p1.left * Number(xRatio),

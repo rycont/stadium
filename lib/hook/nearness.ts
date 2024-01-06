@@ -14,11 +14,11 @@ export class Nearness extends Hook {
 
   onMount(sprite: Sprite) {
     super.onMount(sprite);
-    sprite.stage?.pubsub.sub("spriteMove", () => this.onMove());
+    sprite.stadium?.pubsub.sub("spriteMove", () => this.onMove());
   }
 
   private onMove() {
-    const targets = this.sprite.stage!.sprites.filter((sprite) => {
+    const targets = this.sprite.stadium!.sprites.filter((sprite) => {
       return this.targetTags.some((tag) => sprite.tags.includes(tag));
     });
 

@@ -26,7 +26,7 @@ export class MoveableSprite extends Hook {
       this.moveable.destroy();
     }
 
-    this.moveable = new Moveable(this.sprite.stage!.element, {
+    this.moveable = new Moveable(this.sprite.stadium!.element, {
       target: this.sprite.element,
       draggable: true,
     });

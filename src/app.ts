@@ -1,5 +1,5 @@
 import { ImageSprite } from "../lib/sprite";
-import { Stage } from "../lib/stage";
+import { Stadium } from "../lib/stadium";
 
 import { LineCrossingDetector } from "../lib/hook/lineCrossingDetector";
 import { LoopSpriteByDirection } from "../lib/hook/loopSprite";
@@ -9,8 +9,8 @@ import { SensorLine } from "../lib/sensorLine";
 import { Animate } from "../lib/hook/animate";
 import harang from "./harang";
 
-const element = document.getElementById("stage")! as HTMLDivElement;
-const stage = new Stage(element, {
+const element = document.getElementById("stadium")! as HTMLDivElement;
+const stadium = new Stadium(element, {
   width: 800,
   height: 640,
 });
@@ -24,10 +24,10 @@ ethSprite1.tags.push("eth");
 ethSprite2.tags.push("eth");
 line.tags.push(LineCrossingDetector.LINE_TAG);
 
-stage.addSprite(harangSprite);
-stage.addSprite(ethSprite1);
-stage.addSprite(ethSprite2);
-stage.addSprite(line);
+stadium.addSprite(harangSprite);
+stadium.addSprite(ethSprite1);
+stadium.addSprite(ethSprite2);
+stadium.addSprite(line);
 
 const lineCrossingDetector = new LineCrossingDetector({
   blockMove: true,

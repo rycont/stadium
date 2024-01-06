@@ -9,7 +9,7 @@ interface Size {
   height: number;
 }
 
-export class Stage {
+export class Stadium {
   sprites: Sprite[] = [];
   pubsub = new PubSub(["spriteMove"] as const);
 

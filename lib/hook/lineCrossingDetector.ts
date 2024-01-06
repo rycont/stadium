@@ -25,7 +25,7 @@ export class LineCrossingDetector extends Hook {
   }
 
   isCrossing(target: Point) {
-    const blockLines = this.sprite.stage!.sprites.filter((sprite) => {
+    const blockLines = this.sprite.stadium!.sprites.filter((sprite) => {
       return sprite.tags.includes(LineCrossingDetector.LINE_TAG);
     });
 
