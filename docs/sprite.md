@@ -109,4 +109,3 @@ interface Point {
     top: number
 }
 ```
-
