@@ -7,8 +7,25 @@ export class Position implements Point {
   constructor(public _left: number, public _top: number) {}
 
   set left(value: number) {
-    this.left = value;
-    this.pubsub.pub("set", ["left"]);
+    const prev = {
+      left: this._left,
+      top: this._top,
+    };
+
+    this._left = value;
+
+    const current = {
+      left: this._left,
+      top: this._top,
+    };
+
+    this.pubsub.pub("set", [
+      ["left"],
+      {
+        prev,
+        current,
+      },
+    ]);
   }
 
   get left() {
@@ -16,8 +33,25 @@ export class Position implements Point {
   }
 
   set top(value: number) {
-    this.top = value;
-    this.pubsub.pub("set", ["top"]);
+    const prev = {
+      left: this._left,
+      top: this._top,
+    };
+
+    this._top = value;
+
+    const current = {
+      left: this._left,
+      top: this._top,
+    };
+
+    this.pubsub.pub("set", [
+      ["top"],
+      {
+        prev,
+        current,
+      },
+    ]);
   }
 
   get top() {
@@ -25,9 +59,25 @@ export class Position implements Point {
   }
 
   set(left: number, top: number) {
+    const prev = {
+      left: this._left,
+      top: this._top,
+    };
+
     this._left = left;
     this._top = top;
 
-    this.pubsub.pub("set", ["left", "top"]);
+    const current = {
+      left: this._left,
+      top: this._top,
+    };
+
+    this.pubsub.pub("set", [
+      ["left", "top"],
+      {
+        prev,
+        current,
+      },
+    ]);
   }
 }

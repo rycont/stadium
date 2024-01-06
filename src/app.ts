@@ -1,20 +1,21 @@
 import { ImageSprite } from "./sprite";
 import { Stage } from "./stage";
 
+import { LineCrossingDetector } from "./hook/lineCrossingDetector";
 import { MoveableSprite } from "./hook/moveable";
 import { Nearness } from "./hook/nearness";
 import { SensorLine } from "./sensorLine";
 import { Animate } from "./hook/animate";
 import harang from "./asset/harang";
 import eth from "./asset/eth.png";
-import { LineCrossingDetector } from "./hook/lineCrossingDetector";
+import { LoopSprite, LoopSpriteByDirection } from "./hook/loopSprite";
 
 const element = document.getElementById("stage")! as HTMLDivElement;
 
 const stage = new Stage(element);
 
 const line = new SensorLine({ left: 40, top: 50 }, { left: 320, top: 120 });
-const harangSprite = new ImageSprite(harang, 80, 80, 40, 40);
+const harangSprite = new ImageSprite(harang.idle[0], 80, 80, 40, 40);
 const ethSprite1 = new ImageSprite(eth, 40, 40, 200, 200);
 const ethSprite2 = new ImageSprite(eth, 40, 40, 360, 200);
 
@@ -46,6 +47,7 @@ harangSprite.use([
   new Nearness(["block"], 10, () => {
     console.log("차단선에 가까워짐");
   }),
+  new LoopSpriteByDirection(harang),
 ]);
 
 const harangAnimate = harangSprite.hookManager.get(Animate.name) as Animate;

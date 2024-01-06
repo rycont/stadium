@@ -1,4 +1,5 @@
 import { Hook } from ".";
+import { PubSub } from "../pubsub";
 import { Sprite } from "../sprite";
 import { LineCrossingDetector } from "./lineCrossingDetector";
 
@@ -17,6 +18,7 @@ type Target =
 export class Animate extends Hook {
   targets: Target[] = [];
   isMoving = false;
+  pubsub = new PubSub(["start", "end"] as const);
 
   blocklineDetector?: LineCrossingDetector;
 
@@ -78,6 +80,11 @@ export class Animate extends Hook {
       this.blocklineDetector.pubsub.pub("crossed", [this.sprite]);
     }
 
+    this.pubsub.pub("start", [
+      { left: this.sprite.position.left, top: this.sprite.position.top },
+      { ...target },
+    ]);
+
     const animate = this.sprite.element.animate(
       [
         {
@@ -95,9 +102,12 @@ export class Animate extends Hook {
       }
     );
 
-    await animate.finished;
     this.sprite.position.set(target.left, target.top);
+    await animate.finished;
 
+    this.pubsub.pub("end", [
+      { left: this.sprite.position.left, top: this.sprite.position.top },
+    ]);
     return;
   }
 

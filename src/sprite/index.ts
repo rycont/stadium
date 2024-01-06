@@ -51,9 +51,10 @@ export abstract class Sprite {
 
 export class ImageSprite extends Sprite {
   element = document.createElement("img");
+  private _image!: string;
 
   constructor(
-    public image: SpriteSheet | string,
+    image: string,
     public width: number,
     public height: number,
     left: number = 0,
@@ -61,6 +62,7 @@ export class ImageSprite extends Sprite {
   ) {
     super(new Position(left, top));
 
+    this._image = image;
     this.use([new Locator()]);
   }
 
@@ -71,10 +73,16 @@ export class ImageSprite extends Sprite {
     style.setProperty("width", `${this.width}px`);
     style.setProperty("height", `${this.height}px`);
 
-    element.src =
-      typeof this.image === "string"
-        ? this.image
-        : this.image[DEFAULT_SPRITE_STATE][0];
+    element.src = this.image;
+  }
+
+  get image() {
+    return this._image;
+  }
+
+  set image(value: string) {
+    this._image = value;
+    this.draw();
   }
 }
 

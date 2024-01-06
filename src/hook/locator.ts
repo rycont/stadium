@@ -22,7 +22,7 @@ export class Locator extends Hook {
     element.style.setProperty("left", `${position.left}px`);
     element.style.setProperty("top", `${position.top}px`);
 
-    this.sprite.pubsub.pub("move");
+    this.sprite.pubsub.pub("move", [this.sprite]);
   }
 
   onDestroy() {

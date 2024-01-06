@@ -12,7 +12,7 @@ export class Hook {
 
   get sprite() {
     if (!this._sprite) throw new Error("Hook is not mounted");
-    return this._sprite;
+    return this._sprite as Exclude<this["_sprite"], null | undefined>;
   }
 }
 
