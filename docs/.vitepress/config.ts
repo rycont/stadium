@@ -12,7 +12,7 @@ export default defineConfig({
       { text: "Examples", link: "/markdown-examples" },
     ],
     sidebar: getSidebar({
-      contentRoot: "/vitepress",
+      contentRoot: "/docs",
       contentDirs: [""],
       collapsible: true,
     }),
