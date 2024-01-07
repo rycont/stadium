@@ -23,6 +23,8 @@
   "typedocOptions": {
     "excludePrivate": true,
     "excludeProtected": true,
-    "excludeNotDocumented": true
+    "excludeNotDocumented": true,
+    "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-zod"],
+    "entryPoints": ["lib/main.ts"]
   }
 }

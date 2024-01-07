@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typedoc": "rm -rf ./docs; typedoc"
   },
   "devDependencies": {
+    "typedoc": "^0.25.6",
+    "typedoc-plugin-markdown": "^3.17.1",
+    "typedoc-plugin-zod": "^1.1.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },

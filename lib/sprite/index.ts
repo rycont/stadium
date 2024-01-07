@@ -1,10 +1,8 @@
-import { z } from "zod";
 import { Hook, HookManager } from "../hook/hook";
 import { Locator } from "../hook/locator";
 import { PubSub } from "../pubsub";
 import { Stadium } from "../stadium";
 import { Position } from "./position";
-export const DEFAULT_SPRITE_STATE = "idle";
 
 export abstract class Sprite {
   element: HTMLElement = document.createElement("div");
@@ -86,12 +84,3 @@ export class ImageSprite extends Sprite {
     this.draw();
   }
 }
-
-export const SpriteSheet = z.intersection(
-  z.record(z.string().array()),
-  z.object({
-    [DEFAULT_SPRITE_STATE]: z.array(z.string()),
-  })
-);
-
-export type SpriteSheet = z.infer<typeof SpriteSheet>;

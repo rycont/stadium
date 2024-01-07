@@ -114,7 +114,7 @@ export class LineCrossingDetector extends Hook {
  *
  * @param a 첫 번째 선분
  * @param b 두 번째 선분
- * @returns 교차 여부 (교차하면 true, 그렇지 않으면 false)
+ * @returns 교차 여부
  */
 export function isIntersecting(a: Line, b: Line) {
   const { p1: a1, p2: a2 } = a;

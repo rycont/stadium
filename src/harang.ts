@@ -1,4 +1,4 @@
-import { SpriteSheet } from "../lib/sprite";
+import { SpriteSheet } from "../lib/type";
 
 export default {
   down: ["/asset/down_a.png", "/asset/down_b.png", "/asset/down_c.png"],

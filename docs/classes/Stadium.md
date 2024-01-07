@@ -1,10 +1,6 @@
----
-id: "Stadium"
-title: "Class: Stadium"
-sidebar_label: "Stadium"
-sidebar_position: 0
-custom_edit_url: null
----
+[stadium](../README.md) / [Exports](../modules.md) / Stadium
+
+# Class: Stadium
 
 Stadium은 스프라이트가 배치될 수 있는 공간입니다.
 
@@ -23,6 +19,22 @@ const stadium = new Stadium(element, designedSize, actualSize);
 >    - `--x-ratio`: `width / designedSize.width`
 >    - `--y-ratio`: `height / designedSize.height`
 
+## Table of contents
+
+### Constructors
+
+- [constructor](Stadium.md#constructor)
+
+### Properties
+
+- [element](Stadium.md#element)
+- [pubsub](Stadium.md#pubsub)
+- [sprites](Stadium.md#sprites)
+
+### Methods
+
+- [addSprite](Stadium.md#addsprite)
+
 ## Constructors
 
 ### constructor
@@ -36,8 +48,8 @@ Stadium 클래스의 생성자입니다.
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
 | `element` | `HTMLDivElement` | `undefined` | 스타디움을 표시할 HTMLDivElement입니다. |
-| `designedSize` | `Size` | `undefined` | 스타디움의 설계 크기 |
-| `actualSize` | `Size` | `designedSize` | 실제 렌더링될 Element의 크기 |
+| `designedSize` | [`Size`](../interfaces/Size.md) | `undefined` | 스타디움의 설계 크기 |
+| `actualSize` | [`Size`](../interfaces/Size.md) | `designedSize` | 실제 렌더링될 Element의 크기 |
 
 #### Returns
 
@@ -45,7 +57,7 @@ Stadium 클래스의 생성자입니다.
 
 #### Defined in
 
-[lib/stadium/index.ts:46](https://github.com/rycont/stadium/blob/0a9165d/lib/stadium/index.ts#L46)
+[lib/stadium/index.ts:46](https://github.com/rycont/stadium/blob/7ca00c5/lib/stadium/index.ts#L46)
 
 ## Properties
 
@@ -57,7 +69,7 @@ Stadium 클래스의 생성자입니다.
 
 #### Defined in
 
-[lib/stadium/index.ts:47](https://github.com/rycont/stadium/blob/0a9165d/lib/stadium/index.ts#L47)
+[lib/stadium/index.ts:47](https://github.com/rycont/stadium/blob/7ca00c5/lib/stadium/index.ts#L47)
 
 ___
 
@@ -75,7 +87,7 @@ stadium.pubsub.sub('spriteMove', (sprite: Sprite) => {
 
 #### Defined in
 
-[lib/stadium/index.ts:38](https://github.com/rycont/stadium/blob/0a9165d/lib/stadium/index.ts#L38)
+[lib/stadium/index.ts:38](https://github.com/rycont/stadium/blob/7ca00c5/lib/stadium/index.ts#L38)
 
 ___
 
@@ -87,7 +99,7 @@ Stadium에 배치된 스프라이트들의 목록
 
 #### Defined in
 
-[lib/stadium/index.ts:27](https://github.com/rycont/stadium/blob/0a9165d/lib/stadium/index.ts#L27)
+[lib/stadium/index.ts:27](https://github.com/rycont/stadium/blob/7ca00c5/lib/stadium/index.ts#L27)
 
 ## Methods
 
@@ -120,4 +132,4 @@ stadium.addSprite(sprite);
 
 #### Defined in
 
-[lib/stadium/index.ts:85](https://github.com/rycont/stadium/blob/0a9165d/lib/stadium/index.ts#L85)
+[lib/stadium/index.ts:85](https://github.com/rycont/stadium/blob/7ca00c5/lib/stadium/index.ts#L85)

@@ -1,10 +1,6 @@
----
-id: "LineCrossingDetector"
-title: "Class: LineCrossingDetector"
-sidebar_label: "LineCrossingDetector"
-sidebar_position: 0
-custom_edit_url: null
----
+[stadium](../README.md) / [Exports](../modules.md) / LineCrossingDetector
+
+# Class: LineCrossingDetector
 
 스프라이트가 [Animate](/docs/api/classes/Animate) 훅을 통해 이동할 때 [SensorLine](./docs/api/classes/Animate)을
 지나치게 되는지를 검사하는 Hook입니다. `LineCrossingDetector.LINE_TAG`를 태그로 가지는
@@ -36,6 +32,21 @@ animate.moveTo(100, 0) // { left: 0, top: 100 }에서 { left: 100, top: 0 }으�
 
   ↳ **`LineCrossingDetector`**
 
+## Table of contents
+
+### Constructors
+
+- [constructor](LineCrossingDetector.md#constructor)
+
+### Properties
+
+- [pubsub](LineCrossingDetector.md#pubsub)
+- [LINE\_TAG](LineCrossingDetector.md#line_tag)
+
+### Methods
+
+- [isCrossing](LineCrossingDetector.md#iscrossing)
+
 ## Constructors
 
 ### constructor
@@ -62,7 +73,7 @@ Hook.constructor
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:65](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L65)
+[lib/hook/lineCrossingDetector.ts:65](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/lineCrossingDetector.ts#L65)
 
 ## Properties
 
@@ -87,7 +98,7 @@ lineCrossingDetector.pubsub.sub("blocked", (from: Point, to: Point) => {
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:58](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L58)
+[lib/hook/lineCrossingDetector.ts:58](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/lineCrossingDetector.ts#L58)
 
 ___
 
@@ -104,7 +115,7 @@ line.tags.push(LineCrossingDetector.LINE_TAG);
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:40](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L40)
+[lib/hook/lineCrossingDetector.ts:40](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/lineCrossingDetector.ts#L40)
 
 ## Methods
 
@@ -142,4 +153,4 @@ lineCrossingDetector.isCrossing({ left: 50, top: 50 }); // true
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:95](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L95)
+[lib/hook/lineCrossingDetector.ts:95](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/lineCrossingDetector.ts#L95)

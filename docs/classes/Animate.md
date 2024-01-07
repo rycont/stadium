@@ -1,10 +1,6 @@
----
-id: "Animate"
-title: "Class: Animate"
-sidebar_label: "Animate"
-sidebar_position: 0
-custom_edit_url: null
----
+[stadium](../README.md) / [Exports](../modules.md) / Animate
+
+# Class: Animate
 
 스프라이트의 위치를 부드럽게 조작할 수 있게 하는 Hook 입니다.
 애니메이션 재생 시간의 기본값은 500ms입니다.
@@ -30,6 +26,18 @@ animate.moveTo({ left: 0, top: 0, duration: 500 }) // 0.5초 동안 (0, 0)으로
 
   ↳ **`Animate`**
 
+## Table of contents
+
+### Properties
+
+- [pubsub](Animate.md#pubsub)
+
+### Methods
+
+- [moveBy](Animate.md#moveby)
+- [moveTo](Animate.md#moveto)
+- [onMount](Animate.md#onmount)
+
 ## Properties
 
 ### pubsub
@@ -51,7 +59,7 @@ animate.pubsub.sub("end", (position: Point) => {
 
 #### Defined in
 
-[lib/hook/animate.ts:44](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/animate.ts#L44)
+[lib/hook/animate.ts:44](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/animate.ts#L44)
 
 ## Methods
 
@@ -75,7 +83,7 @@ animate.pubsub.sub("end", (position: Point) => {
 
 #### Defined in
 
-[lib/hook/animate.ts:84](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/animate.ts#L84)
+[lib/hook/animate.ts:84](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/animate.ts#L84)
 
 ___
 
@@ -99,7 +107,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:102](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/animate.ts#L102)
+[lib/hook/animate.ts:102](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/animate.ts#L102)
 
 ___
 
@@ -126,4 +134,4 @@ Hook.onMount
 
 #### Defined in
 
-[lib/hook/animate.ts:57](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/animate.ts#L57)
+[lib/hook/animate.ts:57](https://github.com/rycont/stadium/blob/7ca00c5/lib/hook/animate.ts#L57)
