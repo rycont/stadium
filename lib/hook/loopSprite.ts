@@ -1,4 +1,5 @@
-import { ImageSprite, Sprite } from "../sprite";
+import { Sprite } from "../sprite";
+import { ImageSprite } from "../sprite/ImageSprite";
 import { Point, SpriteSheet } from "../type";
 import { Animate } from "./animate";
 import { Hook } from "./hook";

@@ -1,4 +1,4 @@
-import { ImageSprite } from "../lib/sprite";
+import { ImageSprite } from "../lib/sprite/ImageSprite";
 import { Stadium } from "../lib/stadium";
 
 import { LineCrossingDetector } from "../lib/hook/lineCrossingDetector";

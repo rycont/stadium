@@ -1,5 +1,6 @@
 export { Stadium } from "./stadium";
-export { ImageSprite, Sprite } from "./sprite";
+export { Sprite } from "./sprite";
+export { ImageSprite } from "./sprite/ImageSprite";
 export { SensorLine } from "./sensorLine";
 export { Hook } from "./hook/hook";
 export { PubSub } from "./pubsub";
