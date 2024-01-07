@@ -1,15 +1,17 @@
 import { Sprite } from "../sprite";
-
+/**
+ * Sprite를 확장해 더 다양한 기능을 추가할 수 있도록 합니다. 
+ */
 export class Hook {
   _sprite?: Sprite;
 
-  constructor() {}
+  constructor() { }
 
   public onMount(sprite: Sprite): void {
     this._sprite = sprite;
   }
 
-  public onDestroy() {}
+  public onDestroy() { }
 
   get sprite() {
     if (!this._sprite) throw new Error("Hook is not mounted");
@@ -20,7 +22,7 @@ export class Hook {
 export class HookManager {
   hooks: Hook[] = [];
 
-  constructor(public sprite: Sprite) {}
+  constructor(public sprite: Sprite) { }
 
   mount() {
     for (const hook of this.hooks) {

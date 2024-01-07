@@ -7,9 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "typedoc": "rm -rf ./vitepress/API; typedoc",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "typedoc": "rm -rf ./docs/API; typedoc --watch",
+    "build-typedoc": "rm -rf ./docs/API; typedoc",
+    "docs:dev": "rm -rf ./docs/API && typedoc && vitepress dev docs",
+    "docs:build": "rm -rf ./docs/API && typedoc && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {

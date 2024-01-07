@@ -26,6 +26,6 @@
     "excludeNotDocumented": true,
     "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-zod"],
     "entryPoints": ["lib/main.ts"],
-    "out": "vitepress/API"
+    "out": "docs/API"
   }
 }
