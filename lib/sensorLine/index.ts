@@ -1,14 +1,6 @@
-import { z } from "zod";
 import { Sprite } from "../sprite";
 import { Position } from "../sprite/position";
-import { Point } from "../type";
-
-export const Line = z.object({
-  p1: Point,
-  p2: Point,
-});
-
-export type Line = z.infer<typeof Line>;
+import { Line, Point } from "../type";
 
 export class SensorLine extends Sprite implements Line {
   static TAG = "sensorLine";

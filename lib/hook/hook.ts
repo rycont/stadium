@@ -5,10 +5,11 @@ export class Hook {
 
   constructor() {}
 
-  onMount(sprite: Sprite): void {
+  public onMount(sprite: Sprite): void {
     this._sprite = sprite;
   }
-  onDestroy() {}
+
+  public onDestroy() {}
 
   get sprite() {
     if (!this._sprite) throw new Error("Hook is not mounted");

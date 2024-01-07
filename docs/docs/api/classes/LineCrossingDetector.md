@@ -6,9 +6,33 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+스프라이트가 [Animate](/docs/api/classes/Animate) 훅을 통해 이동할 때 [SensorLine](./docs/api/classes/Animate)을
+지나치게 되는지를 검사하는 Hook입니다. `LineCrossingDetector.LINE_TAG`를 태그로 가지는
+SensorLine만 검사 대상입니다.
+
+```ts
+const sprite = new ImageSprite("image", 10, 10, 0, 100);
+
+const lineCrossingDetector = new LineCrossingDetector({
+    blockMove: true
+});
+const animte = new Animate();
+
+const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+line.tags.push(LineCrossingDetector.LINE_TAG);
+
+sprite.use([ lineCrossingDetector, animate ]);
+
+lineCrossingDetector.pubsub.sub("blocked", (from: Point, to: Point) => {
+    console.log(from, "에서", to, "로 이동하려 했으나 라인에 막혔습니다.");
+})
+
+animate.moveTo(100, 0) // { left: 0, top: 100 }에서 { left: 100, top: 0 }으로 이동하려 했으나 라인에 막혔습니다.
+```
+
 ## Hierarchy
 
-- [`Hook`](Hook.md)
+- `Hook`
 
   ↳ **`LineCrossingDetector`**
 
@@ -18,13 +42,15 @@ custom_edit_url: null
 
 • **new LineCrossingDetector**(`behavior`): [`LineCrossingDetector`](LineCrossingDetector.md)
 
+LineCrossingDetector 클래스의 인스턴스를 생성합니다.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `behavior` | `Object` |
-| `behavior.blockMove?` | `boolean` |
-| `behavior.clearMovePathAfterBlocking?` | `boolean` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `behavior` | `Object` | - |
+| `behavior.blockMove?` | `boolean` | Animate의 이동 경로에 SensorLine이 있을 때, 이동할 수 없도록 합니다. |
+| `behavior.clearMovePathAfterBlocking?` | `boolean` | Animate가 LineCrossingDetector에 의해 가로막혔을 때, 나머지 이동 대기열을 비웁니다. |
 
 #### Returns
 
@@ -32,52 +58,36 @@ custom_edit_url: null
 
 #### Overrides
 
-[Hook](Hook.md).[constructor](Hook.md#constructor)
+Hook.constructor
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:14](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L14)
+[lib/hook/lineCrossingDetector.ts:65](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L65)
 
 ## Properties
 
-### \_sprite
-
-• `Optional` **\_sprite**: `Sprite`
-
-#### Inherited from
-
-[Hook](Hook.md).[_sprite](Hook.md#_sprite)
-
-#### Defined in
-
-[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L4)
-
-___
-
-### behavior
-
-• **behavior**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `blockMove?` | `boolean` |
-| `clearMovePathAfterBlocking?` | `boolean` |
-
-#### Defined in
-
-[lib/hook/lineCrossingDetector.ts:15](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L15)
-
-___
-
 ### pubsub
 
-• **pubsub**: `PubSub`\<readonly [``"crossed"``, ``"blocked"``]\>
+• **pubsub**: `PubSub`\<[``"crossed"``, ``"blocked"``]\>
+
+`crossed`, `blocked` 이벤트를 생성하는 PubSub 인스턴스입니다.
+
+- 스프라이트가 `target`으로 이동할 때 `SensorLine`을 지나치게 되면 `crossed` 이벤트를 생성합니다.
+- 만일 `behavior.blockMove`가 `true`여서 이동이 가로막혔다면 `blocked` 이벤트를 생성합니다.
+
+```ts
+lineCrossingDetector.pubsub.sub("crossed", (from: Point, to: Point) => {
+    console.log(from, "에서", to, "로 이동하며 라인을 지났습니다.");
+});
+
+lineCrossingDetector.pubsub.sub("blocked", (from: Point, to: Point) => {
+    console.log(from, "에서", to, "로 이동하려 했으나 라인에 막혔습니다.");
+});
+```
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:12](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L12)
+[lib/hook/lineCrossingDetector.ts:58](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L58)
 
 ___
 
@@ -85,27 +95,16 @@ ___
 
 ▪ `Static` **LINE\_TAG**: `string` = `"blockline"`
 
-#### Defined in
+`SensorLine`에 `LineCrossingDetector.LINE_TAG` 태그가 붙어있어야 감지할 수 있습니다.
 
-[lib/hook/lineCrossingDetector.ts:10](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L10)
-
-## Accessors
-
-### sprite
-
-• `get` **sprite**(): `Exclude`\<`this`[``"_sprite"``], `undefined` \| ``null``\>
-
-#### Returns
-
-`Exclude`\<`this`[``"_sprite"``], `undefined` \| ``null``\>
-
-#### Inherited from
-
-Hook.sprite
+```ts
+const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+line.tags.push(LineCrossingDetector.LINE_TAG);
+```
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/lineCrossingDetector.ts:40](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L40)
 
 ## Methods
 
@@ -113,60 +112,34 @@ Hook.sprite
 
 ▸ **isCrossing**(`target`): `boolean`
 
+스프라이트가 `target`으로 이동할 때 `SensorLine`을 지나치는지 검사합니다.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `Object` |
-| `target.left` | `number` |
-| `target.top` | `number` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `Object` | 이동할 목적지입니다. |
+| `target.left` | `number` | - |
+| `target.top` | `number` | - |
 
 #### Returns
 
 `boolean`
 
-#### Defined in
+라인을 건너는지 여부를 나타내는 불리언 값입니다.
 
-[lib/hook/lineCrossingDetector.ts:27](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L27)
+```ts
+const lineCrossingDetector = new LineCrossingDetector({});
+const sprite = new ImageSprite(...);
 
-___
+sprite.use([lineCrossingDetector]);
 
-### onDestroy
+const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+line.tags.push(LineCrossingDetector.LINE_TAG);
 
-▸ **onDestroy**(): `void`
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-[Hook](Hook.md).[onDestroy](Hook.md#ondestroy)
+lineCrossingDetector.isCrossing({ left: 50, top: 50 }); // true
+```
 
 #### Defined in
 
-[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L11)
-
-___
-
-### onMount
-
-▸ **onMount**(`sprite`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `sprite` | `Sprite` |
-
-#### Returns
-
-`void`
-
-#### Overrides
-
-[Hook](Hook.md).[onMount](Hook.md#onmount)
-
-#### Defined in
-
-[lib/hook/lineCrossingDetector.ts:23](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L23)
+[lib/hook/lineCrossingDetector.ts:95](https://github.com/rycont/stadium/blob/0a9165d/lib/hook/lineCrossingDetector.ts#L95)
