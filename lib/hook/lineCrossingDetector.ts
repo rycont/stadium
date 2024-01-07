@@ -111,6 +111,13 @@ export class LineCrossingDetector extends Hook {
 
 /**
  * 두 선분이 교차하는지 여부를 확인합니다.
+ * 
+ * ```ts
+ * const line1 = new Line({ left: 0, top: 0 }, { left: 100, top: 100 });
+ * const line2 = new Line({ left: 0, top: 100 }, { left: 100, top: 0 });
+ * 
+ * isIntersecting(line1, line2); // true
+ * ```
  *
  * @param a 첫 번째 선분
  * @param b 두 번째 선분

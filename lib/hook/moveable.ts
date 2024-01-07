@@ -2,9 +2,21 @@ import Moveable, { OnDrag } from "moveable";
 import { Hook } from "./hook";
 import { Sprite } from "../sprite";
 
+/**
+ * Sprite를 드래그 앤 드롭으로 이동할 수 있도록 합니다.
+ * [@daybrush/moveable](https://github.com/daybrush/moveable)로 구현하였습니다.
+ * 
+ * ```ts
+ * const sprite = new Sprite();
+ * sprite.use([ new MoveableSprite() ]);
+ * ```
+ */
 export class MoveableSprite extends Hook {
-  moveable?: Moveable;
+  private moveable?: Moveable;
 
+  /**
+   * MoveableSprite의 인스턴스를 생성합니다.
+   */
   constructor() {
     super();
   }

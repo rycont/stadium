@@ -6,6 +6,9 @@ import { Sprite } from "../sprite";
  * left, top 스타일을 변경합니다. ImageSprite에선 기본 Hook이기에, 직접 사용할 필요는 없습니다.
  */
 export class Locator extends Hook {
+  /**
+   * Locator의 인스턴스를 생성합니다.
+   */
   constructor() {
     super();
   }

@@ -3,7 +3,36 @@ import { SensorLine } from "../sensorLine";
 import { ImageSprite, Sprite } from "../sprite";
 import { Point } from "../type";
 
+/**
+ * Nearness는 Sprite와 다른 Sprite 사이 거리의 근접을 감지하는 Hook입니다.
+ * 
+ * ```ts
+ * const me = new ImageSprite(...);
+ * 
+ * const enemy1 = new ImageSprite(...);
+ * const enemy2 = new ImageSprite(...);
+ * 
+ * enemy1.tags.push("enemy");
+ * enemy2.tags.push("enemy");
+ * 
+ * me.use([
+ *     new Nearness(["enemy"], 20, onNearEnemy),
+ * ]);
+ * 
+ * function onNearEnemy(me: Sprite, enemy: Sprite) {
+ *     console.log("Near enemy!");
+ * }
+ * ```
+ */
 export class Nearness extends Hook {
+  /**
+   * ```ts
+   * new Nearness(["enemy"], 20, onNearEnemy),
+   * ```
+   * @param targetTags 근접을 감지할 태그
+   * @param threshold  감지 거리
+   * @param handler    근접을 감지했을 때 호출할 함수
+   */
   constructor(
     public targetTags: string[],
     public threshold: number = 20,
@@ -33,10 +62,25 @@ export class Nearness extends Hook {
     }
   }
 
-  onDestroy() {}
+  onDestroy() { }
 }
 
-function getDistanceBetween(a: Sprite, b: Sprite) {
+/**
+ * 두 Sprite 사이의 거리를 구합니다.
+ * 
+ * ```ts
+ * const me = new ImageSprite(...);
+ * const enemy = new ImageSprite(...);
+ * 
+ * const distance = getDistanceBetween(me, enemy);
+ * ```
+ * 
+ * @param a
+ * @param b 
+ * @returns Sprite 사이의 거리
+ */
+
+export function getDistanceBetween(a: Sprite, b: Sprite) {
   if (a instanceof ImageSprite && b instanceof ImageSprite) {
     return euclideanDistance(a.position, b.position);
   }
