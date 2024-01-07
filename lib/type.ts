@@ -1,8 +1,5 @@
 import { z } from "zod";
 
-/**
- * 2차원 좌표계의 점을 나타내는 스키마
- */
 export const Point = z.object({
   left: z.number(),
   top: z.number(),
@@ -23,19 +20,16 @@ export interface Size {
 
 export type MoveTarget =
   | {
-      left: number;
-      top: number;
-      duration: number;
-    }
+    left: number;
+    top: number;
+    duration: number;
+  }
   | {
-      dleft: number;
-      dtop: number;
-      duration: number;
-    };
+    dleft: number;
+    dtop: number;
+    duration: number;
+  };
 
-/**
- * 2차원 좌표계의 선을 나타내는 스키마
- */
 export const Line = z.object({
   p1: Point,
   p2: Point,
