@@ -9,7 +9,7 @@ import { Point } from "../type";
 export class LineCrossingDetector extends Hook {
   static LINE_TAG = "blockline";
 
-  pubsub = new PubSub(["crossed", "blocked"] as const);
+  pubsub = new PubSub<["crossed", "blocked"]>();
 
   constructor(
     public behavior: {

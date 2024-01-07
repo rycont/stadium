@@ -13,24 +13,6 @@ custom_edit_url: null
 
   ↳ **`MoveableSprite`**
 
-## Constructors
-
-### constructor
-
-• **new MoveableSprite**(): [`MoveableSprite`](main.MoveableSprite.md)
-
-#### Returns
-
-[`MoveableSprite`](main.MoveableSprite.md)
-
-#### Overrides
-
-[Hook](main.Hook.md).[constructor](main.Hook.md#constructor)
-
-#### Defined in
-
-[lib/hook/moveable.ts:8](https://github.com/rycont/stadium/blob/85a354b/lib/hook/moveable.ts#L8)
-
 ## Properties
 
 ### \_sprite
@@ -43,7 +25,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L4)
+[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L4)
 
 ___
 
@@ -53,7 +35,7 @@ ___
 
 #### Defined in
 
-[lib/hook/moveable.ts:6](https://github.com/rycont/stadium/blob/85a354b/lib/hook/moveable.ts#L6)
+[lib/hook/moveable.ts:6](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/moveable.ts#L6)
 
 ## Accessors
 
@@ -71,7 +53,7 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L13)
 
 ## Methods
 
@@ -89,7 +71,7 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/moveable.ts:20](https://github.com/rycont/stadium/blob/85a354b/lib/hook/moveable.ts#L20)
+[lib/hook/moveable.ts:20](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/moveable.ts#L20)
 
 ___
 
@@ -109,7 +91,7 @@ ___
 
 #### Defined in
 
-[lib/hook/moveable.ts:38](https://github.com/rycont/stadium/blob/85a354b/lib/hook/moveable.ts#L38)
+[lib/hook/moveable.ts:38](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/moveable.ts#L38)
 
 ___
 
@@ -133,7 +115,7 @@ ___
 
 #### Defined in
 
-[lib/hook/moveable.ts:12](https://github.com/rycont/stadium/blob/85a354b/lib/hook/moveable.ts#L12)
+[lib/hook/moveable.ts:12](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/moveable.ts#L12)
 
 ___
 
@@ -153,4 +135,4 @@ ___
 
 #### Defined in
 
-[lib/hook/moveable.ts:24](https://github.com/rycont/stadium/blob/85a354b/lib/hook/moveable.ts#L24)
+[lib/hook/moveable.ts:24](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/moveable.ts#L24)

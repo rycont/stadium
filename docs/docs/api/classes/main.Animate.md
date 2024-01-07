@@ -13,24 +13,6 @@ custom_edit_url: null
 
   ↳ **`Animate`**
 
-## Constructors
-
-### constructor
-
-• **new Animate**(): [`Animate`](main.Animate.md)
-
-#### Returns
-
-[`Animate`](main.Animate.md)
-
-#### Overrides
-
-[Hook](main.Hook.md).[constructor](main.Hook.md#constructor)
-
-#### Defined in
-
-[lib/hook/animate.ts:25](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L25)
-
 ## Properties
 
 ### \_sprite
@@ -43,7 +25,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L4)
+[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L4)
 
 ___
 
@@ -53,7 +35,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:23](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L23)
+[lib/hook/animate.ts:23](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L23)
 
 ___
 
@@ -63,17 +45,17 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:20](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L20)
+[lib/hook/animate.ts:20](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L20)
 
 ___
 
 ### pubsub
 
-• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<readonly [``"start"``, ``"end"``]\>
+• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<[``"start"``, ``"end"``]\>
 
 #### Defined in
 
-[lib/hook/animate.ts:21](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L21)
+[lib/hook/animate.ts:21](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L21)
 
 ___
 
@@ -83,7 +65,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L19)
+[lib/hook/animate.ts:19](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L19)
 
 ## Accessors
 
@@ -101,37 +83,9 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L13)
 
 ## Methods
-
-### completeTarget
-
-▸ **completeTarget**(`target`): `Object`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `target` | `Target` |
-
-#### Returns
-
-`Object`
-
-| Name | Type |
-| :------ | :------ |
-| `dleft` | `number` |
-| `dtop` | `number` |
-| `duration` | `number` |
-| `left` | `number` |
-| `top` | `number` |
-
-#### Defined in
-
-[lib/hook/animate.ts:114](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L114)
-
-___
 
 ### move
 
@@ -149,7 +103,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:67](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L67)
+[lib/hook/animate.ts:67](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L67)
 
 ___
 
@@ -171,7 +125,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:48](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L48)
+[lib/hook/animate.ts:48](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L48)
 
 ___
 
@@ -191,7 +145,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:40](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L40)
+[lib/hook/animate.ts:40](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L40)
 
 ___
 
@@ -209,7 +163,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:38](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L38)
+[lib/hook/animate.ts:38](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L38)
 
 ___
 
@@ -223,7 +177,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:37](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L37)
+[lib/hook/animate.ts:37](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L37)
 
 ___
 
@@ -247,7 +201,7 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:29](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L29)
+[lib/hook/animate.ts:29](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L29)
 
 ___
 
@@ -261,4 +215,4 @@ ___
 
 #### Defined in
 
-[lib/hook/animate.ts:56](https://github.com/rycont/stadium/blob/85a354b/lib/hook/animate.ts#L56)
+[lib/hook/animate.ts:56](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/animate.ts#L56)

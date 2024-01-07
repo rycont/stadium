@@ -13,32 +13,6 @@ custom_edit_url: null
 
   ↳ **`Nearness`**
 
-## Constructors
-
-### constructor
-
-• **new Nearness**(`targetTags`, `threshold?`, `handler`): [`Nearness`](main.Nearness.md)
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `targetTags` | `string`[] | `undefined` |
-| `threshold` | `number` | `20` |
-| `handler` | (`source`: [`Sprite`](sprite.Sprite.md), `target`: [`Sprite`](sprite.Sprite.md)) => `void` | `undefined` |
-
-#### Returns
-
-[`Nearness`](main.Nearness.md)
-
-#### Overrides
-
-[Hook](main.Hook.md).[constructor](main.Hook.md#constructor)
-
-#### Defined in
-
-[lib/hook/nearness.ts:7](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L7)
-
 ## Properties
 
 ### \_sprite
@@ -51,7 +25,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L4)
+[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L4)
 
 ___
 
@@ -76,7 +50,7 @@ ___
 
 #### Defined in
 
-[lib/hook/nearness.ts:10](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L10)
+[lib/hook/nearness.ts:10](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/nearness.ts#L10)
 
 ___
 
@@ -86,7 +60,7 @@ ___
 
 #### Defined in
 
-[lib/hook/nearness.ts:8](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L8)
+[lib/hook/nearness.ts:8](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/nearness.ts#L8)
 
 ___
 
@@ -96,7 +70,7 @@ ___
 
 #### Defined in
 
-[lib/hook/nearness.ts:9](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L9)
+[lib/hook/nearness.ts:9](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/nearness.ts#L9)
 
 ## Accessors
 
@@ -114,7 +88,7 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L13)
 
 ## Methods
 
@@ -132,7 +106,7 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/nearness.ts:36](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L36)
+[lib/hook/nearness.ts:36](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/nearness.ts#L36)
 
 ___
 
@@ -156,18 +130,4 @@ ___
 
 #### Defined in
 
-[lib/hook/nearness.ts:15](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L15)
-
-___
-
-### onMove
-
-▸ **onMove**(): `void`
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[lib/hook/nearness.ts:20](https://github.com/rycont/stadium/blob/85a354b/lib/hook/nearness.ts#L20)
+[lib/hook/nearness.ts:15](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/nearness.ts#L15)

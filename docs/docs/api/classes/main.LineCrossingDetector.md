@@ -13,32 +13,6 @@ custom_edit_url: null
 
   ↳ **`LineCrossingDetector`**
 
-## Constructors
-
-### constructor
-
-• **new LineCrossingDetector**(`behavior`): [`LineCrossingDetector`](main.LineCrossingDetector.md)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `behavior` | `Object` |
-| `behavior.blockMove?` | `boolean` |
-| `behavior.clearMovePathAfterBlocking?` | `boolean` |
-
-#### Returns
-
-[`LineCrossingDetector`](main.LineCrossingDetector.md)
-
-#### Overrides
-
-[Hook](main.Hook.md).[constructor](main.Hook.md#constructor)
-
-#### Defined in
-
-[lib/hook/lineCrossingDetector.ts:14](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L14)
-
 ## Properties
 
 ### \_sprite
@@ -51,7 +25,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L4)
+[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L4)
 
 ___
 
@@ -68,17 +42,17 @@ ___
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:15](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L15)
+[lib/hook/lineCrossingDetector.ts:15](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/lineCrossingDetector.ts#L15)
 
 ___
 
 ### pubsub
 
-• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<readonly [``"crossed"``, ``"blocked"``]\>
+• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<[``"crossed"``, ``"blocked"``]\>
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:12](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L12)
+[lib/hook/lineCrossingDetector.ts:12](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/lineCrossingDetector.ts#L12)
 
 ___
 
@@ -88,7 +62,7 @@ ___
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:10](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L10)
+[lib/hook/lineCrossingDetector.ts:10](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/lineCrossingDetector.ts#L10)
 
 ## Accessors
 
@@ -106,7 +80,7 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L13)
 
 ## Methods
 
@@ -128,7 +102,7 @@ Hook.sprite
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:27](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L27)
+[lib/hook/lineCrossingDetector.ts:27](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/lineCrossingDetector.ts#L27)
 
 ___
 
@@ -146,7 +120,7 @@ ___
 
 #### Defined in
 
-[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L11)
+[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L11)
 
 ___
 
@@ -170,4 +144,4 @@ ___
 
 #### Defined in
 
-[lib/hook/lineCrossingDetector.ts:23](https://github.com/rycont/stadium/blob/85a354b/lib/hook/lineCrossingDetector.ts#L23)
+[lib/hook/lineCrossingDetector.ts:23](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/lineCrossingDetector.ts#L23)

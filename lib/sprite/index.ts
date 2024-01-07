@@ -10,7 +10,7 @@ export abstract class Sprite {
   element: HTMLElement = document.createElement("div");
   tags: string[] = [];
 
-  pubsub = new PubSub(["move"] as const);
+  pubsub = new PubSub<["move"]>();
   hookManager = new HookManager(this);
 
   stadium?: Stadium;

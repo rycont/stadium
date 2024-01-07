@@ -5,20 +5,20 @@ import { LineCrossingDetector } from "./lineCrossingDetector";
 
 type Target =
   | {
-      left: number;
-      top: number;
-      duration: number;
-    }
+    left: number;
+    top: number;
+    duration: number;
+  }
   | {
-      dleft: number;
-      dtop: number;
-      duration: number;
-    };
+    dleft: number;
+    dtop: number;
+    duration: number;
+  };
 
 export class Animate extends Hook {
   targets: Target[] = [];
   isMoving = false;
-  pubsub = new PubSub(["start", "end"] as const);
+  pubsub = new PubSub<["start", "end"]>();
 
   blocklineDetector?: LineCrossingDetector;
 
@@ -32,10 +32,10 @@ export class Animate extends Hook {
       this.blocklineDetector = sprite.hookManager.get(
         LineCrossingDetector.name
       ) as LineCrossingDetector;
-    } catch (_e) {}
+    } catch (_e) { }
   }
-  onDraw(): void {}
-  onDestroy(): void {}
+  onDraw(): void { }
+  onDestroy(): void { }
 
   public moveTo(target: Target) {
     this.targets.push(target);

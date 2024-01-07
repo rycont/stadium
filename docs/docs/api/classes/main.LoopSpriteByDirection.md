@@ -13,31 +13,6 @@ custom_edit_url: null
 
   ↳ **`LoopSpriteByDirection`**
 
-## Constructors
-
-### constructor
-
-• **new LoopSpriteByDirection**(`sheet`, `interval?`): [`LoopSpriteByDirection`](main.LoopSpriteByDirection.md)
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `sheet` | `Record`\<`string`, `string`[]\> & \{ `idle`: `string`[]  } | `undefined` |
-| `interval` | `number` | `500` |
-
-#### Returns
-
-[`LoopSpriteByDirection`](main.LoopSpriteByDirection.md)
-
-#### Overrides
-
-LoopSprite.constructor
-
-#### Defined in
-
-[lib/hook/loopSprite.ts:68](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L68)
-
 ## Properties
 
 ### \_sprite
@@ -50,7 +25,7 @@ LoopSprite.\_sprite
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:7](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L7)
+[lib/hook/loopSprite.ts:7](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L7)
 
 ## Accessors
 
@@ -68,7 +43,7 @@ LoopSprite.sprite
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L13)
 
 ___
 
@@ -92,7 +67,7 @@ LoopSprite.state
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:33](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L33)
+[lib/hook/loopSprite.ts:33](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L33)
 
 ## Methods
 
@@ -106,7 +81,7 @@ LoopSprite.state
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:110](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L110)
+[lib/hook/loopSprite.ts:110](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L110)
 
 ___
 
@@ -130,7 +105,7 @@ LoopSprite.assertProperState
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:55](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L55)
+[lib/hook/loopSprite.ts:55](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L55)
 
 ___
 
@@ -155,7 +130,7 @@ ___
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:87](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L87)
+[lib/hook/loopSprite.ts:87](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L87)
 
 ___
 
@@ -173,7 +148,7 @@ LoopSprite.onDestroy
 
 #### Defined in
 
-[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L11)
+[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L11)
 
 ___
 
@@ -197,7 +172,7 @@ LoopSprite.onMount
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:73](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L73)
+[lib/hook/loopSprite.ts:73](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L73)
 
 ___
 
@@ -215,4 +190,4 @@ LoopSprite.preload
 
 #### Defined in
 
-[lib/hook/loopSprite.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/hook/loopSprite.ts#L19)
+[lib/hook/loopSprite.ts:19](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/loopSprite.ts#L19)

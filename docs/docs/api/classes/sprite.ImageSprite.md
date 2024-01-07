@@ -13,45 +13,7 @@ custom_edit_url: null
 
   ↳ **`ImageSprite`**
 
-## Constructors
-
-### constructor
-
-• **new ImageSprite**(`image`, `width`, `height`, `left?`, `top?`): [`ImageSprite`](sprite.ImageSprite.md)
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `image` | `string` | `undefined` |
-| `width` | `number` | `undefined` |
-| `height` | `number` | `undefined` |
-| `left` | `number` | `0` |
-| `top` | `number` | `0` |
-
-#### Returns
-
-[`ImageSprite`](sprite.ImageSprite.md)
-
-#### Overrides
-
-[Sprite](sprite.Sprite.md).[constructor](sprite.Sprite.md#constructor)
-
-#### Defined in
-
-[lib/sprite/index.ts:57](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L57)
-
 ## Properties
-
-### \_image
-
-• `Private` **\_image**: `string`
-
-#### Defined in
-
-[lib/sprite/index.ts:55](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L55)
-
-___
 
 ### element
 
@@ -63,7 +25,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:54](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L54)
+[lib/sprite/index.ts:54](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L54)
 
 ___
 
@@ -73,7 +35,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:60](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L60)
+[lib/sprite/index.ts:60](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L60)
 
 ___
 
@@ -87,7 +49,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:14](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L14)
+[lib/sprite/index.ts:14](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L14)
 
 ___
 
@@ -101,7 +63,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:17](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L17)
+[lib/sprite/index.ts:17](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L17)
 
 ___
 
@@ -115,13 +77,13 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L19)
+[lib/sprite/index.ts:19](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L19)
 
 ___
 
 ### pubsub
 
-• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<readonly [``"move"``]\>
+• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<[``"move"``]\>
 
 #### Inherited from
 
@@ -129,7 +91,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L13)
+[lib/sprite/index.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L13)
 
 ___
 
@@ -143,7 +105,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:16](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L16)
+[lib/sprite/index.ts:16](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L16)
 
 ___
 
@@ -157,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L11)
+[lib/sprite/index.ts:11](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L11)
 
 ___
 
@@ -167,7 +129,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:59](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L59)
+[lib/sprite/index.ts:59](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L59)
 
 ## Accessors
 
@@ -181,7 +143,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:80](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L80)
+[lib/sprite/index.ts:80](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L80)
 
 • `set` **image**(`value`): `void`
 
@@ -197,7 +159,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:84](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L84)
+[lib/sprite/index.ts:84](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L84)
 
 ___
 
@@ -215,7 +177,7 @@ Sprite.mounted
 
 #### Defined in
 
-[lib/sprite/index.ts:46](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L46)
+[lib/sprite/index.ts:46](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L46)
 
 ## Methods
 
@@ -233,7 +195,7 @@ Sprite.mounted
 
 #### Defined in
 
-[lib/sprite/index.ts:38](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L38)
+[lib/sprite/index.ts:38](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L38)
 
 ___
 
@@ -251,7 +213,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:70](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L70)
+[lib/sprite/index.ts:70](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L70)
 
 ___
 
@@ -276,7 +238,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:23](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L23)
+[lib/sprite/index.ts:23](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L23)
 
 ___
 
@@ -294,7 +256,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:31](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L31)
+[lib/sprite/index.ts:31](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L31)
 
 ___
 
@@ -318,4 +280,4 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:42](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L42)
+[lib/sprite/index.ts:42](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L42)

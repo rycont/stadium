@@ -19,5 +19,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["lib", "src", "public/asset"]
+  "include": ["lib", "src", "public/asset"],
+  "typedocOptions": {
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeNotDocumented": true
+  }
 }

@@ -18,9 +18,9 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/sensorLine/index.ts:6](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L6)
+[lib/sensorLine/index.ts:6](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L6)
 
-[lib/sensorLine/index.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L11)
+[lib/sensorLine/index.ts:11](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L11)
 
 ## Variables
 
@@ -30,6 +30,6 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/sensorLine/index.ts:6](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L6)
+[lib/sensorLine/index.ts:6](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L6)
 
-[lib/sensorLine/index.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L11)
+[lib/sensorLine/index.ts:11](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L11)

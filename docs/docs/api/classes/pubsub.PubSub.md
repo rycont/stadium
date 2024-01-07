@@ -1,69 +1,37 @@
 ---
 id: "pubsub.PubSub"
-title: "Class: PubSub<T>"
+title: "Class: PubSub<Events>"
 sidebar_label: "PubSub"
 custom_edit_url: null
 ---
 
 [pubsub](../modules/pubsub.md).PubSub
 
-A generic PubSub class that allows subscribing to and publishing events.
+PubSub 클래스는 이벤트를 생성하고 구독하는 PubSub 패턴을 구현합니다.
+
+**`Example`**
+
+```ts
+const pubsub = new PubSub<['event1', 'event2']>();
+
+pubsub.sub('event1', () => console.log('event1 발생'));
+pubsub.pub('event1'); // 'event1 발생'
+```
+
+**`Example`**
+
+```ts
+const pubsub = new PubSub<['점심시간']>();
+
+pubsub.sub('점심시간', (food: string) => console.log(`${food} 먹을 시간입니다.`));
+pubsub.pub('점심시간', ['김치찌개']);
+```
 
 ## Type parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `T` | extends readonly `string`[] | The type of events that can be subscribed to. |
-
-## Constructors
-
-### constructor
-
-• **new PubSub**\<`T`\>(`events`): [`PubSub`](pubsub.PubSub.md)\<`T`\>
-
-#### Type parameters
-
 | Name | Type |
 | :------ | :------ |
-| `T` | extends readonly `string`[] |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `events` | `T` |
-
-#### Returns
-
-[`PubSub`](pubsub.PubSub.md)\<`T`\>
-
-#### Defined in
-
-[lib/pubsub.ts:6](https://github.com/rycont/stadium/blob/85a354b/lib/pubsub.ts#L6)
-
-## Properties
-
-### events
-
-• **events**: `T`
-
-#### Defined in
-
-[lib/pubsub.ts:6](https://github.com/rycont/stadium/blob/85a354b/lib/pubsub.ts#L6)
-
-___
-
-### handlers
-
-• **handlers**: `Object` = `{}`
-
-#### Index signature
-
-▪ [key: `string`]: `Function`[]
-
-#### Defined in
-
-[lib/pubsub.ts:8](https://github.com/rycont/stadium/blob/85a354b/lib/pubsub.ts#L8)
+| `Events` | extends `string`[] |
 
 ## Methods
 
@@ -71,22 +39,28 @@ ___
 
 ▸ **pub**(`event`, `args?`): `void`
 
-Publishes an event with optional arguments.
+지정된 이벤트를 생성합니다.
 
 #### Parameters
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `event` | `T`[`number`] | `undefined` | The event to publish. |
-| `args` | `any`[] | `[]` | Optional arguments to pass to the event listeners. |
+| `event` | `Events`[`number`] | `undefined` | 생성할 이벤트의 이름입니다. |
+| `args` | `any`[] | `[]` | 이벤트 핸들러에 전달할 인수의 배열입니다. |
 
 #### Returns
 
 `void`
 
+**`Example`**
+
+```ts
+pubsub.pub('register', ['홍길동']);
+```
+
 #### Defined in
 
-[lib/pubsub.ts:27](https://github.com/rycont/stadium/blob/85a354b/lib/pubsub.ts#L27)
+[lib/pubsub.ts:53](https://github.com/rycont/stadium/blob/eca21ca/lib/pubsub.ts#L53)
 
 ___
 
@@ -94,19 +68,25 @@ ___
 
 ▸ **sub**(`event`, `listener`): `void`
 
-Subscribes a listener function to an event.
+이벤트를 구독합니다.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `event` | `T`[`number`] | The event to subscribe to. |
-| `listener` | `Function` | The listener function to be called when the event is published. |
+| `event` | `Events`[`number`] | 구독할 이벤트의 이름입니다 |
+| `listener` | `Function` | 이벤트가 발생했을 때 실행할 함수입니다. |
 
 #### Returns
 
 `void`
 
+**`Example`**
+
+```ts
+pubsub.sub('register', (name: string) => console.log(`${name}님이 입장하셨습니다.`));
+```
+
 #### Defined in
 
-[lib/pubsub.ts:17](https://github.com/rycont/stadium/blob/85a354b/lib/pubsub.ts#L17)
+[lib/pubsub.ts:38](https://github.com/rycont/stadium/blob/eca21ca/lib/pubsub.ts#L38)

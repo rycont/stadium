@@ -1,30 +1,56 @@
 /**
- * A generic PubSub class that allows subscribing to and publishing events.
- * @template T - The type of events that can be subscribed to.
+ * PubSub 클래스는 이벤트를 생성하고 구독하는 PubSub 패턴을 구현합니다.
+ * 
+ * @example
+ * ```ts
+ * const pubsub = new PubSub<['event1', 'event2']>();
+ * 
+ * pubsub.sub('event1', () => console.log('event1 발생'));
+ * pubsub.pub('event1'); // 'event1 발생'
+ * ```
+ * 
+ * @example
+ * ```ts
+ * const pubsub = new PubSub<['점심시간']>();
+ * 
+ * pubsub.sub('점심시간', (food: string) => console.log(`${food} 먹을 시간입니다.`));
+ * pubsub.pub('점심시간', ['김치찌개']);
+ * ```
+ * 
  */
-export class PubSub<T extends readonly string[]> {
-  constructor(public events: T) { }
+export class PubSub<Events extends string[]> {
+  constructor() { }
 
-  handlers: {
+  private handlers: {
     [key: string]: Function[];
   } = {};
 
   /**
-   * Subscribes a listener function to an event.
-   * @param event - The event to subscribe to.
-   * @param listener - The listener function to be called when the event is published.
+   * 이벤트를 구독합니다.
+   * @param event - 구독할 이벤트의 이름입니다
+   * @param listener - 이벤트가 발생했을 때 실행할 함수입니다.
+   * 
+   * @example
+   * ```ts
+   * pubsub.sub('register', (name: string) => console.log(`${name}님이 입장하셨습니다.`));
+   * ```
    */
-  sub(event: T[number], listener: Function) {
+  public sub(event: Events[number], listener: Function) {
     if (!this.handlers[event]) this.handlers[event] = [];
     this.handlers[event].push(listener);
   }
 
   /**
-   * Publishes an event with optional arguments.
-   * @param event - The event to publish.
-   * @param args - Optional arguments to pass to the event listeners.
+   * 지정된 이벤트를 생성합니다.
+   * @param event - 생성할 이벤트의 이름입니다.
+   * @param args - 이벤트 핸들러에 전달할 인수의 배열입니다.
+   * 
+   * @example
+   * ```ts
+   * pubsub.pub('register', ['홍길동']);
+   * ```
    */
-  pub(event: T[number], args: any[] = []) {
+  public pub(event: Events[number], args: any[] = []) {
     if (!this.handlers[event]) return;
     for (const listener of this.handlers[event]) {
       listener(...args);

@@ -19,9 +19,9 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/sprite/index.ts:90](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L90)
+[lib/sprite/index.ts:90](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L90)
 
-[lib/sprite/index.ts:97](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L97)
+[lib/sprite/index.ts:97](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L97)
 
 ## Variables
 
@@ -31,7 +31,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/sprite/index.ts:7](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L7)
+[lib/sprite/index.ts:7](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L7)
 
 ___
 
@@ -41,6 +41,6 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:90](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L90)
+[lib/sprite/index.ts:90](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L90)
 
-[lib/sprite/index.ts:97](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L97)
+[lib/sprite/index.ts:97](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L97)

@@ -19,20 +19,6 @@ custom_edit_url: null
 
   ↳ [`LineCrossingDetector`](main.LineCrossingDetector.md)
 
-## Constructors
-
-### constructor
-
-• **new Hook**(): [`Hook`](main.Hook.md)
-
-#### Returns
-
-[`Hook`](main.Hook.md)
-
-#### Defined in
-
-[lib/hook/hook.ts:6](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L6)
-
 ## Properties
 
 ### \_sprite
@@ -41,7 +27,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L4)
+[lib/hook/hook.ts:4](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L4)
 
 ## Accessors
 
@@ -55,7 +41,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L13)
+[lib/hook/hook.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L13)
 
 ## Methods
 
@@ -69,7 +55,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L11)
+[lib/hook/hook.ts:11](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L11)
 
 ___
 
@@ -89,4 +75,4 @@ ___
 
 #### Defined in
 
-[lib/hook/hook.ts:8](https://github.com/rycont/stadium/blob/85a354b/lib/hook/hook.ts#L8)
+[lib/hook/hook.ts:8](https://github.com/rycont/stadium/blob/eca21ca/lib/hook/hook.ts#L8)

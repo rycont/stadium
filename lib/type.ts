@@ -6,3 +6,8 @@ export const Point = z.object({
 });
 
 export type Point = z.infer<typeof Point>;
+
+export interface Size {
+  width: number;
+  height: number;
+}

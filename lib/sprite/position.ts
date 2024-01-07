@@ -2,9 +2,9 @@ import { PubSub } from "../pubsub";
 import { Point } from "../type";
 
 export class Position implements Point {
-  pubsub = new PubSub(["set"] as const);
+  pubsub = new PubSub<["set"]>();
 
-  constructor(public _left: number, public _top: number) {}
+  constructor(public _left: number, public _top: number) { }
 
   set left(value: number) {
     const prev = {

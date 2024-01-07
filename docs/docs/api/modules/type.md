@@ -14,9 +14,9 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/type.ts:3](https://github.com/rycont/stadium/blob/85a354b/lib/type.ts#L3)
+[lib/type.ts:3](https://github.com/rycont/stadium/blob/eca21ca/lib/type.ts#L3)
 
-[lib/type.ts:8](https://github.com/rycont/stadium/blob/85a354b/lib/type.ts#L8)
+[lib/type.ts:8](https://github.com/rycont/stadium/blob/eca21ca/lib/type.ts#L8)
 
 ## Variables
 
@@ -26,6 +26,6 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/type.ts:3](https://github.com/rycont/stadium/blob/85a354b/lib/type.ts#L3)
+[lib/type.ts:3](https://github.com/rycont/stadium/blob/eca21ca/lib/type.ts#L3)
 
-[lib/type.ts:8](https://github.com/rycont/stadium/blob/85a354b/lib/type.ts#L8)
+[lib/type.ts:8](https://github.com/rycont/stadium/blob/eca21ca/lib/type.ts#L8)

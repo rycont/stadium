@@ -17,35 +17,6 @@ custom_edit_url: null
 
 - [`Line`](../modules/sensorLine.md#line)
 
-## Constructors
-
-### constructor
-
-• **new SensorLine**(`p1`, `p2`): [`SensorLine`](sensorLine.SensorLine.md)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `p1` | `Object` |
-| `p1.left` | `number` |
-| `p1.top` | `number` |
-| `p2` | `Object` |
-| `p2.left` | `number` |
-| `p2.top` | `number` |
-
-#### Returns
-
-[`SensorLine`](sensorLine.SensorLine.md)
-
-#### Overrides
-
-[Sprite](sprite.Sprite.md).[constructor](sprite.Sprite.md#constructor)
-
-#### Defined in
-
-[lib/sensorLine/index.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L19)
-
 ## Properties
 
 ### element
@@ -58,7 +29,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/sensorLine/index.ts:16](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L16)
+[lib/sensorLine/index.ts:16](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L16)
 
 ___
 
@@ -72,7 +43,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:14](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L14)
+[lib/sprite/index.ts:14](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L14)
 
 ___
 
@@ -86,7 +57,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:17](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L17)
+[lib/sprite/index.ts:17](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L17)
 
 ___
 
@@ -107,7 +78,7 @@ Line.p1
 
 #### Defined in
 
-[lib/sensorLine/index.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L19)
+[lib/sensorLine/index.ts:19](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L19)
 
 ___
 
@@ -128,7 +99,7 @@ Line.p2
 
 #### Defined in
 
-[lib/sensorLine/index.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L19)
+[lib/sensorLine/index.ts:19](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L19)
 
 ___
 
@@ -142,13 +113,13 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:19](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L19)
+[lib/sprite/index.ts:19](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L19)
 
 ___
 
 ### pubsub
 
-• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<readonly [``"move"``]\>
+• **pubsub**: [`PubSub`](pubsub.PubSub.md)\<[``"move"``]\>
 
 #### Inherited from
 
@@ -156,7 +127,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:13](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L13)
+[lib/sprite/index.ts:13](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L13)
 
 ___
 
@@ -170,7 +141,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:16](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L16)
+[lib/sprite/index.ts:16](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L16)
 
 ___
 
@@ -184,7 +155,7 @@ ___
 
 #### Defined in
 
-[lib/sensorLine/index.ts:17](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L17)
+[lib/sensorLine/index.ts:17](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L17)
 
 ___
 
@@ -194,7 +165,7 @@ ___
 
 #### Defined in
 
-[lib/sensorLine/index.ts:14](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L14)
+[lib/sensorLine/index.ts:14](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L14)
 
 ## Accessors
 
@@ -212,7 +183,7 @@ Sprite.mounted
 
 #### Defined in
 
-[lib/sprite/index.ts:46](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L46)
+[lib/sprite/index.ts:46](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L46)
 
 ## Methods
 
@@ -230,7 +201,7 @@ Sprite.mounted
 
 #### Defined in
 
-[lib/sprite/index.ts:38](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L38)
+[lib/sprite/index.ts:38](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L38)
 
 ___
 
@@ -248,7 +219,7 @@ ___
 
 #### Defined in
 
-[lib/sensorLine/index.ts:24](https://github.com/rycont/stadium/blob/85a354b/lib/sensorLine/index.ts#L24)
+[lib/sensorLine/index.ts:24](https://github.com/rycont/stadium/blob/eca21ca/lib/sensorLine/index.ts#L24)
 
 ___
 
@@ -273,7 +244,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:23](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L23)
+[lib/sprite/index.ts:23](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L23)
 
 ___
 
@@ -291,7 +262,7 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:31](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L31)
+[lib/sprite/index.ts:31](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L31)
 
 ___
 
@@ -315,4 +286,4 @@ ___
 
 #### Defined in
 
-[lib/sprite/index.ts:42](https://github.com/rycont/stadium/blob/85a354b/lib/sprite/index.ts#L42)
+[lib/sprite/index.ts:42](https://github.com/rycont/stadium/blob/eca21ca/lib/sprite/index.ts#L42)
