@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "typedoc": "rm -rf ./docs/API; typedoc --watch",
     "build-typedoc": "rm -rf ./docs/API; typedoc",
-    "docs:dev": "rm -rf ./docs/API && typedoc && vitepress dev docs",
+    "docs:dev": "vitepress dev docs",
     "docs:build": "rm -rf ./docs/API && typedoc && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },

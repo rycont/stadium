@@ -1,14 +1,16 @@
+# Stadium
+
 Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와주는 UI 라이브러리입니다.
 
 ```typescript
-import { Stadium } from "@horangedu/stadium";
 import {
+  Stadium,
   LineCrossingDetector,
   MoveableSprite,
   Animate,
   Nearness,
   LoopSpriteByDirection,
-} from "@horangedu/stadium/hooks";
+} from "@rycont/stadium";
 
 const element = document.getElementById("stadium");
 const stadium = new Stadium(element);

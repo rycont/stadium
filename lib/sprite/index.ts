@@ -28,7 +28,7 @@ export abstract class Sprite {
   public pubsub = new PubSub<["move"]>();
 
   /**
-   * Sprite가 사용할 HookManager입니다. Sprite.use 메서드를 통해 Hook을 추가할 수 있습니다.
+   * Sprite가 사용할 HookManager입니다. `Sprite.use` 메서드를 통해 Hook을 추가할 수 있습니다.
    */
   public hookManager = new HookManager(this);
 

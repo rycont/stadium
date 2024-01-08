@@ -15,9 +15,13 @@ export default defineConfig({
       contentRoot: "/docs",
       contentDirs: [""],
       collapsible: true,
+      collapsed: false,
     }),
     socialLinks: [
       { icon: "github", link: "https://github.com/rycont/stadium" },
     ],
+    search: {
+      provider: "local",
+    },
   },
 });

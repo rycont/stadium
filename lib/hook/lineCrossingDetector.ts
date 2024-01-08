@@ -1,6 +1,6 @@
 import { PubSub } from "../pubsub";
 import { Sprite } from "../sprite";
-import { Line, Point } from "../type";
+import { Line, Point, isLine } from "../type";
 import { Hook } from "./hook";
 
 /**
@@ -93,12 +93,13 @@ export class LineCrossingDetector extends Hook {
    * ```
    */
   isCrossing(target: Point) {
-    const blockLines = this.sprite.stadium!.sprites.filter((sprite) => {
-      return sprite.tags.includes(LineCrossingDetector.LINE_TAG);
-    });
+    const blockLines = this.sprite.stadium!.sprites.filter(
+      (sprite): sprite is Sprite & Line =>
+        sprite.tags.includes(LineCrossingDetector.LINE_TAG) && isLine(sprite)
+    );
 
     for (const _blockLine of blockLines) {
-      const blockLine = Line.parse(_blockLine);
+      const blockLine = _blockLine;
 
       if (isIntersecting({ p1: this.sprite.position, p2: target }, blockLine)) {
         return true;
@@ -111,11 +112,11 @@ export class LineCrossingDetector extends Hook {
 
 /**
  * 두 선분이 교차하는지 여부를 확인합니다.
- * 
+ *
  * ```ts
  * const line1 = new Line({ left: 0, top: 0 }, { left: 100, top: 100 });
  * const line2 = new Line({ left: 0, top: 100 }, { left: 100, top: 0 });
- * 
+ *
  * isIntersecting(line1, line2); // true
  * ```
  *
