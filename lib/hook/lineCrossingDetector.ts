@@ -4,7 +4,7 @@ import { Line, Point, isLine } from "../type";
 import { Hook } from "./hook";
 
 /**
- * 스프라이트가 [Animate](/docs/api/classes/Animate) 훅을 통해 이동할 때 [SensorLine](./docs/api/classes/Animate)을
+ * 스프라이트가 [Animate](./Animate) 훅을 통해 이동할 때 [SensorLine](./Animate)을
  * 지나치게 되는지를 검사하는 Hook입니다. `LineCrossingDetector.LINE_TAG`를 태그로 가지는
  * SensorLine만 검사 대상입니다.
  *
