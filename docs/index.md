@@ -2,42 +2,89 @@
 
 Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와주는 UI 라이브러리입니다.
 
-```typescript
-import {
-  Stadium,
-  LineCrossingDetector,
-  MoveableSprite,
-  Animate,
-  Nearness,
-  LoopSpriteByDirection,
-} from "@rycont/stadium";
+::: tip 아래 박스는 Stadium을 사용해 만든 예제입니다.
 
-const element = document.getElementById("stadium");
-const stadium = new Stadium(element);
+- 키보드로 조작할 수 있습니다.
+  :::
 
-const dog = new ImageSprite("dog.png", 80, 80, 40, 40);
-const eth = new ImageSprite("eth.png", 40, 40, 200, 200);
+<div ref="el"></div>
 
-etg.tags.push("eth");
+<script setup>
+    import { ref, onMounted } from 'vue'
+    import {
+        Stadium,
+        SensorLine,
+        ImageSprite,
+        MoveableSprite,
+        Animate,
+        LineCrossingDetector,
+    } from "../dist/stadium.js";
+    const el = ref(null)
 
-harangSprite.use([
-  new MoveableSprite(),
-  lineCrossingDetector,
-  new Animate(),
-  new Nearness(["eth"], 10, onGetEth),
-  new LoopSpriteByDirection(harang),
-]);
+    onMounted(() => {
+        const stadium = new Stadium(el.value, {
+            width: 400,
+            height: 400,
+        });
 
-function onGetEth() {
-  alert("이더리움을 획득했습니다!");
-}
+        const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+        const animate = new Animate();
 
-stadium.addSprite(harang);
-stadium.addSprite(eth);
+        picture.use([animate]);
+        stadium.addSprite(picture);
 
-animate.moveBy(0, 80);
-animate.moveBy(80, 0);
+        addEventListener("keydown", (e) => {
+            switch(e.key) {
+                case "ArrowUp":
+                    animate.moveBy(0, -20, 100);
+                    break;
+                case "ArrowDown":
+                    animate.moveBy(0, 20, 100);
+                    break;
+                case "ArrowLeft":
+                    animate.moveBy(-20, 0, 100);
+                    break;
+                case "ArrowRight":
+                    animate.moveBy(20, 0, 100);
+                    break;
+            }
+        })
+
+        el.value.style.setProperty("border", "1px solid black")
+    })
+</script>
+
+```js{1-5,10,13,16,19}
+const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+const animate = new Animate();
+
+picture.use([animate]);
+stadium.addSprite(picture);
+
+addEventListener("keydown", (e) => {
+  switch (e.key) {
+    case "ArrowUp":
+      animate.moveBy(0, -20, 100);
+      break;
+    case "ArrowDown":
+      animate.moveBy(0, 20, 100);
+      break;
+    case "ArrowLeft":
+      animate.moveBy(-20, 0, 100);
+      break;
+    case "ArrowRight":
+      animate.moveBy(20, 0, 100);
+      break;
+  }
+});
 ```
+
+## 따라하며 배우기!
+
+- [맵 만들기](./따라하기/1.%20맵%20만들기)
+- [움직이는 스프라이트](./따라하기/2.%20움직이는%20스프라이트)
+- [선의 통과를 감지하기](./따라하기/3.%20선의%20통과를%20감지하기)
+- [넘을 수 없는 선](./따라하기/4.%20넘을%20수%20없는%20선.md)
 
 ## Quick Tour
 
@@ -101,12 +148,10 @@ stage.addSprite(image);
 - 사용자가 조종할 수 있는 캐릭터
 - 캐릭터가 획득할 수 있는 아이템
 
-> [!TIP]  
-> 눈에 보이는 대부분의 개체는 ImageSprite입니다
-
 #### SensorLine
 
 [SensorLine 자세히 알아보기](./API/classes/SensorLine.md)
+
 맵에 선을 그을 수 있습니다. 다양한 상호작용을 구현하기 위해 사용합니다.
 
 ```typescript
@@ -125,6 +170,7 @@ stage.addSprite(line);
 ### Hook 이해하기
 
 [Hook 자세히 알아보기](./API/classes/Hook.md)
+
 `Hook`으로 ImageSprite의 기능을 확장합니다. 다음과 같은 Hook이 제공됩니다.
 
 1. **Animate**  
