@@ -21,19 +21,38 @@ export class MoveableSprite extends Hook {
     super();
   }
 
-  onMount(sprite: Sprite): void {
+  public onMount(sprite: Sprite): void {
     super.onMount(sprite);
 
     const element = this.sprite.element;
+
     element.style.setProperty("cursor", "move");
+    element.setAttribute("draggable", "true");
+
     element.addEventListener("dragstart", this.onMouseDown.bind(this));
+    addEventListener("click", this.onDocumentClick.bind(this))
   }
 
-  onDestroy(): void {
+  public onDestroy(): void {
+    this.removeMoveable();
+
+    const element = this.sprite.element;
+
+    element.style.removeProperty("cursor");
+    element.removeAttribute("draggable");
+
+    element.removeEventListener("dragstart", this.onMouseDown.bind(this));
+    removeEventListener("click", this.onDocumentClick.bind(this))
+
+    super.onDestroy();
+  }
+
+  private removeMoveable() {
     this.moveable?.destroy();
+    delete this.moveable;
   }
 
-  onMouseDown(event: MouseEvent) {
+  private onMouseDown(event: MouseEvent) {
     if (this.moveable) {
       this.moveable.destroy();
     }
@@ -47,7 +66,18 @@ export class MoveableSprite extends Hook {
     this.moveable.dragStart(event);
   }
 
-  onDrag({ left, top }: OnDrag) {
+  private onDocumentClick(event: MouseEvent) {
+    if (event.target === this.sprite.element) {
+      event.stopPropagation();
+    }
+
+    if (this.moveable) {
+      this.moveable.destroy();
+      delete this.moveable;
+    }
+  }
+
+  private onDrag({ left, top }: OnDrag) {
     this.sprite.position.set(left, top);
   }
 }
