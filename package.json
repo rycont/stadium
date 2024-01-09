@@ -14,6 +14,8 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.7",
     "typedoc": "^0.25.6",
     "typedoc-plugin-markdown": "^3.17.1",
     "typedoc-plugin-zod": "^1.1.2",
