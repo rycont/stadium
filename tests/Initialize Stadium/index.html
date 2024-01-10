@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
   </head>
   <body>
     <div id="stadium"></div>
+
     <script type="module">
-      import { Stadium } from "../../dist/stadium";
+      import { Stadium } from "../../dist/stadium.js";
 
       const el = document.getElementById("stadium");
 
-      new Stadium(el, {
+      const stadium = new Stadium(el, {
         width: 500,
         height: 500,
       });
