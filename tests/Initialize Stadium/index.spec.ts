@@ -1,7 +1,11 @@
 import { expect, test } from "@playwright/test";
 
-test("Initialize Stadium", async ({ page, browserName }) => {
-  await page.goto("./Initialize%20Stadium/index.html");
+test("Initialize Stadium", async ({ page }) => {
+  const pageURI =
+    "/" +
+    import.meta.url.split("stadium/")[1].replace("index.spec.ts", "index.html");
+  await page.goto(pageURI);
+
   const stadium = await page.waitForSelector("#stadium");
 
   const style = await stadium.evaluate((el) => {

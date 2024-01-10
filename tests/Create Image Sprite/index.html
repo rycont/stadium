@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="stadium"></div>
+
+    <script type="module">
+      import { Stadium, ImageSprite } from "../../dist/stadium.js";
+
+      const el = document.getElementById("stadium");
+
+      const stadium = new Stadium(el, {
+        width: 500,
+        height: 500,
+      });
+
+      const sprite = new ImageSprite("/asset/eth.png", 80, 80, 40, 40);
+      stadium.addSprite(sprite);
+    </script>
+  </body>
+</html>
