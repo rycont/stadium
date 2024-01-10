@@ -23,7 +23,7 @@ export class LoopSprite extends Hook {
   declare _sprite?: ImageSprite;
 
   private _state?: string;
-  private timer?: number;
+  private timer?: ReturnType<typeof setInterval>;
 
   /**
    * LoopSprite를 생성합니다. 생성자가 호출될 때, 시트에 있는 모든 이미지를 미리 로드합니다.
