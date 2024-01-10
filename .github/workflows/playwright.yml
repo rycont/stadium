@@ -17,6 +17,7 @@ jobs:
       - name: Build Package & Document
         run: pnpm docs:build
   test:
+    needs: [build]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
