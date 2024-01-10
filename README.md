@@ -3,10 +3,10 @@ Stadium
 </h1>
 <p align="center">
 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와주는 UI 라이브러리
-<p>
+</p>
 
 <p align="center">
- <a href="https://stadium.pages.dev/">문서</a> | <a href="https://stadium.pages.dev/따라하기/1.%20맵%20만들기">따라하며 배우기</a>
+  <a href="https://stadium.pages.dev/">문서</a> | <a href="https://stadium.pages.dev/따라하기/1.%20맵%20만들기">따라하며 배우기</a>
 </p>
 
 ```js
