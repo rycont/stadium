@@ -19,7 +19,7 @@
         ImageSprite,
         MoveableSprite,
         Animate,
-        LineCrossingDetector,
+        DetectLineCrossing,
       } from "./dist/stadium.js";
 
       const element = document.getElementById("stadium");
@@ -35,20 +35,19 @@
         new SensorLine({ left: 40, top: 120 }, { left: 40, top: 40 }),
       ];
 
+      const detector = new DetectLineCrossing({
+        blockMove: true,
+      });
+
       for (const line of lines) {
-        line.tags.push(LineCrossingDetector.LINE_TAG);
+        line.tags.push(detector.targetTag);
         stadium.addSprite(line);
       }
 
       const me = new ImageSprite("/asset/eth.png", 40, 40, 80, 80);
       const animateMe = new Animate();
 
-      me.use([
-        new LineCrossingDetector({
-          blockMove: true,
-        }),
-        animateMe,
-      ]);
+      me.use([detector, animateMe]);
       stadium.addSprite(me);
 
       addEventListener("keydown", (e) => {

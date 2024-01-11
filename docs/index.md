@@ -17,7 +17,7 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
         ImageSprite,
         MoveableSprite,
         Animate,
-        LineCrossingDetector,
+        DetectLineCrossing,
     } from "../dist/stadium.js";
     const el = ref(null)
 
@@ -182,22 +182,22 @@ sprite.use([animate]);
 animate.moveBy(80, 0);
 ```
 
-2. **LineCrossingDetector**  
+2. **DetectLineCrossing**  
    ImageSprite가 SensorLine을 지났는지 검사하고, 이동을 제한하거나 특정 동작을 실행할 수 있습니다.
 
 ```typescript
-line.tags.push(LineCrossingDetector.LINE_TAG);
-
-const lineCrossingDetector = new LineCrossingDetector({
+const detector = new DetectLineCrossing({
   blockMove: true,
   clearMovePathAfterBlocking: true,
 });
 
-lineCrossingDetector.pubsub.sub("blocked", () => {
+line.tags.push(detector.targetTag);
+
+detector.pubsub.sub("blocked", () => {
   console.log("Blocked by line");
 });
 
-sprite.use([lineCrossingDetector]);
+sprite.use([detector]);
 ```
 
 3. **LoopSprite**  

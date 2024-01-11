@@ -1,7 +1,7 @@
 import { ImageSprite } from "../lib/sprite/ImageSprite";
 import { Stadium } from "../lib/stadium";
 
-import { LineCrossingDetector } from "../lib/hook/lineCrossingDetector";
+import { DetectLineCrossing } from "../lib/hook/detectLineCrossing";
 import { LoopSpriteByDirection } from "../lib/hook/loopSprite";
 import { MoveableSprite } from "../lib/hook/moveable";
 import { Nearness } from "../lib/hook/nearness";
@@ -22,19 +22,20 @@ const ethSprite2 = new ImageSprite("/asset/eth.png", 40, 40, 360, 200);
 
 ethSprite1.tags.push("eth");
 ethSprite2.tags.push("eth");
-line.tags.push(LineCrossingDetector.LINE_TAG);
 
 stadium.addSprite(harangSprite);
 stadium.addSprite(ethSprite1);
 stadium.addSprite(ethSprite2);
 stadium.addSprite(line);
 
-const lineCrossingDetector = new LineCrossingDetector({
+const detector = new DetectLineCrossing({
   blockMove: true,
   clearMovePathAfterBlocking: true,
 });
 
-lineCrossingDetector.pubsub.sub("blocked", () => {
+line.tags.push(detector.targetTag);
+
+detector.pubsub.sub("blocked", () => {
   console.log("Blocked by line");
 });
 
@@ -42,14 +43,11 @@ const animate = new Animate();
 
 harangSprite.use([
   new MoveableSprite(),
-  lineCrossingDetector,
+  detector,
   animate,
   new Nearness(["eth"], 10, (_, target) => {
     console.log("이더리움을 획득했습니다!");
     target.destroy();
-  }),
-  new Nearness(["block"], 10, () => {
-    console.log("차단선에 가까워짐");
   }),
   new LoopSpriteByDirection(harang),
 ]);

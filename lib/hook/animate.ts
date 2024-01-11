@@ -1,7 +1,7 @@
 import { Hook } from "./hook";
 import { PubSub } from "../pubsub";
 import { Sprite } from "../sprite";
-import { LineCrossingDetector } from "./lineCrossingDetector";
+import { DetectLineCrossing } from "./detectLineCrossing";
 import { MoveTarget } from "../type";
 
 /**
@@ -43,7 +43,7 @@ export class Animate extends Hook {
    */
   public pubsub = new PubSub<["start", "end"]>();
 
-  private blocklineDetector?: LineCrossingDetector;
+  private blocklineDetector?: DetectLineCrossing;
 
   constructor() {
     super();
@@ -51,15 +51,15 @@ export class Animate extends Hook {
 
   /**
    * 훅이 스프라이트에 마운트될 때 호출되는 메서드입니다.
-   * 스프라이트에서 `LineCrossingDetector` 훅을 찾고, 있다면 `blocklineDetector`에 저장합니다.
+   * 스프라이트에서 `DetectLineCrossing` 훅을 찾고, 있다면 `blocklineDetector`에 저장합니다.
    * @param sprite 마운트된 스프라이트
    */
   public onMount(sprite: Sprite): void {
     super.onMount(sprite);
     try {
       this.blocklineDetector = sprite.hookManager.get(
-        LineCrossingDetector.name
-      ) as LineCrossingDetector;
+        DetectLineCrossing.name
+      ) as DetectLineCrossing;
     } catch (_e) {}
   }
 

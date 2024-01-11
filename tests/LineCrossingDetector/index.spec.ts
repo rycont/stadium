@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { relative } from "path";
 
-test("LineCrossingDetector", async ({ page }) => {
+test("DetectLineCrossing", async ({ page }) => {
   const testPath =
     "/" +
     relative(process.cwd(), new URL(import.meta.url).pathname).replace(

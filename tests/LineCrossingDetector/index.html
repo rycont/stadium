@@ -11,7 +11,7 @@
       import {
         Stadium,
         ImageSprite,
-        LineCrossingDetector,
+        DetectLineCrossing,
         Animate,
         SensorLine,
       } from "../../dist/stadium.js";
@@ -26,20 +26,20 @@
       const sprite = new ImageSprite("/asset/eth.png", 10, 10, 0, 100);
 
       stadium.addSprite(sprite);
-      const lineCrossingDetector = new LineCrossingDetector({
+      const detector = new DetectLineCrossing({
         blockMove: true,
       });
 
       const animate = new Animate();
 
       const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
-      line.tags.push(LineCrossingDetector.LINE_TAG);
+      line.tags.push(detector.targetTag);
 
-      sprite.use([lineCrossingDetector, animate]);
+      sprite.use([detector, animate]);
 
       stadium.addSprite(line);
 
-      lineCrossingDetector.pubsub.sub("blocked", (from, to) => {
+      detector.pubsub.sub("blocked", (from, to) => {
         alert(`이동하려 했으나 라인에 막혔습니다.`);
       });
 
