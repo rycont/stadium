@@ -32,7 +32,12 @@
       const point1 = { left: 40, top: 50 };
       const point2 = { left: 320, top: 120 };
 
-      const line = new SensorLine(point1, point2);
+      const points = {
+        p1: point1,
+        p2: point2,
+      };
+
+      const line = new SensorLine(points);
 
       stadium.addSprite(sprite);
       stadium.addSprite(line);

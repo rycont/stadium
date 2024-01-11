@@ -56,7 +56,7 @@ export class DetectLineCrossing extends Hook {
     public behavior: {
       blockMove?: boolean;
       clearMovePathAfterBlocking?: boolean;
-    },
+    } = {},
     public targetTag = "line-" + crypto.randomUUID()
   ) {
     super();
@@ -77,7 +77,7 @@ export class DetectLineCrossing extends Hook {
    *
    * sprite.use([detector]);
    *
-   * const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+   * const line = new SensorLine({ p1: { left: 0, top: 0 }, p2: { left: 100, top: 100 } })
    * line.tags.push(detector.targetTag);
    *
    * detector.isCrossing({ left: 50, top: 50 }); // true

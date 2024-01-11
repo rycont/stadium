@@ -178,10 +178,12 @@ stage.addSprite(image);
 맵에 선을 그을 수 있습니다. 다양한 상호작용을 구현하기 위해 사용합니다.
 
 ```typescript
-const point1 = { left: 40, top: 50 };
-const point2 = { left: 320, top: 120 };
+const points = {
+  p1: { left: 40, top: 50 },
+  p2: { left: 320, top: 120 },
+};
 
-const line = new SensorLine(point1, point2);
+const line = new SensorLine(points);
 stage.addSprite(line);
 ```
 

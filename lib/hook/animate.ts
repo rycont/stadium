@@ -43,8 +43,6 @@ export class Animate extends Hook {
    */
   public pubsub = new PubSub<["start", "end"]>();
 
-  private blocklineDetector?: DetectLineCrossing;
-
   constructor() {
     super();
   }
@@ -56,11 +54,11 @@ export class Animate extends Hook {
    */
   public onMount(sprite: Sprite): void {
     super.onMount(sprite);
-    try {
-      this.blocklineDetector = sprite.hookManager.get(
-        DetectLineCrossing.name
-      ) as DetectLineCrossing;
-    } catch (_e) {}
+    // try {
+    //   this.blocklineDetector = sprite.hookManager.get(
+    //     DetectLineCrossing.name
+    //   ) as DetectLineCrossing;
+    // } catch (_e) {}
   }
 
   private addMoveTarget(target: MoveTarget) {
@@ -179,5 +177,13 @@ export class Animate extends Hook {
         top: target.dtop + this.sprite.position.top,
       };
     }
+  }
+
+  private get blocklineDetector(): DetectLineCrossing | undefined {
+    try {
+      return this.sprite.hookManager.get(
+        DetectLineCrossing.name
+      ) as DetectLineCrossing;
+    } catch (_e) {}
   }
 }

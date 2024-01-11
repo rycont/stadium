@@ -42,7 +42,10 @@
 
       const animate = new Animate();
 
-      const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+      const line = new SensorLine({
+        p1: { left: 0, top: 0 },
+        p2: { left: 100, top: 100 },
+      });
       line.tags.push(detector.targetTag);
 
       sprite.use([detector, animate]);
