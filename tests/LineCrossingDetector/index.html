@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="stadium"></div>
+
+    <script type="module">
+      import {
+        Stadium,
+        ImageSprite,
+        LineCrossingDetector,
+        Animate,
+        SensorLine,
+      } from "../../dist/stadium.js";
+
+      const el = document.getElementById("stadium");
+
+      const stadium = new Stadium(el, {
+        width: 500,
+        height: 500,
+      });
+
+      const sprite = new ImageSprite("/asset/eth.png", 10, 10, 0, 100);
+
+      stadium.addSprite(sprite);
+      const lineCrossingDetector = new LineCrossingDetector({
+        blockMove: true,
+      });
+
+      const animate = new Animate();
+
+      const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+      line.tags.push(LineCrossingDetector.LINE_TAG);
+
+      sprite.use([lineCrossingDetector, animate]);
+
+      stadium.addSprite(line);
+
+      lineCrossingDetector.pubsub.sub("blocked", (from, to) => {
+        alert(`이동하려 했으나 라인에 막혔습니다.`);
+      });
+
+      animate.moveTo(100, 0, 100);
+    </script>
+  </body>
+</html>
