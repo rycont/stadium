@@ -131,15 +131,17 @@ export class LoopSpriteByDirection extends LoopSprite {
   public onMount(sprite: Sprite): void {
     super.onMount(sprite);
 
-    const animate = sprite.hookManager.get(Animate.name) as Animate;
+    const animates = sprite.hookManager.get(Animate.name) as Animate[];
 
-    animate.pubsub.sub("start", (from: Point, to: Point) => {
-      this.state = this.getDirection(from, to);
-    });
+    for (const animate of animates) {
+      animate.pubsub.sub("start", (from: Point, to: Point) => {
+        this.state = this.getDirection(from, to);
+      });
 
-    animate.pubsub.sub("end", () => {
-      this.state = "idle";
-    });
+      animate.pubsub.sub("end", () => {
+        this.state = "idle";
+      });
+    }
   }
 
   private getDirection(from: Point, to: Point) {
