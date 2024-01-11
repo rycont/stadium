@@ -1,12 +1,4 @@
-import { ImageSprite } from "../lib/sprite/ImageSprite";
-import { Stadium } from "../lib/stadium";
-
-import { DetectLineCrossing } from "../lib/hook/detectLineCrossing";
-import { LoopSpriteByDirection } from "../lib/hook/loopSprite";
-import { MoveableSprite } from "../lib/hook/moveable";
-import { Nearness } from "../lib/hook/nearness";
-import { SensorLine } from "../lib/sensorLine";
-import { Animate } from "../lib/hook/animate";
+import { ImageSprite, Stadium } from "../lib/main";
 import harang from "./harang";
 
 const element = document.getElementById("stadium")! as HTMLDivElement;
@@ -15,53 +7,16 @@ const stadium = new Stadium(element, {
   height: 640,
 });
 
-const line = new SensorLine({ left: 40, top: 50 }, { left: 320, top: 120 });
-const harangSprite = new ImageSprite(harang.idle[0], 80, 80, 40, 40);
-const ethSprite1 = new ImageSprite("/asset/eth.png", 40, 40, 200, 200);
-const ethSprite2 = new ImageSprite("/asset/eth.png", 40, 40, 360, 200);
-
-ethSprite1.tags.push("eth");
-ethSprite2.tags.push("eth");
+const harangSprite = new ImageSprite({
+  src: harang.idle[0],
+  position: {
+    left: 400,
+    top: 320,
+  },
+  size: {
+    width: 80,
+    height: 80,
+  },
+});
 
 stadium.addSprite(harangSprite);
-stadium.addSprite(ethSprite1);
-stadium.addSprite(ethSprite2);
-stadium.addSprite(line);
-
-const detector = new DetectLineCrossing({
-  blockMove: true,
-  clearMovePathAfterBlocking: true,
-});
-
-line.tags.push(detector.targetTag);
-
-detector.pubsub.sub("blocked", () => {
-  console.log("Blocked by line");
-});
-
-const animate = new Animate();
-
-harangSprite.use([
-  new MoveableSprite(),
-  detector,
-  animate,
-  new Nearness(["eth"], 10, (_, target) => {
-    console.log("이더리움을 획득했습니다!");
-    target.destroy();
-  }),
-  new LoopSpriteByDirection(harang),
-]);
-
-addEventListener("keydown", (e) => {
-  const key = e.key;
-
-  if (key === "ArrowUp") {
-    animate.moveBy(0, -80);
-  } else if (key === "ArrowDown") {
-    animate.moveBy(0, 80);
-  } else if (key === "ArrowLeft") {
-    animate.moveBy(-80, 0);
-  } else if (key === "ArrowRight") {
-    animate.moveBy(80, 0);
-  }
-});

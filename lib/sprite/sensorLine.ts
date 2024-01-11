@@ -1,14 +1,14 @@
-import { Sprite } from "../sprite";
-import { Position } from "../sprite/position";
+import { Sprite } from ".";
+import { Position } from "./position";
 import { Line, Point } from "../type";
 
 /**
  * 다른 스프라이트의 접근 혹은 통과를 감지할 수 있는 스프라이트입니다.
- * 
+ *
  * ```ts
  * const point1 = { left: 40,  top: 50  }
  * const point2 = { left: 320, top: 120 }
- * 
+ *
  * const line = new SensorLine(point1, point2);
  * ```
  */
@@ -16,7 +16,7 @@ import { Line, Point } from "../type";
 export class SensorLine extends Sprite implements Line {
   /**
    * SensorLine의 태그입니다. 모든 SensorLine은 이 태그를 가집니다.
-  */
+   */
   static TAG = "sensorLine";
 
   /**
@@ -27,7 +27,7 @@ export class SensorLine extends Sprite implements Line {
 
   /**
    * 새 SensorLine 인스턴스를 생성합니다. Position은 두 점의 중간지점으로 설정됩니다.
-   * 
+   *
    * @param p1 시작점
    * @param p2 끝점
    */

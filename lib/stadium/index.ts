@@ -80,7 +80,7 @@ export class Stadium {
    *     - `id`는 crypto.randomUUID 함수를 사용해서 만들어집니다. **고유함을 보장하지 않습니다.**
    *
    * @param sprite 추가할 스프라이트 객체입니다.
-   *
+   * @deprecated `Stadium.addSprite`는 `Stadium.add`로 대체되었습니다.
    */
   addSprite(sprite: Sprite) {
     this.sprites.push(sprite);
@@ -90,5 +90,22 @@ export class Stadium {
     sprite.pubsub.sub("move", () => {
       this.pubsub.pub("spriteMove", [sprite]);
     });
+  }
+
+  public add(target: Sprite | Sprite[]) {
+    if (target instanceof Sprite) {
+      this.addSprite(target);
+      return;
+    }
+
+    if (Array.isArray(target)) {
+      for (const sprite of target) {
+        this.addSprite(sprite);
+      }
+
+      return;
+    }
+
+    throw new Error("Invalid target for [Stadium].add");
   }
 }

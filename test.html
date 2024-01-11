@@ -44,7 +44,17 @@
         stadium.addSprite(line);
       }
 
-      const me = new ImageSprite("/asset/eth.png", 40, 40, 80, 80);
+      const me = new ImageSprite({
+        src: "/asset/eth.png",
+        size: {
+          width: 80,
+          height: 80,
+        },
+        position: {
+          left: 40,
+          top: 40,
+        },
+      });
       const animateMe = new Animate();
 
       me.use([detector, animateMe]);

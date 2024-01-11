@@ -1,25 +1,25 @@
 import { Hook } from "./hook";
-import { SensorLine } from "../sensorLine";
+import { SensorLine } from "../sprite/sensorLine";
 import { Sprite } from "../sprite";
 import { ImageSprite } from "../sprite/ImageSprite";
 import { Point } from "../type";
 
 /**
  * Nearness는 Sprite와 다른 Sprite 사이 거리의 근접을 감지하는 Hook입니다.
- * 
+ *
  * ```ts
  * const me = new ImageSprite(...);
- * 
+ *
  * const enemy1 = new ImageSprite(...);
  * const enemy2 = new ImageSprite(...);
- * 
+ *
  * enemy1.tags.push("enemy");
  * enemy2.tags.push("enemy");
- * 
+ *
  * me.use([
  *     new Nearness(["enemy"], 20, onNearEnemy),
  * ]);
- * 
+ *
  * function onNearEnemy(me: Sprite, enemy: Sprite) {
  *     console.log("Near enemy!");
  * }
@@ -63,21 +63,21 @@ export class Nearness extends Hook {
     }
   }
 
-  onDestroy() { }
+  onDestroy() {}
 }
 
 /**
  * 두 Sprite 사이의 거리를 구합니다.
- * 
+ *
  * ```ts
  * const me = new ImageSprite(...);
  * const enemy = new ImageSprite(...);
- * 
+ *
  * const distance = getDistanceBetween(me, enemy);
  * ```
- * 
+ *
  * @param a
- * @param b 
+ * @param b
  * @returns Sprite 사이의 거리
  */
 

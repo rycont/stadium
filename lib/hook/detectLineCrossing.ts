@@ -9,14 +9,14 @@ import { Hook } from "./hook";
  * SensorLine만 검사 대상입니다.
  *
  * ```ts
- * const sprite = new ImageSprite("image", 10, 10, 0, 100);
+ * const sprite = new ImageSprite({ ... });
  *
  * const detector = new DetectLineCrossing({
  *     blockMove: true
  * });
  * const animte = new Animate();
  *
- * const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
+ * const line = new SensorLine({ ... });
  * line.tags.push(detector.targetTag);
  *
  * sprite.use([ detector, animate ]);

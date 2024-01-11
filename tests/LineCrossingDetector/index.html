@@ -23,7 +23,17 @@
         height: 500,
       });
 
-      const sprite = new ImageSprite("/asset/eth.png", 10, 10, 0, 100);
+      const sprite = new ImageSprite({
+        src: "/asset/eth.png",
+        size: {
+          width: 10,
+          height: 10,
+        },
+        position: {
+          left: 0,
+          top: 100,
+        },
+      });
 
       stadium.addSprite(sprite);
       const detector = new DetectLineCrossing({

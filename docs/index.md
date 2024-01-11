@@ -27,7 +27,17 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
             height: 400,
         });
 
-        const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+        const picture = new ImageSprite({
+            src: "https://picsum.photos/200",
+            size: {
+                width: 40,
+                height: 40,
+            },
+            position: {
+                x: 160,
+                y: 220,
+            },
+        });
         const animate = new Animate();
 
         picture.use([animate]);
@@ -55,7 +65,17 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
 </script>
 
 ```js{1-5,10,13,16,19}
-const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+const picture = new ImageSprite({
+  src: "https://picsum.photos/200",
+  size: {
+    width: 40,
+    height: 40,
+  },
+  position: {
+    x: 160,
+    y: 220,
+  },
+});
 const animate = new Animate();
 
 picture.use([animate]);
@@ -131,15 +151,18 @@ Sprite는 맵에 표시되는 각 개체입니다.
 const src = "/asset/eth.png";
 
 // 크기 설정
-const width = 80;
-const height = 80;
+const size = {
+  width: 80,
+  height: 80,
+};
 
 // 위치 설정
-const left = 40;
-const top = 40;
+const position = {
+  left: 160,
+  top: 220,
+};
 
-const image = new ImageSprite(src, width, height, left, top);
-
+const image = new ImageSprite({ src, size, position });
 stage.addSprite(image);
 ```
 
