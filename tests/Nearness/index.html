@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="stadium"></div>
+
+    <script type="module">
+      import {
+        Stadium,
+        ImageSprite,
+        Animate,
+        Nearness,
+        MoveableSprite,
+      } from "../../dist/stadium.js";
+
+      const el = document.getElementById("stadium");
+
+      const stadium = new Stadium(el, {
+        width: 500,
+        height: 500,
+      });
+
+      const images = [
+        "https://fastly.picsum.photos/id/1062/200/200.jpg?hmac=F_trr44XLYeth1u5FIqJIgtD4pR7WOlzKZ2xrQ3tzww",
+        "https://fastly.picsum.photos/id/66/200/200.jpg?hmac=gaKXe-rWmo5fSEm79TTkW_yFJLECw3FdRCh6Dm7jp4g",
+        "https://fastly.picsum.photos/id/993/200/200.jpg?hmac=CEiN6Eewa6wBwf3bGpqqpFUAi5-u8XXTZ76fqI6gMXo",
+      ];
+
+      const me = new ImageSprite(images[0], 20, 20, 100, 100);
+
+      const enemy1 = new ImageSprite(images[1], 50, 50, 200, 200);
+      const enemy2 = new ImageSprite(images[2], 50, 50, 50, 50);
+
+      enemy1.tags.push("enemy");
+      enemy2.tags.push("enemy");
+
+      stadium.addSprite(enemy1);
+      stadium.addSprite(enemy2);
+      stadium.addSprite(me);
+
+      const animate = new Animate();
+      me.use([animate, new Nearness(["enemy"], 10, onNearEnemy)]);
+
+      function onNearEnemy(me, enemy) {
+        alert("Near Enemy!");
+      }
+
+      animate.moveBy(100, 100, 200);
+    </script>
+  </body>
+</html>

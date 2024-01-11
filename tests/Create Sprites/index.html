@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="stadium"></div>
+
+    <script type="module">
+      import { Stadium, ImageSprite, SensorLine } from "../../dist/stadium.js";
+
+      const el = document.getElementById("stadium");
+
+      const stadium = new Stadium(el, {
+        width: 500,
+        height: 500,
+      });
+
+      const sprite = new ImageSprite("/asset/eth.png", 80, 80, 40, 40);
+
+      const point1 = { left: 40, top: 50 };
+      const point2 = { left: 320, top: 120 };
+
+      const line = new SensorLine(point1, point2);
+
+      stadium.addSprite(sprite);
+      stadium.addSprite(line);
+    </script>
+  </body>
+</html>

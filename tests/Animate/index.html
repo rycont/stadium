@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="stadium"></div>
+
+    <script type="module">
+      import { Stadium, ImageSprite, Animate } from "../../dist/stadium.js";
+
+      const el = document.getElementById("stadium");
+
+      const stadium = new Stadium(el, {
+        width: 500,
+        height: 500,
+      });
+
+      const sprite = new ImageSprite("/asset/eth.png", 80, 80, 40, 40);
+
+      const animate = new Animate();
+      sprite.use([animate]);
+
+      stadium.addSprite(sprite);
+
+      const dleft = 20;
+      const dtop = 20;
+      const duration = 250;
+
+      addEventListener("keydown", (e) => {
+        const key = e.key;
+
+        switch (key) {
+          case "ArrowUp":
+            animate.moveBy(0, -dtop, duration);
+            break;
+          case "ArrowDown":
+            animate.moveBy(0, dtop, duration);
+            break;
+          case "ArrowLeft":
+            animate.moveBy(-dleft, 0, duration);
+            break;
+          case "ArrowRight":
+            animate.moveBy(dleft, 0, duration);
+            break;
+        }
+      });
+    </script>
+  </body>
+</html>

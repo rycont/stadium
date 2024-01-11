@@ -7,13 +7,16 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "typedoc": "rm -rf ./docs/API; typedoc --watch",
-    "build-typedoc": "rm -rf ./docs/API; typedoc",
+    "typedoc:watch": "rm -rf ./docs/API; typedoc --watch",
+    "typedoc:build": "rm -rf ./docs/API; typedoc",
     "docs:dev": "vitepress dev docs",
     "docs:build": "rm -rf ./docs/API && typedoc && vite build && vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "test:e2e": "tsc && vite build && playwright test && playwright show-report"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.7",
     "typedoc": "^0.25.6",
     "typedoc-plugin-markdown": "^3.17.1",
     "typedoc-plugin-zod": "^1.1.2",

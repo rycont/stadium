@@ -25,3 +25,7 @@ dist-ssr
 
 docs/.vitepress/cache
 docs/API
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
