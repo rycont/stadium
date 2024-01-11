@@ -5,6 +5,7 @@ import {
   Line,
   Animate,
   DetectLineCrossing,
+  Nearness,
 } from "../lib/main";
 import harang from "./harang";
 
@@ -97,3 +98,29 @@ addEventListener("keydown", (e) => {
     animate.moveBy(0, 100);
   }
 });
+
+const eth = new ImageSprite({
+  src: "/asset/eth.png",
+  position: {
+    left: 600,
+    top: 320,
+  },
+  size: {
+    width: 40,
+    height: 40,
+  },
+});
+
+stadium.add(eth);
+
+eth.tags.push("eth");
+
+const near = new Nearness({
+  targetTags: ["eth"],
+  distance: 10,
+  handler: (sprite, target) => {
+    console.log(sprite, target);
+  },
+});
+
+harangSprite.use([near]);

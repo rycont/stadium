@@ -73,7 +73,14 @@
       stadium.addSprite(me);
 
       const animate = new Animate();
-      me.use([animate, new Nearness(["enemy"], 10, onNearEnemy)]);
+      me.use([
+        animate,
+        new Nearness({
+          targetTags: ["enemy"],
+          distance: 10,
+          handler: onNearEnemy,
+        }),
+      ]);
 
       function onNearEnemy(me, enemy) {
         alert("Near Enemy!");

@@ -17,7 +17,11 @@ import { Point } from "../type";
  * enemy2.tags.push("enemy");
  *
  * me.use([
- *     new Nearness(["enemy"], 20, onNearEnemy),
+ *     new Nearness({
+ *         targetTags: ["enemy"],
+ *         distance: 20,
+ *         handler: onNearEnemy,
+ *     }),
  * ]);
  *
  * function onNearEnemy(me: Sprite, enemy: Sprite) {
@@ -28,18 +32,31 @@ import { Point } from "../type";
 export class Nearness extends Hook {
   /**
    * ```ts
-   * new Nearness(["enemy"], 20, onNearEnemy),
+   * new Nearness({
+   *    targetTags: ["enemy"],
+   *    distance: 20,
+   *    handler: onNearEnemy,
+   * });
    * ```
    * @param targetTags 근접을 감지할 태그
-   * @param threshold  감지 거리
+   * @param distance  감지 거리
    * @param handler    근접을 감지했을 때 호출할 함수
    */
-  constructor(
-    public targetTags: string[],
-    public threshold: number = 20,
-    public handler: (source: Sprite, target: Sprite) => void
-  ) {
+
+  public targetTags: string[];
+  public distance: number = 10;
+  public handler: (source: Sprite, target: Sprite) => void;
+
+  constructor(props: {
+    targetTags: string[];
+    distance?: number;
+    handler: (source: Sprite, target: Sprite) => void;
+  }) {
     super();
+
+    this.targetTags = props.targetTags;
+    this.distance = props.distance ?? this.distance;
+    this.handler = props.handler;
   }
 
   onMount(sprite: Sprite) {
@@ -57,7 +74,7 @@ export class Nearness extends Hook {
     for (const target of targets) {
       const distance = getDistanceBetween(this.sprite, target);
 
-      if (distance < this.threshold) {
+      if (distance < this.distance) {
         this.handler(this.sprite, target);
       }
     }

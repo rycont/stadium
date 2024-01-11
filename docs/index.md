@@ -254,10 +254,10 @@ sprite.use([new MoveableSprite()]);
    스프라이트가 다른 스프라이트에 근접했는지를 확인하고, 특정 동작을 실행할 수 있습니다.
 
 ```typescript
-const tags = ["block"];
-const threshold = 10;
+const targetTags = ["block"];
+const distance = 10;
 
-const onNear = (source: Sprite, target: Sprite) => {};
+const handler = (source: Sprite, target: Sprite) => {};
 
-sprite.use([new Nearness(tags, threshold, onNear)]);
+sprite.use([new Nearness({ targetTags, distance, handler })]);
 ```
