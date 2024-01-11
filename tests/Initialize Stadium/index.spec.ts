@@ -1,10 +1,15 @@
 import { expect, test } from "@playwright/test";
+import { relative } from "path";
 
 test("Initialize Stadium", async ({ page }) => {
-  const pageURI =
+  const testPath =
     "/" +
-    import.meta.url.split("stadium/")[1].replace("index.spec.ts", "index.html");
-  await page.goto(pageURI);
+    relative(process.cwd(), new URL(import.meta.url).pathname).replace(
+      "index.spec.ts",
+      "index.html"
+    );
+
+  await page.goto(testPath);
 
   const stadium = await page.waitForSelector("#stadium");
 

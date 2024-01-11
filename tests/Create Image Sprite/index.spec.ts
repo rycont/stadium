@@ -1,12 +1,14 @@
 import { expect, test } from "@playwright/test";
+import { relative } from "path";
 
 test("Create Image Sprite", async ({ page }) => {
-  const pageURI =
+  const testPath =
     "/" +
-    import.meta.url.split("stadium/")[1].replace("index.spec.ts", "index.html");
+    relative(process.cwd(), new URL(import.meta.url).pathname).replace(
+      "index.spec.ts",
+      "index.html"
+    );
 
-  console.log(pageURI);
-  await page.goto(pageURI);
-
+  await page.goto(testPath);
   await expect(page).toHaveScreenshot();
 });
