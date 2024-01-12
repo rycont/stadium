@@ -3,7 +3,9 @@
  *
  *
  * ```ts
- * const pubsub = new PubSub<['event1', 'event2']>();
+ * const pubsub = new PubSub<{
+ *   event1: () => void;
+ * }>();
  *
  * pubsub.sub('event1', () => console.log('event1 발생'));
  * pubsub.pub('event1'); // 'event1 발생'
@@ -11,7 +13,9 @@
  *
  *
  * ```ts
- * const pubsub = new PubSub<['점심시간']>();
+ * const pubsub = new PubSub<{
+ *   점심시간: (food: string) => void;
+ * }>();
  *
  * pubsub.sub('점심시간', (food: string) => console.log(`${food} 먹을 시간입니다.`));
  * pubsub.pub('점심시간', ['김치찌개']);
@@ -39,10 +43,6 @@ export class PubSub<
    * pubsub.sub('register', (name: string) => console.log(`${name}님이 입장하셨습니다.`));
    * ```
    */
-  // public sub(event: Events[number], listener: Function) {
-  //   if (!this.handlers[event]) this.handlers[event] = [];
-  //   this.handlers[event].push(listener);
-  // }
 
   public sub<EventName extends keyof Events>(
     event: EventName,
