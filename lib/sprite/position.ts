@@ -3,14 +3,14 @@ import { Point } from "../type";
 
 /**
  * ```ts
- * const position = new Position(40, 50)
+ * const position = new Position({ left: 40, top: 50 })
  *
  * position.pubsub.sub('set', (changed, movement) => { /* ... *\/ })
  *
  * position.left = 40
  * position.top = 50
  *
- * position.set(40, 50)
+ * position.set({ left: 40, top: 50 })
  * ```
  * 위치를 다루는 클래스입니다.
  */
@@ -134,21 +134,24 @@ export class Position implements Point {
   }
 
   /**
-   * 가로방향 위치와 세로방향 위치를 설정합니다. `set` 이벤트가 발생합니다.
+   * 가로방향 위치와 세로방향 위치를 한번에 설정합니다. `set` 이벤트가 발생합니다.
    *
    * ```ts
-   * position.set(40, 50)
+   * position.set({
+   *   left: 40,
+   *   top: 50,
+   * })
    * ```
    */
 
-  set(left: number, top: number) {
+  set(point: Point) {
     const prev = {
       left: this._left,
       top: this._top,
     };
 
-    this._left = left;
-    this._top = top;
+    this._left = point.left;
+    this._top = point.top;
 
     const current = {
       left: this._left,

@@ -108,15 +108,8 @@ export class DetectLineCrossing extends Hook {
         sprite.tags.includes(this.targetTag) && isLine(sprite)
     );
 
-    for (const _blockLine of blockLines) {
-      const blockLine = _blockLine;
-
-      if (isIntersecting({ p1: this.sprite.position, p2: target }, blockLine)) {
-        return true;
-      }
-    }
-
-    return false;
+    const movePath = { p1: this.sprite.position, p2: target };
+    return blockLines.some((blockLine) => isIntersecting(blockLine, movePath));
   }
 }
 

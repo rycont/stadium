@@ -64,7 +64,7 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
     })
 </script>
 
-```js{1-5,10,13,16,19}
+```js
 const picture = new ImageSprite({
   src: "https://picsum.photos/200",
   size: {
