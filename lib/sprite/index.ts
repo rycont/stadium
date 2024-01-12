@@ -48,6 +48,8 @@ export abstract class Sprite {
    * @param position Sprite의 초기 위치
    */
   constructor(public position: Position) {
+    if (!(position instanceof Position))
+      throw new Error("position must be instance of Position");
     this.element.classList.add("sprite");
   }
 

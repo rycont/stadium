@@ -1,7 +1,8 @@
 import { Locator } from "../hook/locator";
 import { Position } from "./position";
 import { Sprite } from ".";
-import { Point, Size } from "../type";
+import { Point, Size, isPoint } from "../type";
+import { z } from "zod";
 
 /**
  * ```ts
@@ -25,6 +26,12 @@ export class ImageSprite extends Sprite {
 
   private size: Size;
 
+  static propScheme = z.object({
+    src: z.string(),
+    position: z.custom(isPoint),
+    size: z.object({ width: z.number(), height: z.number() }),
+  });
+
   /**
    * 새 ImageSprite 인스턴스를 생성합니다.
    * @param image 표시될 이미지의 URL. `src` 속성으로 설정됩니다.
@@ -35,7 +42,8 @@ export class ImageSprite extends Sprite {
    */
 
   constructor(props: { src: string; position: Point; size: Size }) {
-    // super(new Position(left, top));
+    ImageSprite.propScheme.parse(props);
+
     super(new Position(props.position.left, props.position.top));
 
     this._image = props.src;

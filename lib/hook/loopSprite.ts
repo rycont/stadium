@@ -32,6 +32,9 @@ export class LoopSprite extends Hook {
    * @param interval 이미지 전환 간격
    */
   constructor(private sheet: SpriteSheet, private interval: number = 200) {
+    if (!sheet.idle) throw new Error("Sheet must have idle state");
+    if (interval < 0) throw new Error("Interval must be positive");
+
     super();
 
     this.assertProperState("idle");
@@ -124,6 +127,9 @@ export class LoopSpriteByDirection extends LoopSprite {
    * @param interval 이미지 전환 간격
    */
   constructor(sheet: SpriteSheet, interval: number = 500) {
+    if (!sheet.idle) throw new Error("Sheet must have idle state");
+    if (interval < 0) throw new Error("Interval must be positive");
+
     super(sheet, interval);
     this.assertHaveAllDirection();
   }

@@ -3,6 +3,7 @@ import { SensorLine } from "../sprite/sensorLine";
 import { Sprite } from "../sprite";
 import { ImageSprite } from "../sprite/ImageSprite";
 import { Point } from "../type";
+import { z } from "zod";
 
 /**
  * Nearness는 Sprite와 다른 Sprite 사이 거리의 근접을 감지하는 Hook입니다.
@@ -30,6 +31,16 @@ import { Point } from "../type";
  * ```
  */
 export class Nearness extends Hook {
+  public targetTags: string[];
+  public distance: number = 10;
+  public handler: (source: Sprite, target: Sprite) => void;
+
+  static propScheme = z.object({
+    targetTags: z.array(z.string()),
+    distance: z.number().optional(),
+    handler: z.function(z.tuple([z.instanceof(Sprite), z.instanceof(Sprite)])),
+  });
+
   /**
    * ```ts
    * new Nearness({
@@ -43,15 +54,9 @@ export class Nearness extends Hook {
    * @param handler    근접을 감지했을 때 호출할 함수
    */
 
-  public targetTags: string[];
-  public distance: number = 10;
-  public handler: (source: Sprite, target: Sprite) => void;
+  constructor(props: z.infer<typeof Nearness.propScheme>) {
+    Nearness.propScheme.parse(props);
 
-  constructor(props: {
-    targetTags: string[];
-    distance?: number;
-    handler: (source: Sprite, target: Sprite) => void;
-  }) {
     super();
 
     this.targetTags = props.targetTags;

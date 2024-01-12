@@ -41,6 +41,10 @@ export interface Size {
   height: number;
 }
 
+export const isSize = (value: any): value is Size => {
+  return typeof value.width === "number" && typeof value.height === "number";
+};
+
 export type MoveTarget =
   | {
       left: number;

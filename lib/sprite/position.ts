@@ -39,7 +39,10 @@ export class Position implements Point {
    * @param _top 세로방향 위치
    */
 
-  constructor(public _left: number, public _top: number) {}
+  constructor(public _left: number, public _top: number) {
+    if (typeof _left !== "number") throw new Error("left must be number");
+    if (typeof _top !== "number") throw new Error("top must be number");
+  }
 
   /**
    * 가로방향 위치를 설정합니다. `set` 이벤트가 발생합니다.

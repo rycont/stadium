@@ -18,7 +18,7 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
         MoveableSprite,
         Animate,
         DetectLineCrossing,
-    } from "../dist/stadium.js";
+    } from "../lib/main.ts";
     const el = ref(null)
 
     onMounted(() => {
@@ -34,8 +34,8 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
                 height: 40,
             },
             position: {
-                x: 160,
-                y: 220,
+                left: 160,
+                top: 220,
             },
         });
         const animate = new Animate();
@@ -72,8 +72,8 @@ const picture = new ImageSprite({
     height: 40,
   },
   position: {
-    x: 160,
-    y: 220,
+    left: 160,
+    top: 220,
   },
 });
 const animate = new Animate();

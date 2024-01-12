@@ -17,8 +17,8 @@ const picture = new ImageSprite({
     height: 40,
   },
   position: {
-    x: 160,
-    y: 220,
+    left: 160,
+    top: 220,
   },
 });
 const animate = new Animate();

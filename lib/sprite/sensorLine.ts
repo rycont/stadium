@@ -1,6 +1,6 @@
 import { Sprite } from ".";
 import { Position } from "./position";
-import { Line, Point } from "../type";
+import { Line, Point, isLine } from "../type";
 
 /**
  * 다른 스프라이트의 접근 혹은 통과를 감지할 수 있는 스프라이트입니다.
@@ -34,6 +34,7 @@ export class SensorLine extends Sprite implements Line {
    * Line에서 새 SensorLine 인스턴스를 생성합니다. Position은 두 점의 중간지점으로 설정됩니다.
    */
   constructor(line: Line) {
+    if (!isLine(line)) throw new Error("line must implement Line");
     const { p1, p2 } = line;
 
     const center = new Position((p1.left + p2.top) / 2, (p1.left + p2.top) / 2);

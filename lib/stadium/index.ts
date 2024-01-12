@@ -1,6 +1,6 @@
 import { PubSub } from "../pubsub";
 import { Sprite } from "../sprite";
-import { Size } from "../type";
+import { Size, isSize } from "../type";
 
 /**
  * Stadium은 스프라이트가 배치될 수 있는 공간입니다.
@@ -48,6 +48,12 @@ export class Stadium {
     designedSize: Size,
     actualSize: Size = designedSize
   ) {
+    if (!(element instanceof HTMLDivElement))
+      throw new Error("element must be HTMLDivElement");
+
+    if (!isSize(designedSize)) throw new Error("designedSize must be Size");
+    if (!isSize(actualSize)) throw new Error("actualSize must be Size");
+
     this.element.style.setProperty("position", "relative");
 
     const { width, height } = actualSize;
