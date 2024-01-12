@@ -27,9 +27,6 @@ export abstract class Sprite {
    */
   public pubsub = new PubSub<["move"]>();
 
-  /**
-   * Sprite가 사용할 HookManager입니다. `Sprite.use` 메서드를 통해 Hook을 추가할 수 있습니다.
-   */
   public hookManager = new HookManager(this);
 
   /**
@@ -42,11 +39,6 @@ export abstract class Sprite {
    */
   public id?: string;
 
-  /**
-   * 새 Sprite 인스턴스를 생성합니다.
-   *
-   * @param position Sprite의 초기 위치
-   */
   constructor(public position: Position) {
     if (!(position instanceof Position))
       throw new Error("position must be instance of Position");
@@ -76,7 +68,12 @@ export abstract class Sprite {
   }
 
   /**
-   * 새 Hook들을 추가합니다.
+   * 새 Hook을 스프라이트에 추가합니다.
+   *
+   * ```ts
+   * sprite.use([ new Hook() ])
+   * ```
+   *
    * @param hooks
    */
   public use(hooks: Hook[]) {

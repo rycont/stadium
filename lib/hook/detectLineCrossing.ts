@@ -4,29 +4,44 @@ import { Line, Point, isLine } from "../type";
 import { Hook } from "./hook";
 
 /**
- * 스프라이트가 [Animate](./Animate) 훅을 통해 이동할 때 [SensorLine](./Animate)을
- * 지나치게 되는지를 검사하는 Hook입니다. `[instance].targetTag`를 태그로 가지는
- * SensorLine만 검사 대상입니다.
+ * 스프라이트가 [SensorLine](./SensorLine)을 지나는지 검사하는 Hook입니다.
+ *
+ * 검사할 라인의 태그를 지정할 수 있고, 지정되지 않는다면 랜덤한 태그가 생성됩니다.
+ *
+ * ```js
+ * const line = new SensorLine({ ... })
+ * line.tags.push('detect_line') // [!code highlight]
+ *
+ * const sprite = new ImageSprite({ ... })
+ * const animate = new Animate()
+ *
+ * const detector = new DetectLineCrossing({ // [!code highlight]
+ *     targetTag: ['detect_line'] // [!code highlight]
+ * }) // [!code highlight]
+ * detector.pubsub.sub("crossed", () => console.log("라인을 지났습니다!")) // [!code highlight]
+ *
+ * sprite.use([ detector, animate ]) // [!code highlight]
+ * animate.moveTo(100, 0)
+ * ```
+ *
+ * 다음은 `targetTag`를 지정하지 않고 사용하는 예시입니다.
  *
  * ```ts
- * const sprite = new ImageSprite({ ... });
+ * const detector = new DetectLineCrossing() // [!code highlight]
+ * const animate = new Animate()
  *
- * const detector = new DetectLineCrossing({
- *     blockMove: true
- * });
- * const animte = new Animate();
+ * sprite.use([
+ *   detector, // [!code highlight]
+ *   animate
+ * ])
  *
- * const line = new SensorLine({ ... });
- * line.tags.push(detector.targetTag);
+ * const line = new SensorLine({ ... })
+ * line.tags.push(detector.targetTag)  // [!code highlight]
  *
- * sprite.use([ detector, animate ]);
- *
- * detector.pubsub.sub("blocked", (from: Point, to: Point) => {
- *     console.log(from, "에서", to, "로 이동하려 했으나 라인에 막혔습니다.");
- * })
- *
- * animate.moveTo(100, 0) // { left: 0, top: 100 }에서 { left: 100, top: 0 }으로 이동하려 했으나 라인에 막혔습니다.
+ * detector.pubsub.sub("crossed", () => console.log("라인을 지났습니다!")) // [!code highlight]
+ * animate.moveTo(100, 0)
  * ```
+ *
  */
 export class DetectLineCrossing extends Hook {
   /**
@@ -49,6 +64,7 @@ export class DetectLineCrossing extends Hook {
 
   /**
    * DetectLineCrossing 클래스의 인스턴스를 생성합니다.
+   *
    * @param behavior.blockMove Animate의 이동 경로에 SensorLine이 있을 때, 이동할 수 없도록 합니다.
    * @param behavior.clearMovePathAfterBlocking Animate가 DetectLineCrossing에 의해 가로막혔을 때, 나머지 이동 대기열을 비웁니다.
    */
@@ -68,8 +84,8 @@ export class DetectLineCrossing extends Hook {
 
   /**
    * 스프라이트가 `target`으로 이동할 때 `SensorLine`을 지나치는지 검사합니다.
-   * @param target 이동할 목적지입니다.
-   * @returns 라인을 건너는지 여부를 나타내는 불리언 값입니다.
+   * @param target 이동할 목적지
+   * @returns `target`으로 이동할 때 `SensorLine`을 지나친다면 `true`를 반환합니다.
    *
    * ```ts
    * const detector = new DetectLineCrossing({});

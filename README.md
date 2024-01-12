@@ -24,7 +24,7 @@ const picture = new ImageSprite({
 const animate = new Animate();
 
 picture.use([animate]);
-stadium.addSprite(picture);
+stadium.add(picture);
 
 addEventListener("keydown", (e) => {
   switch (e.key) {
