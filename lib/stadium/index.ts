@@ -35,7 +35,9 @@ export class Stadium {
    * })
    * ```
    */
-  public pubsub = new PubSub<["spriteMove"]>();
+  public pubsub = new PubSub<{
+    spriteMove: (sprite: Sprite) => void;
+  }>();
 
   /**
    * Stadium 클래스의 생성자입니다.

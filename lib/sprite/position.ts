@@ -31,7 +31,12 @@ export class Position implements Point {
    * })
    * ```
    */
-  pubsub = new PubSub<["set"]>();
+  pubsub = new PubSub<{
+    set: (
+      changed: ("left" | "top")[],
+      movement: { prev: Point; current: Point }
+    ) => void;
+  }>();
 
   /**
    * 새 Position 인스턴스를 생성합니다.
@@ -157,5 +162,15 @@ export class Position implements Point {
         current,
       },
     ]);
+  }
+
+  /**
+   * Point 객체로 변환합니다
+   */
+  toPoint(): Point {
+    return {
+      left: this.left,
+      top: this.top,
+    };
   }
 }

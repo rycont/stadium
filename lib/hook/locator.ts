@@ -36,7 +36,7 @@ export class Locator extends Hook {
       `calc(var(--y-ratio) * ${position.top}px)`
     );
 
-    this.sprite.pubsub.pub("move", [this.sprite]);
+    this.sprite.pubsub.pub("move", [this.sprite.position.toPoint()]);
   }
 
   onDestroy() {
