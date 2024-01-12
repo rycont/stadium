@@ -1,6 +1,7 @@
 import { Hook, HookManager } from "../hook/hook";
 import { PubSub } from "../pubsub";
 import { Stadium } from "../stadium";
+import { Point } from "../type";
 import { Position } from "./position";
 
 /**
@@ -25,7 +26,9 @@ export abstract class Sprite {
   /**
    * Sprite의 PubSub 인스턴스입니다. Position에 변화가 생기면 `move` 이벤트가 생성됩니다.
    */
-  public pubsub = new PubSub<["move"]>();
+  public pubsub = new PubSub<{
+    move: (position: Point) => void;
+  }>();
 
   public hookManager = new HookManager(this);
 

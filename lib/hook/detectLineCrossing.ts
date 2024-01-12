@@ -60,7 +60,10 @@ export class DetectLineCrossing extends Hook {
    * });
    * ```
    */
-  public pubsub = new PubSub<["crossed", "blocked"]>();
+  public pubsub = new PubSub<{
+    crossed: (from: Point, to: Point) => void;
+    blocked: (from: Point, to: Point) => void;
+  }>();
 
   /**
    * DetectLineCrossing 클래스의 인스턴스를 생성합니다.

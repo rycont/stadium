@@ -3,7 +3,9 @@
  *
  *
  * ```ts
- * const pubsub = new PubSub<['event1', 'event2']>();
+ * const pubsub = new PubSub<{
+ *   event1: () => void;
+ * }>();
  *
  * pubsub.sub('event1', () => console.log('event1 발생'));
  * pubsub.pub('event1'); // 'event1 발생'
@@ -11,18 +13,24 @@
  *
  *
  * ```ts
- * const pubsub = new PubSub<['점심시간']>();
+ * const pubsub = new PubSub<{
+ *   점심시간: (food: string) => void;
+ * }>();
  *
  * pubsub.sub('점심시간', (food: string) => console.log(`${food} 먹을 시간입니다.`));
  * pubsub.pub('점심시간', ['김치찌개']);
  * ```
  *
  */
-export class PubSub<Events extends string[]> {
+export class PubSub<
+  Events extends {
+    [key: string]: (...args: any[]) => void;
+  }
+> {
   constructor() {}
 
   private handlers: {
-    [key: string]: Function[];
+    [key in keyof Events]?: Events[key][];
   } = {};
 
   /**
@@ -35,9 +43,13 @@ export class PubSub<Events extends string[]> {
    * pubsub.sub('register', (name: string) => console.log(`${name}님이 입장하셨습니다.`));
    * ```
    */
-  public sub(event: Events[number], listener: Function) {
+
+  public sub<EventName extends keyof Events>(
+    event: EventName,
+    listener: Events[EventName]
+  ) {
     if (!this.handlers[event]) this.handlers[event] = [];
-    this.handlers[event].push(listener);
+    this.handlers[event]!.push(listener);
   }
 
   /**
@@ -50,9 +62,14 @@ export class PubSub<Events extends string[]> {
    * pubsub.pub('register', ['홍길동']);
    * ```
    */
-  public pub(event: Events[number], args: any[] = []) {
+
+  public pub<EventName extends keyof Events>(
+    event: EventName,
+    args: Parameters<Events[EventName]>
+  ) {
     if (!this.handlers[event]) return;
-    for (const listener of this.handlers[event]) {
+
+    for (const listener of this.handlers[event]!) {
       listener(...args);
     }
   }

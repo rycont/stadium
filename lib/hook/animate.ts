@@ -42,7 +42,10 @@ export class Animate extends Hook {
    * });
    * ```
    */
-  public pubsub = new PubSub<["start", "end"]>();
+  public pubsub = new PubSub<{
+    start: (from: Point, to: Point) => void;
+    end: (position: Point) => void;
+  }>();
 
   constructor() {
     super();
@@ -177,11 +180,19 @@ export class Animate extends Hook {
         }
 
         if (detector.behavior.blockMove) {
-          detector.pubsub.pub("blocked", [this.sprite]);
+          detector.pubsub.pub("blocked", [
+            this.sprite.position.toPoint(),
+            { ...target },
+          ]);
           blocked = true;
+
+          break;
         }
 
-        detector.pubsub.pub("crossed", [this.sprite]);
+        detector.pubsub.pub("crossed", [
+          this.sprite.position.toPoint(),
+          { ...target },
+        ]);
       }
     }
 
@@ -189,8 +200,10 @@ export class Animate extends Hook {
   }
 
   private get blocklineDetector() {
-    return this.sprite.hookManager.get(
-      DetectLineCrossing.name
-    ) as DetectLineCrossing[];
+    return [
+      ...(this.sprite.hookManager.get(
+        DetectLineCrossing.name
+      ) as DetectLineCrossing[]),
+    ].sort((a, b) => +!!b.behavior.blockMove - +!!a.behavior.blockMove);
   }
 }
