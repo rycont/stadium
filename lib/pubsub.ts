@@ -18,11 +18,15 @@
  * ```
  *
  */
-export class PubSub<Events extends string[]> {
+export class PubSub<
+  Events extends {
+    [key: string]: (...args: any[]) => void;
+  }
+> {
   constructor() {}
 
   private handlers: {
-    [key: string]: Function[];
+    [key in keyof Events]?: Events[key][];
   } = {};
 
   /**
@@ -35,9 +39,17 @@ export class PubSub<Events extends string[]> {
    * pubsub.sub('register', (name: string) => console.log(`${name}님이 입장하셨습니다.`));
    * ```
    */
-  public sub(event: Events[number], listener: Function) {
+  // public sub(event: Events[number], listener: Function) {
+  //   if (!this.handlers[event]) this.handlers[event] = [];
+  //   this.handlers[event].push(listener);
+  // }
+
+  public sub<EventName extends keyof Events>(
+    event: EventName,
+    listener: Events[EventName]
+  ) {
     if (!this.handlers[event]) this.handlers[event] = [];
-    this.handlers[event].push(listener);
+    this.handlers[event]!.push(listener);
   }
 
   /**
@@ -50,9 +62,14 @@ export class PubSub<Events extends string[]> {
    * pubsub.pub('register', ['홍길동']);
    * ```
    */
-  public pub(event: Events[number], args: any[] = []) {
+
+  public pub<EventName extends keyof Events>(
+    event: EventName,
+    args: Parameters<Events[EventName]>
+  ) {
     if (!this.handlers[event]) return;
-    for (const listener of this.handlers[event]) {
+
+    for (const listener of this.handlers[event]!) {
       listener(...args);
     }
   }
