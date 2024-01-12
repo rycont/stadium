@@ -100,13 +100,13 @@ export class Stadium {
 
   public add(target: Sprite | Sprite[]) {
     if (target instanceof Sprite) {
-      this.add(target);
+      this.addSprite(target);
       return;
     }
 
     if (Array.isArray(target)) {
       for (const sprite of target) {
-        this.add(sprite);
+        this.addSprite(sprite);
       }
 
       return;
