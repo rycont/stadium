@@ -7,15 +7,11 @@ import { z } from "zod";
 /**
  * ```ts
  * const src = "/asset/eth.png"
- *
- * // 크기 설정
  * const size = { width: 80, height: 80 }
- *
- * // 위치 설정
  * const position = { left: 400, top: 320 }
  *
- * const image = new ImageSprite({ src, size, position })
- * stadium.addSprite(image)
+ * const image = new ImageSprite({ src, size, position }) // [!code highlight]
+ * stadium.add(image)
  * ```
  * 이미지를 그릴 수 있는 Sprite입니다.
  */
@@ -31,15 +27,6 @@ export class ImageSprite extends Sprite {
     position: z.custom(isPoint),
     size: z.object({ width: z.number(), height: z.number() }),
   });
-
-  /**
-   * 새 ImageSprite 인스턴스를 생성합니다.
-   * @param image 표시될 이미지의 URL. `src` 속성으로 설정됩니다.
-   * @param width 가로 크기
-   * @param height 세로 크기
-   * @param left
-   * @param top
-   */
 
   constructor(props: { src: string; position: Point; size: Size }) {
     ImageSprite.propScheme.parse(props);
@@ -68,6 +55,10 @@ export class ImageSprite extends Sprite {
 
   /**
    * 새 이미지를 설정합니다.
+   *
+   * ```ts
+   * sprite.image = "/asset/eth.png"
+   * ```
    *
    * @param value 새 이미지의 URL
    */

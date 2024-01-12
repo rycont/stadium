@@ -48,11 +48,13 @@ export class LoopSprite extends Hook {
 
   /**
    * 보여줄 시트의 상태를 설정합니다.
-   * @param value 상태 값
    *
    * ```ts
    * loop.state = "fly";
    * ```
+   *
+   * @param value 상태 값
+   *
    */
   public set state(value: string) {
     if (this._state === value) return;
@@ -98,21 +100,25 @@ export class LoopSprite extends Hook {
 }
 
 /**
- * LoopSprite를 상속받아, Animate Hook의 이동 방향에 따라 이미지를 전환하는 Hook입니다.
- * Animate Hook보다 이후에 마운트되어야 합니다.
+ * Animate Hook의 이동 방향에 따라 이미지를 전환하는 Hook입니다.
+ * Animate Hook보다 나중에 마운트되어야 합니다.
+ *
+ * ::: info
+ * SpriteSheet에 `left`, `right`, `up`, `down`, `idle` 상태가 있어야 합니다.
+ * :::
  *
  * ```ts
  * const sprite = new ImageSprite({ ... });
  *
- * const sheet = {
- *     left: ["left1.png", "left2.png", "left3.png"],
- *     right: ["right1.png", "right2.png", "right3.png"],
- *     up: ["up1.png", "up2.png", "up3.png"],
- *     down: ["down1.png", "down2.png", "down3.png"],
- *     idle: ["idle1.png", "idle2.png", "idle3.png"],
- * }
+ * const sheet = { // [!code highlight]
+ *     left: ["left1.png", "left2.png", "left3.png"], // [!code highlight]
+ *     right: ["right1.png", "right2.png", "right3.png"], // [!code highlight]
+ *     up: ["up1.png", "up2.png", "up3.png"], // [!code highlight]
+ *     down: ["down1.png", "down2.png", "down3.png"], // [!code highlight]
+ *     idle: ["idle1.png", "idle2.png", "idle3.png"], // [!code highlight]
+ * } // [!code highlight]
  *
- * const loop = new LoopSpriteByDirection(sheet, 100)
+ * const loop = new LoopSpriteByDirection(sheet, 100) // [!code highlight]
  * const animate = new Animate();
  *
  * sprite.use([ animate, loop ])

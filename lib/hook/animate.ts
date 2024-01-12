@@ -3,6 +3,8 @@ import { PubSub } from "../pubsub";
 import { DetectLineCrossing } from "./detectLineCrossing";
 import { MoveTarget, Point } from "../type";
 
+export let DEFAULT_ANIMATION_DURATION = 500;
+
 /**
  * 스프라이트의 위치를 부드럽게 조작할 수 있게 하는 Hook 입니다.
  * 애니메이션 재생 시간의 기본값은 500ms입니다.
@@ -19,7 +21,7 @@ import { MoveTarget, Point } from "../type";
  * const duration = 1000
  *
  * animate.moveBy(dleft, dtop, duration) // 1초 동안 오른쪽으로 80px 이동
- * animate.moveTo({ left: 0, top: 0, duration: 500 }) // 0.5초 동안 (0, 0)으로 이동
+ * animate.moveTo(0, 0, duration) // 0.5초 동안 (0, 0)으로 이동
  * ```
  */
 export class Animate extends Hook {
@@ -56,15 +58,20 @@ export class Animate extends Hook {
 
   /**
    * 상대적인 좌표로 스프라이트를 이동합니다.
-   * @param dleft 좌측으로 이동할 거리
-   * @param dtop 상단으로 이동할 거리
-   * @param duration 애니메이션의 지속 시간 (ms)
    *
    * ```ts
    * animate.moveBy(80, 0, 1000) // 1초 동안 오른쪽으로 80px 이동
    * ```
+   *
+   * @param dleft 좌측으로 이동할 거리
+   * @param dtop 상단으로 이동할 거리
+   * @param duration 애니메이션의 지속 시간 (ms)
    */
-  public moveBy(dleft: number, dtop: number, duration: number = 500) {
+  public moveBy(
+    dleft: number,
+    dtop: number,
+    duration: number = DEFAULT_ANIMATION_DURATION
+  ) {
     this.addMoveTarget({
       dleft,
       dtop,
@@ -74,15 +81,20 @@ export class Animate extends Hook {
 
   /**
    * 절대적인 좌표로 스프라이트를 이동합니다.
-   * @param left 이동할 좌표의 x값
-   * @param top 이동할 좌표의 y값
-   * @param duration 애니메이션의 지속 시간 (ms)
    *
    * ```ts
    * animate.moveTo(0, 0, 800) // 0.8초 동안 (0, 0)으로 이동
    * ```
+   *
+   * @param left 이동할 좌표의 x값
+   * @param top 이동할 좌표의 y값
+   * @param duration 애니메이션의 지속 시간 (ms)
    */
-  public moveTo(left: number, top: number, duration: number = 500) {
+  public moveTo(
+    left: number,
+    top: number,
+    duration: number = DEFAULT_ANIMATION_DURATION
+  ) {
     this.addMoveTarget({
       left,
       top,
@@ -107,19 +119,6 @@ export class Animate extends Hook {
     const blocked = this.applyLineBlocker(target);
 
     if (blocked) return;
-
-    // if (this.blocklineDetector?.isCrossing(target)) {
-    //   if (this.blocklineDetector.behavior.clearMovePathAfterBlocking) {
-    //     this.targets = [];
-    //   }
-
-    //   if (this.blocklineDetector.behavior.blockMove) {
-    //     this.blocklineDetector.pubsub.pub("blocked", [this.sprite]);
-    //     return;
-    //   }
-
-    //   this.blocklineDetector.pubsub.pub("crossed", [this.sprite]);
-    // }
 
     this.pubsub.pub("start", [
       { left: this.sprite.position.left, top: this.sprite.position.top },
