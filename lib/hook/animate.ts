@@ -1,8 +1,7 @@
 import { Hook } from "./hook";
 import { PubSub } from "../pubsub";
-import { Sprite } from "../sprite";
-import { LineCrossingDetector } from "./lineCrossingDetector";
-import { MoveTarget } from "../type";
+import { DetectLineCrossing } from "./detectLineCrossing";
+import { MoveTarget, Point } from "../type";
 
 /**
  * 스프라이트의 위치를 부드럽게 조작할 수 있게 하는 Hook 입니다.
@@ -43,24 +42,8 @@ export class Animate extends Hook {
    */
   public pubsub = new PubSub<["start", "end"]>();
 
-  private blocklineDetector?: LineCrossingDetector;
-
   constructor() {
     super();
-  }
-
-  /**
-   * 훅이 스프라이트에 마운트될 때 호출되는 메서드입니다.
-   * 스프라이트에서 `LineCrossingDetector` 훅을 찾고, 있다면 `blocklineDetector`에 저장합니다.
-   * @param sprite 마운트된 스프라이트
-   */
-  public onMount(sprite: Sprite): void {
-    super.onMount(sprite);
-    try {
-      this.blocklineDetector = sprite.hookManager.get(
-        LineCrossingDetector.name
-      ) as LineCrossingDetector;
-    } catch (_e) {}
   }
 
   private addMoveTarget(target: MoveTarget) {
@@ -121,18 +104,22 @@ export class Animate extends Hook {
   private async move(_target: MoveTarget) {
     const target = this.completeTarget(_target);
 
-    if (this.blocklineDetector?.isCrossing(target)) {
-      if (this.blocklineDetector.behavior.clearMovePathAfterBlocking) {
-        this.targets = [];
-      }
+    const blocked = this.applyLineBlocker(target);
 
-      if (this.blocklineDetector.behavior.blockMove) {
-        this.blocklineDetector.pubsub.pub("blocked", [this.sprite]);
-        return;
-      }
+    if (blocked) return;
 
-      this.blocklineDetector.pubsub.pub("crossed", [this.sprite]);
-    }
+    // if (this.blocklineDetector?.isCrossing(target)) {
+    //   if (this.blocklineDetector.behavior.clearMovePathAfterBlocking) {
+    //     this.targets = [];
+    //   }
+
+    //   if (this.blocklineDetector.behavior.blockMove) {
+    //     this.blocklineDetector.pubsub.pub("blocked", [this.sprite]);
+    //     return;
+    //   }
+
+    //   this.blocklineDetector.pubsub.pub("crossed", [this.sprite]);
+    // }
 
     this.pubsub.pub("start", [
       { left: this.sprite.position.left, top: this.sprite.position.top },
@@ -179,5 +166,32 @@ export class Animate extends Hook {
         top: target.dtop + this.sprite.position.top,
       };
     }
+  }
+
+  private applyLineBlocker(target: MoveTarget & Point) {
+    let blocked = false;
+
+    for (const detector of this.blocklineDetector) {
+      if (detector.isCrossing(target)) {
+        if (detector.behavior.clearMovePathAfterBlocking) {
+          this.targets = [];
+        }
+
+        if (detector.behavior.blockMove) {
+          detector.pubsub.pub("blocked", [this.sprite]);
+          blocked = true;
+        }
+
+        detector.pubsub.pub("crossed", [this.sprite]);
+      }
+    }
+
+    return blocked;
+  }
+
+  private get blocklineDetector() {
+    return this.sprite.hookManager.get(
+      DetectLineCrossing.name
+    ) as DetectLineCrossing[];
   }
 }

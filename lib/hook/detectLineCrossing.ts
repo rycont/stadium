@@ -5,40 +5,30 @@ import { Hook } from "./hook";
 
 /**
  * 스프라이트가 [Animate](./Animate) 훅을 통해 이동할 때 [SensorLine](./Animate)을
- * 지나치게 되는지를 검사하는 Hook입니다. `LineCrossingDetector.LINE_TAG`를 태그로 가지는
+ * 지나치게 되는지를 검사하는 Hook입니다. `[instance].targetTag`를 태그로 가지는
  * SensorLine만 검사 대상입니다.
  *
  * ```ts
- * const sprite = new ImageSprite("image", 10, 10, 0, 100);
+ * const sprite = new ImageSprite({ ... });
  *
- * const lineCrossingDetector = new LineCrossingDetector({
+ * const detector = new DetectLineCrossing({
  *     blockMove: true
  * });
  * const animte = new Animate();
  *
- * const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
- * line.tags.push(LineCrossingDetector.LINE_TAG);
+ * const line = new SensorLine({ ... });
+ * line.tags.push(detector.targetTag);
  *
- * sprite.use([ lineCrossingDetector, animate ]);
+ * sprite.use([ detector, animate ]);
  *
- * lineCrossingDetector.pubsub.sub("blocked", (from: Point, to: Point) => {
+ * detector.pubsub.sub("blocked", (from: Point, to: Point) => {
  *     console.log(from, "에서", to, "로 이동하려 했으나 라인에 막혔습니다.");
  * })
  *
  * animate.moveTo(100, 0) // { left: 0, top: 100 }에서 { left: 100, top: 0 }으로 이동하려 했으나 라인에 막혔습니다.
  * ```
  */
-export class LineCrossingDetector extends Hook {
-  /**
-   * `SensorLine`에 `LineCrossingDetector.LINE_TAG` 태그가 붙어있어야 감지할 수 있습니다.
-   *
-   * ```ts
-   * const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
-   * line.tags.push(LineCrossingDetector.LINE_TAG);
-   * ```
-   */
-  public static LINE_TAG = "blockline";
-
+export class DetectLineCrossing extends Hook {
   /**
    * `crossed`, `blocked` 이벤트를 생성하는 PubSub 인스턴스입니다.
    *
@@ -46,11 +36,11 @@ export class LineCrossingDetector extends Hook {
    * - 만일 `behavior.blockMove`가 `true`여서 이동이 가로막혔다면 `blocked` 이벤트를 생성합니다.
    *
    * ```ts
-   * lineCrossingDetector.pubsub.sub("crossed", (from: Point, to: Point) => {
+   * detector.pubsub.sub("crossed", (from: Point, to: Point) => {
    *     console.log(from, "에서", to, "로 이동하며 라인을 지났습니다.");
    * });
    *
-   * lineCrossingDetector.pubsub.sub("blocked", (from: Point, to: Point) => {
+   * detector.pubsub.sub("blocked", (from: Point, to: Point) => {
    *     console.log(from, "에서", to, "로 이동하려 했으나 라인에 막혔습니다.");
    * });
    * ```
@@ -58,15 +48,16 @@ export class LineCrossingDetector extends Hook {
   public pubsub = new PubSub<["crossed", "blocked"]>();
 
   /**
-   * LineCrossingDetector 클래스의 인스턴스를 생성합니다.
+   * DetectLineCrossing 클래스의 인스턴스를 생성합니다.
    * @param behavior.blockMove Animate의 이동 경로에 SensorLine이 있을 때, 이동할 수 없도록 합니다.
-   * @param behavior.clearMovePathAfterBlocking Animate가 LineCrossingDetector에 의해 가로막혔을 때, 나머지 이동 대기열을 비웁니다.
+   * @param behavior.clearMovePathAfterBlocking Animate가 DetectLineCrossing에 의해 가로막혔을 때, 나머지 이동 대기열을 비웁니다.
    */
   constructor(
     public behavior: {
       blockMove?: boolean;
       clearMovePathAfterBlocking?: boolean;
-    }
+    } = {},
+    public targetTag = "line-" + crypto.randomUUID()
   ) {
     super();
   }
@@ -81,21 +72,21 @@ export class LineCrossingDetector extends Hook {
    * @returns 라인을 건너는지 여부를 나타내는 불리언 값입니다.
    *
    * ```ts
-   * const lineCrossingDetector = new LineCrossingDetector({});
+   * const detector = new DetectLineCrossing({});
    * const sprite = new ImageSprite(...);
    *
-   * sprite.use([lineCrossingDetector]);
+   * sprite.use([detector]);
    *
-   * const line = new SensorLine({ left: 0, top: 0 }, { left: 100, top: 100 });
-   * line.tags.push(LineCrossingDetector.LINE_TAG);
+   * const line = new SensorLine({ p1: { left: 0, top: 0 }, p2: { left: 100, top: 100 } })
+   * line.tags.push(detector.targetTag);
    *
-   * lineCrossingDetector.isCrossing({ left: 50, top: 50 }); // true
+   * detector.isCrossing({ left: 50, top: 50 }); // true
    * ```
    */
   isCrossing(target: Point) {
     const blockLines = this.sprite.stadium!.sprites.filter(
       (sprite): sprite is Sprite & Line =>
-        sprite.tags.includes(LineCrossingDetector.LINE_TAG) && isLine(sprite)
+        sprite.tags.includes(this.targetTag) && isLine(sprite)
     );
 
     for (const _blockLine of blockLines) {

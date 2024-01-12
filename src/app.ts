@@ -1,12 +1,12 @@
-import { ImageSprite } from "../lib/sprite/ImageSprite";
-import { Stadium } from "../lib/stadium";
-
-import { LineCrossingDetector } from "../lib/hook/lineCrossingDetector";
-import { LoopSpriteByDirection } from "../lib/hook/loopSprite";
-import { MoveableSprite } from "../lib/hook/moveable";
-import { Nearness } from "../lib/hook/nearness";
-import { SensorLine } from "../lib/sensorLine";
-import { Animate } from "../lib/hook/animate";
+import {
+  Stadium,
+  ImageSprite,
+  SensorLine,
+  Line,
+  Animate,
+  DetectLineCrossing,
+  Nearness,
+} from "../lib/main";
 import harang from "./harang";
 
 const element = document.getElementById("stadium")! as HTMLDivElement;
@@ -15,55 +15,112 @@ const stadium = new Stadium(element, {
   height: 640,
 });
 
-const line = new SensorLine({ left: 40, top: 50 }, { left: 320, top: 120 });
-const harangSprite = new ImageSprite(harang.idle[0], 80, 80, 40, 40);
-const ethSprite1 = new ImageSprite("/asset/eth.png", 40, 40, 200, 200);
-const ethSprite2 = new ImageSprite("/asset/eth.png", 40, 40, 360, 200);
-
-ethSprite1.tags.push("eth");
-ethSprite2.tags.push("eth");
-line.tags.push(LineCrossingDetector.LINE_TAG);
-
-stadium.addSprite(harangSprite);
-stadium.addSprite(ethSprite1);
-stadium.addSprite(ethSprite2);
-stadium.addSprite(line);
-
-const lineCrossingDetector = new LineCrossingDetector({
-  blockMove: true,
-  clearMovePathAfterBlocking: true,
+const harangSprite = new ImageSprite({
+  src: harang.idle[0],
+  position: {
+    left: 400,
+    top: 320,
+  },
+  size: {
+    width: 80,
+    height: 80,
+  },
 });
 
-lineCrossingDetector.pubsub.sub("blocked", () => {
-  console.log("Blocked by line");
-});
+stadium.add(harangSprite);
 
 const animate = new Animate();
+harangSprite.use([animate]);
 
-harangSprite.use([
-  new MoveableSprite(),
-  lineCrossingDetector,
-  animate,
-  new Nearness(["eth"], 10, (_, target) => {
-    console.log("이더리움을 획득했습니다!");
-    target.destroy();
-  }),
-  new Nearness(["block"], 10, () => {
-    console.log("차단선에 가까워짐");
-  }),
-  new LoopSpriteByDirection(harang),
-]);
+const detector = new DetectLineCrossing({
+  blockMove: true,
+});
+harangSprite.use([detector]);
+
+const lines: Line[] = [
+  {
+    p1: {
+      left: 50,
+      top: 50,
+    },
+    p2: {
+      left: 250,
+      top: 50,
+    },
+  },
+  {
+    p1: {
+      left: 250,
+      top: 50,
+    },
+    p2: {
+      left: 250,
+      top: 250,
+    },
+  },
+  {
+    p1: {
+      left: 250,
+      top: 250,
+    },
+    p2: {
+      left: 50,
+      top: 250,
+    },
+  },
+  {
+    p1: {
+      left: 50,
+      top: 250,
+    },
+    p2: {
+      left: 50,
+      top: 50,
+    },
+  },
+];
+
+for (const line of lines) {
+  const sensorLine = new SensorLine(line);
+  sensorLine.tags.push(detector.targetTag);
+
+  stadium.add(sensorLine);
+}
 
 addEventListener("keydown", (e) => {
-  const key = e.key;
-
-  if (key === "ArrowUp") {
-    animate.moveBy(0, -80);
-  } else if (key === "ArrowDown") {
-    animate.moveBy(0, 80);
-  } else if (key === "ArrowLeft") {
-    animate.moveBy(-80, 0);
-  } else if (key === "ArrowRight") {
-    animate.moveBy(80, 0);
+  if (e.key === "ArrowLeft") {
+    animate.moveBy(-100, 0);
+  } else if (e.key === "ArrowRight") {
+    animate.moveBy(100, 0);
+  } else if (e.key === "ArrowUp") {
+    animate.moveBy(0, -100);
+  } else if (e.key === "ArrowDown") {
+    animate.moveBy(0, 100);
   }
 });
+
+const eth = new ImageSprite({
+  src: "/asset/eth.png",
+  position: {
+    left: 600,
+    top: 320,
+  },
+  size: {
+    width: 40,
+    height: 40,
+  },
+});
+
+stadium.add(eth);
+
+eth.tags.push("eth");
+
+const near = new Nearness({
+  targetTags: ["eth"],
+  distance: 10,
+  handler: (sprite, target) => {
+    console.log(sprite, target);
+  },
+});
+
+harangSprite.use([near]);

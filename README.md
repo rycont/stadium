@@ -10,7 +10,17 @@ Stadium
 </p>
 
 ```js
-const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+const picture = new ImageSprite({
+  src: "https://picsum.photos/200",
+  size: {
+    width: 40,
+    height: 40,
+  },
+  position: {
+    x: 160,
+    y: 220,
+  },
+});
 const animate = new Animate();
 
 picture.use([animate]);

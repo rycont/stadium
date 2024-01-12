@@ -29,10 +29,41 @@
         "https://fastly.picsum.photos/id/993/200/200.jpg?hmac=CEiN6Eewa6wBwf3bGpqqpFUAi5-u8XXTZ76fqI6gMXo",
       ];
 
-      const me = new ImageSprite(images[0], 20, 20, 100, 100);
+      const me = new ImageSprite({
+        src: images[0],
+        size: {
+          width: 20,
+          height: 20,
+        },
+        position: {
+          left: 100,
+          top: 100,
+        },
+      });
 
-      const enemy1 = new ImageSprite(images[1], 50, 50, 200, 200);
-      const enemy2 = new ImageSprite(images[2], 50, 50, 50, 50);
+      const enemy1 = new ImageSprite({
+        src: images[1],
+        size: {
+          width: 50,
+          height: 50,
+        },
+        position: {
+          left: 200,
+          top: 200,
+        },
+      });
+
+      const enemy2 = new ImageSprite({
+        src: images[2],
+        size: {
+          width: 50,
+          height: 50,
+        },
+        position: {
+          left: 50,
+          top: 50,
+        },
+      });
 
       enemy1.tags.push("enemy");
       enemy2.tags.push("enemy");
@@ -42,7 +73,14 @@
       stadium.addSprite(me);
 
       const animate = new Animate();
-      me.use([animate, new Nearness(["enemy"], 10, onNearEnemy)]);
+      me.use([
+        animate,
+        new Nearness({
+          targetTags: ["enemy"],
+          distance: 10,
+          handler: onNearEnemy,
+        }),
+      ]);
 
       function onNearEnemy(me, enemy) {
         alert("Near Enemy!");

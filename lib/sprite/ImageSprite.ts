@@ -1,20 +1,19 @@
 import { Locator } from "../hook/locator";
 import { Position } from "./position";
 import { Sprite } from ".";
+import { Point, Size } from "../type";
 
 /**
  * ```ts
  * const src = "/asset/eth.png"
  *
  * // 크기 설정
- * const width = 80
- * const height = 80
+ * const size = { width: 80, height: 80 }
  *
  * // 위치 설정
- * const left = 40
- * const top = 40
+ * const position = { left: 400, top: 320 }
  *
- * const image = new ImageSprite(src, width, height, left, top)
+ * const image = new ImageSprite({ src, size, position })
  * stadium.addSprite(image)
  * ```
  * 이미지를 그릴 수 있는 Sprite입니다.
@@ -23,6 +22,8 @@ import { Sprite } from ".";
 export class ImageSprite extends Sprite {
   public element = document.createElement("img");
   private _image!: string;
+
+  private size: Size;
 
   /**
    * 새 ImageSprite 인스턴스를 생성합니다.
@@ -33,16 +34,13 @@ export class ImageSprite extends Sprite {
    * @param top
    */
 
-  constructor(
-    image: string,
-    public width: number,
-    public height: number,
-    left: number = 0,
-    top: number = 0
-  ) {
-    super(new Position(left, top));
+  constructor(props: { src: string; position: Point; size: Size }) {
+    // super(new Position(left, top));
+    super(new Position(props.position.left, props.position.top));
 
-    this._image = image;
+    this._image = props.src;
+    this.size = props.size;
+
     this.use([new Locator()]);
   }
 
@@ -50,8 +48,8 @@ export class ImageSprite extends Sprite {
     const element = this.element;
     const style = element.style;
 
-    style.setProperty("width", `calc(var(--x-ratio) * ${this.width}px)`);
-    style.setProperty("height", `calc(var(--y-ratio) * ${this.height}px)`);
+    style.setProperty("width", `calc(var(--x-ratio) * ${this.size.width}px)`);
+    style.setProperty("height", `calc(var(--y-ratio) * ${this.size.height}px)`);
 
     element.src = this.image;
   }

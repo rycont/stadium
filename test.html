@@ -19,7 +19,7 @@
         ImageSprite,
         MoveableSprite,
         Animate,
-        LineCrossingDetector,
+        DetectLineCrossing,
       } from "./dist/stadium.js";
 
       const element = document.getElementById("stadium");
@@ -29,26 +29,37 @@
       });
 
       const lines = [
-        new SensorLine({ left: 40, top: 40 }, { left: 120, top: 40 }),
-        new SensorLine({ left: 120, top: 40 }, { left: 120, top: 120 }),
-        new SensorLine({ left: 120, top: 120 }, { left: 40, top: 120 }),
-        new SensorLine({ left: 40, top: 120 }, { left: 40, top: 40 }),
+        { p1: { left: 40, top: 40 }, p2: { left: 120, top: 40 } },
+        { p1: { left: 120, top: 40 }, p2: { left: 120, top: 120 } },
+        { p1: { left: 120, top: 120 }, p2: { left: 40, top: 120 } },
+        { p1: { left: 40, top: 120 }, p2: { left: 40, top: 40 } },
       ];
 
+      const detector = new DetectLineCrossing({
+        blockMove: true,
+      });
+
       for (const line of lines) {
-        line.tags.push(LineCrossingDetector.LINE_TAG);
-        stadium.addSprite(line);
+        const sensorLine = new SensorLine(line);
+
+        sensorLine.tags.push(detector.targetTag);
+        stadium.addSprite(sensorLine);
       }
 
-      const me = new ImageSprite("/asset/eth.png", 40, 40, 80, 80);
+      const me = new ImageSprite({
+        src: "/asset/eth.png",
+        size: {
+          width: 40,
+          height: 40,
+        },
+        position: {
+          left: 50,
+          top: 50,
+        },
+      });
       const animateMe = new Animate();
 
-      me.use([
-        new LineCrossingDetector({
-          blockMove: true,
-        }),
-        animateMe,
-      ]);
+      me.use([detector, animateMe]);
       stadium.addSprite(me);
 
       addEventListener("keydown", (e) => {

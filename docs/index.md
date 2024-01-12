@@ -17,7 +17,7 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
         ImageSprite,
         MoveableSprite,
         Animate,
-        LineCrossingDetector,
+        DetectLineCrossing,
     } from "../dist/stadium.js";
     const el = ref(null)
 
@@ -27,7 +27,17 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
             height: 400,
         });
 
-        const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+        const picture = new ImageSprite({
+            src: "https://picsum.photos/200",
+            size: {
+                width: 40,
+                height: 40,
+            },
+            position: {
+                x: 160,
+                y: 220,
+            },
+        });
         const animate = new Animate();
 
         picture.use([animate]);
@@ -55,7 +65,17 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
 </script>
 
 ```js{1-5,10,13,16,19}
-const picture = new ImageSprite("https://picsum.photos/200", 40, 40, 160, 220);
+const picture = new ImageSprite({
+  src: "https://picsum.photos/200",
+  size: {
+    width: 40,
+    height: 40,
+  },
+  position: {
+    x: 160,
+    y: 220,
+  },
+});
 const animate = new Animate();
 
 picture.use([animate]);
@@ -131,15 +151,18 @@ Sprite는 맵에 표시되는 각 개체입니다.
 const src = "/asset/eth.png";
 
 // 크기 설정
-const width = 80;
-const height = 80;
+const size = {
+  width: 80,
+  height: 80,
+};
 
 // 위치 설정
-const left = 40;
-const top = 40;
+const position = {
+  left: 160,
+  top: 220,
+};
 
-const image = new ImageSprite(src, width, height, left, top);
-
+const image = new ImageSprite({ src, size, position });
 stage.addSprite(image);
 ```
 
@@ -155,10 +178,12 @@ stage.addSprite(image);
 맵에 선을 그을 수 있습니다. 다양한 상호작용을 구현하기 위해 사용합니다.
 
 ```typescript
-const point1 = { left: 40, top: 50 };
-const point2 = { left: 320, top: 120 };
+const points = {
+  p1: { left: 40, top: 50 },
+  p2: { left: 320, top: 120 },
+};
 
-const line = new SensorLine(point1, point2);
+const line = new SensorLine(points);
 stage.addSprite(line);
 ```
 
@@ -182,22 +207,22 @@ sprite.use([animate]);
 animate.moveBy(80, 0);
 ```
 
-2. **LineCrossingDetector**  
+2. **DetectLineCrossing**  
    ImageSprite가 SensorLine을 지났는지 검사하고, 이동을 제한하거나 특정 동작을 실행할 수 있습니다.
 
 ```typescript
-line.tags.push(LineCrossingDetector.LINE_TAG);
-
-const lineCrossingDetector = new LineCrossingDetector({
+const detector = new DetectLineCrossing({
   blockMove: true,
   clearMovePathAfterBlocking: true,
 });
 
-lineCrossingDetector.pubsub.sub("blocked", () => {
+line.tags.push(detector.targetTag);
+
+detector.pubsub.sub("blocked", () => {
   console.log("Blocked by line");
 });
 
-sprite.use([lineCrossingDetector]);
+sprite.use([detector]);
 ```
 
 3. **LoopSprite**  
@@ -229,10 +254,10 @@ sprite.use([new MoveableSprite()]);
    스프라이트가 다른 스프라이트에 근접했는지를 확인하고, 특정 동작을 실행할 수 있습니다.
 
 ```typescript
-const tags = ["block"];
-const threshold = 10;
+const targetTags = ["block"];
+const distance = 10;
 
-const onNear = (source: Sprite, target: Sprite) => {};
+const handler = (source: Sprite, target: Sprite) => {};
 
-sprite.use([new Nearness(tags, threshold, onNear)]);
+sprite.use([new Nearness({ targetTags, distance, handler })]);
 ```

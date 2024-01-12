@@ -8,7 +8,7 @@ import { Hook } from "./hook";
  * ImageSprite에 반복되는 이미지를 표시할 수 있게 해주는 Hook입니다.
  *
  * ```ts
- * const sprite = new ImageSprite("image", 10, 10, 0, 100);
+ * const sprite = new ImageSprite({ ... });
  * const sheet = {
  *     idle: ["idle1.png", "idle2.png", "idle3.png"],
  *     fly: ["fly1.png", "fly2.png", "fly3.png"],
@@ -99,7 +99,7 @@ export class LoopSprite extends Hook {
  * Animate Hook보다 이후에 마운트되어야 합니다.
  *
  * ```ts
- * const sprite = new ImageSprite("image", 10, 10, 0, 100);
+ * const sprite = new ImageSprite({ ... });
  *
  * const sheet = {
  *     left: ["left1.png", "left2.png", "left3.png"],
@@ -131,15 +131,17 @@ export class LoopSpriteByDirection extends LoopSprite {
   public onMount(sprite: Sprite): void {
     super.onMount(sprite);
 
-    const animate = sprite.hookManager.get(Animate.name) as Animate;
+    const animates = sprite.hookManager.get(Animate.name) as Animate[];
 
-    animate.pubsub.sub("start", (from: Point, to: Point) => {
-      this.state = this.getDirection(from, to);
-    });
+    for (const animate of animates) {
+      animate.pubsub.sub("start", (from: Point, to: Point) => {
+        this.state = this.getDirection(from, to);
+      });
 
-    animate.pubsub.sub("end", () => {
-      this.state = "idle";
-    });
+      animate.pubsub.sub("end", () => {
+        this.state = "idle";
+      });
+    }
   }
 
   private getDirection(from: Point, to: Point) {
