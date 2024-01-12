@@ -41,7 +41,7 @@ Stadium은 코딩 교육용 웹 게임을 쉽게 개발할 수 있도록 도와�
         const animate = new Animate();
 
         picture.use([animate]);
-        stadium.addSprite(picture);
+        stadium.add(picture);
 
         addEventListener("keydown", (e) => {
             switch(e.key) {
@@ -79,7 +79,7 @@ const picture = new ImageSprite({
 const animate = new Animate();
 
 picture.use([animate]);
-stadium.addSprite(picture);
+stadium.add(picture);
 
 addEventListener("keydown", (e) => {
   switch (e.key) {
@@ -163,7 +163,7 @@ const position = {
 };
 
 const image = new ImageSprite({ src, size, position });
-stage.addSprite(image);
+stage.add(image);
 ```
 
 다음과 같이 사용할 수 있습니다:
@@ -184,7 +184,7 @@ const points = {
 };
 
 const line = new SensorLine(points);
-stage.addSprite(line);
+stage.add(line);
 ```
 
 다음과 같이 사용할 수 있습니다:

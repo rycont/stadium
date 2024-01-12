@@ -75,7 +75,7 @@ export class Stadium {
    * 스프라이트를 스타디움에 추가합니다. Stadium에 Sprite를 추가하는 과정을 `mount`라고 합니다.
    *
    * ```ts
-   * stadium.addSprite(sprite);
+   * stadium.add(sprite);
    * ```
    *
    * 다음의 순서로 mount됩니다:
@@ -100,13 +100,13 @@ export class Stadium {
 
   public add(target: Sprite | Sprite[]) {
     if (target instanceof Sprite) {
-      this.addSprite(target);
+      this.add(target);
       return;
     }
 
     if (Array.isArray(target)) {
       for (const sprite of target) {
-        this.addSprite(sprite);
+        this.add(sprite);
       }
 
       return;

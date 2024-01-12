@@ -35,7 +35,7 @@
         },
       });
 
-      stadium.addSprite(sprite);
+      stadium.add(sprite);
       const detector = new DetectLineCrossing({
         blockMove: true,
       });
@@ -50,7 +50,7 @@
 
       sprite.use([detector, animate]);
 
-      stadium.addSprite(line);
+      stadium.add(line);
 
       detector.pubsub.sub("blocked", (from, to) => {
         alert(`이동하려 했으나 라인에 막혔습니다.`);

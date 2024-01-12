@@ -43,7 +43,7 @@
         const sensorLine = new SensorLine(line);
 
         sensorLine.tags.push(detector.targetTag);
-        stadium.addSprite(sensorLine);
+        stadium.add(sensorLine);
       }
 
       const me = new ImageSprite({
@@ -60,7 +60,7 @@
       const animateMe = new Animate();
 
       me.use([detector, animateMe]);
-      stadium.addSprite(me);
+      stadium.add(me);
 
       addEventListener("keydown", (e) => {
         switch (e.key) {
