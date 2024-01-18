@@ -2,6 +2,7 @@ import { Hook } from "./hook";
 import { PubSub } from "../pubsub";
 import { DetectLineCrossing } from "./detectLineCrossing";
 import { MoveTarget, Point } from "../type";
+import { pointToRelativePixels } from "../utils";
 
 export let DEFAULT_ANIMATION_DURATION = 500;
 
@@ -25,23 +26,13 @@ export let DEFAULT_ANIMATION_DURATION = 500;
  * ```
  */
 export class Animate extends Hook {
-  private targets: MoveTarget[] = [];
+  private targetQueue: MoveTarget[] = [];
   private isMoving = false;
 
   /**
    * 이벤트를 발행하고 구독하는 PubSub 인스턴스입니다.
-   * "start"와 "end" 이벤트를 발행합니다.
-   *
-   * ```ts
-   * animate.pubsub.sub("start", (from: Point, to: Point) => {
-   *  console.log(from, "에서", to, "로 이동합니다.");
-   * });
-   *
-   * animate.pubsub.sub("end", (position: Point) => {
-   *  console.log(position, "에 도착했습니다.");
-   * });
-   * ```
    */
+
   public pubsub = new PubSub<{
     start: (from: Point, to: Point) => void;
     end: (position: Point) => void;
@@ -52,7 +43,7 @@ export class Animate extends Hook {
   }
 
   private addMoveTarget(target: MoveTarget) {
-    this.targets.push(target);
+    this.targetQueue.push(target);
 
     if (!this.isMoving) {
       this.runQueue();
@@ -108,8 +99,8 @@ export class Animate extends Hook {
   private async runQueue() {
     this.isMoving = true;
 
-    while (this.targets.length > 0) {
-      const target = this.targets.shift()!;
+    while (this.targetQueue.length > 0) {
+      const target = this.targetQueue.shift()!;
       await this.move(target);
     }
 
@@ -117,44 +108,32 @@ export class Animate extends Hook {
   }
 
   private async move(_target: MoveTarget) {
-    const target = this.completeTarget(_target);
-
-    const blocked = this.applyLineBlocker(target);
+    const target = this.makeTargetComplete(_target);
+    const blocked = this.callLineBlocker(target);
 
     if (blocked) return;
 
-    this.pubsub.pub("start", [
-      { left: this.sprite.position.left, top: this.sprite.position.top },
-      { ...target },
-    ]);
+    const startPoint = this.sprite.position.toPoint();
+    this.pubsub.pub("start", [startPoint, { ...target }]);
+
+    const animateConfig = {
+      duration: target.duration,
+      easing: "ease-in-out",
+    };
 
     const animate = this.sprite.element.animate(
-      [
-        {
-          left: `calc(var(--x-ratio) * ${this.sprite.position.left}px)`,
-          top: `calc(var(--y-ratio) * ${this.sprite.position.top}px)`,
-        },
-        {
-          left: `calc(var(--x-ratio) * ${target.left}px)`,
-          top: `calc(var(--y-ratio) * ${target.top}px)`,
-        },
-      ],
-      {
-        duration: target.duration,
-        easing: "ease-in-out",
-      }
+      [pointToRelativePixels(startPoint), pointToRelativePixels(target)],
+      animateConfig
     );
 
-    this.sprite.position.set(target.left, target.top);
+    this.sprite.position.set(target);
     await animate.finished;
 
-    this.pubsub.pub("end", [
-      { left: this.sprite.position.left, top: this.sprite.position.top },
-    ]);
+    this.pubsub.pub("end", [this.sprite.position.toPoint()]);
     return;
   }
 
-  private completeTarget(target: MoveTarget) {
+  private makeTargetComplete(target: MoveTarget) {
     if ("left" in target) {
       return {
         ...target,
@@ -170,40 +149,42 @@ export class Animate extends Hook {
     }
   }
 
-  private applyLineBlocker(target: MoveTarget & Point) {
+  private callLineBlocker(target: MoveTarget & Point) {
     let blocked = false;
+    let clearMovePath = false;
 
-    for (const detector of this.blocklineDetector) {
-      if (detector.isCrossing(target)) {
-        if (detector.behavior.clearMovePathAfterBlocking) {
-          this.targets = [];
-        }
+    const caughtDetectors = this.blocklineDetector.filter((detector) =>
+      detector.isCrossing(target)
+    );
 
-        if (detector.behavior.blockMove) {
-          detector.pubsub.pub("blocked", [
-            this.sprite.position.toPoint(),
-            { ...target },
-          ]);
-          blocked = true;
+    for (const detector of caughtDetectors) {
+      let event: "crossed" | "blocked" = "crossed";
 
-          break;
-        }
-
-        detector.pubsub.pub("crossed", [
-          this.sprite.position.toPoint(),
-          { ...target },
-        ]);
+      if (detector.behavior.blockMove) {
+        event = "blocked";
+        blocked = true;
       }
+
+      if (detector.behavior.clearMovePathAfterBlocking) {
+        clearMovePath = true;
+      }
+
+      detector.pubsub.pub(event, [
+        this.sprite.position.toPoint(),
+        { ...target },
+      ]);
+    }
+
+    if (clearMovePath) {
+      this.targetQueue = [];
     }
 
     return blocked;
   }
 
   private get blocklineDetector() {
-    return [
-      ...(this.sprite.hookManager.get(
-        DetectLineCrossing.name
-      ) as DetectLineCrossing[]),
-    ].sort((a, b) => +!!b.behavior.blockMove - +!!a.behavior.blockMove);
+    return this.sprite.hookManager.get(
+      DetectLineCrossing.name
+    ) as DetectLineCrossing[];
   }
 }

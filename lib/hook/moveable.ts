@@ -5,7 +5,7 @@ import { Sprite } from "../sprite";
 /**
  * Sprite를 드래그 앤 드롭으로 이동할 수 있도록 합니다.
  * [@daybrush/moveable](https://github.com/daybrush/moveable)로 구현하였습니다.
- * 
+ *
  * ```ts
  * const sprite = new Sprite();
  * sprite.use([ new MoveableSprite() ]);
@@ -30,7 +30,7 @@ export class MoveableSprite extends Hook {
     element.setAttribute("draggable", "true");
 
     element.addEventListener("dragstart", this.onMouseDown.bind(this));
-    addEventListener("click", this.onDocumentClick.bind(this))
+    addEventListener("click", this.onDocumentClick.bind(this));
   }
 
   public onDestroy(): void {
@@ -42,7 +42,7 @@ export class MoveableSprite extends Hook {
     element.removeAttribute("draggable");
 
     element.removeEventListener("dragstart", this.onMouseDown.bind(this));
-    removeEventListener("click", this.onDocumentClick.bind(this))
+    removeEventListener("click", this.onDocumentClick.bind(this));
 
     super.onDestroy();
   }
@@ -78,6 +78,6 @@ export class MoveableSprite extends Hook {
   }
 
   private onDrag({ left, top }: OnDrag) {
-    this.sprite.position.set(left, top);
+    this.sprite.position.set({ left, top });
   }
 }
