@@ -12,6 +12,7 @@ import { Sprite } from "../sprite";
  * ```
  */
 export class MoveableSprite extends Hook {
+  //@ts-ignore: Deno에서 Moveable을 Constructable 객체로 인식하지 못함.
   private moveable?: Moveable;
 
   /**
@@ -57,6 +58,7 @@ export class MoveableSprite extends Hook {
       this.moveable.destroy();
     }
 
+    // @ts-ignore: L15와 동일
     this.moveable = new Moveable(this.sprite.stadium!.element, {
       target: this.sprite.element,
       draggable: true,
