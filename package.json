@@ -1,5 +1,5 @@
 {
-  "name": "stadium",
+  "name": "@rycont/stadium",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "moveable": "^0.53.0",
-    "zod": "^3.22.4"
+    "zod": "^3.24.1"
   }
 }

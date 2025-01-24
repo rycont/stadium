@@ -6,7 +6,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, "lib/main.ts"),
-      name: "@horangedu/stadium",
+      name: "@rycont/stadium",
       // the proper extensions will be added
       fileName: "stadium",
     },

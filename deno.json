@@ -1,0 +1,15 @@
+{
+    "name": "@rycont/stadium",
+    "exports": "./lib/main.ts",
+    "unstable": [
+        "sloppy-imports"
+    ],
+    "compilerOptions": {
+        "lib": [
+            "deno.window",
+            "dom"
+        ]
+    },
+    "version": "1.0.0",
+    "license": "MIT"
+}
