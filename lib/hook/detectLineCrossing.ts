@@ -81,7 +81,7 @@ export class DetectLineCrossing extends Hook {
     super();
   }
 
-  public onMount(sprite: Sprite) {
+  public override onMount(sprite: Sprite) {
     super.onMount(sprite);
   }
 

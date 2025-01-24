@@ -13,7 +13,7 @@ export class Locator extends Hook {
     super();
   }
 
-  onMount(sprite: Sprite) {
+  override onMount(sprite: Sprite) {
     super.onMount(sprite);
 
     this.sprite.element.style.setProperty("transform", "translate(-50%, -50%)");
@@ -39,7 +39,7 @@ export class Locator extends Hook {
     this.sprite.pubsub.pub("move", [this.sprite.position.toPoint()]);
   }
 
-  onDestroy() {
+  override onDestroy() {
     this.sprite.element.style.removeProperty("transform");
     this.sprite.element.style.removeProperty("position");
   }

@@ -64,7 +64,7 @@ export class Nearness extends Hook {
     this.handler = props.handler;
   }
 
-  onMount(sprite: Sprite) {
+  override onMount(sprite: Sprite) {
     super.onMount(sprite);
     sprite.stadium?.pubsub.sub("spriteMove", () => this.onMove());
   }
@@ -85,7 +85,7 @@ export class Nearness extends Hook {
     }
   }
 
-  onDestroy() {}
+  override onDestroy() {}
 }
 
 /**

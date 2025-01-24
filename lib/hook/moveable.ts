@@ -1,4 +1,4 @@
-import Moveable, { OnDrag } from "moveable";
+import Moveable, { type OnDrag } from "moveable";
 import { Hook } from "./hook";
 import { Sprite } from "../sprite";
 
@@ -21,7 +21,7 @@ export class MoveableSprite extends Hook {
     super();
   }
 
-  public onMount(sprite: Sprite): void {
+  public override onMount(sprite: Sprite): void {
     super.onMount(sprite);
 
     const element = this.sprite.element;
@@ -33,7 +33,7 @@ export class MoveableSprite extends Hook {
     addEventListener("click", this.onDocumentClick.bind(this));
   }
 
-  public onDestroy(): void {
+  public override onDestroy(): void {
     this.removeMoveable();
 
     const element = this.sprite.element;

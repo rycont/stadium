@@ -1,4 +1,4 @@
-import { Sprite } from ".";
+import { Sprite } from "./index";
 import { Position } from "./position";
 import { Line, Point, isLine } from "../type";
 
@@ -24,8 +24,8 @@ export class SensorLine extends Sprite implements Line {
   /**
    * SensorLine의 DOM 엘리먼트입니다. div 엘리먼트로 그려집니다.
    */
-  element = document.createElement("div");
-  tags = [SensorLine.TAG];
+  override element = document.createElement("div");
+  override tags = [SensorLine.TAG];
 
   public p1: Point;
   public p2: Point;

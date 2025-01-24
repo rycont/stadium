@@ -41,7 +41,7 @@ export class LoopSprite extends Hook {
     this.preload();
   }
 
-  public onMount(sprite: Sprite): void {
+  public override onMount(sprite: Sprite): void {
     super.onMount(sprite);
     this.state = "idle";
   }
@@ -140,7 +140,7 @@ export class LoopSpriteByDirection extends LoopSprite {
     this.assertHaveAllDirection();
   }
 
-  public onMount(sprite: Sprite): void {
+  public override onMount(sprite: Sprite): void {
     super.onMount(sprite);
 
     const animates = sprite.hookManager.get(Animate.name) as Animate[];

@@ -1,7 +1,7 @@
 import { Locator } from "../hook/locator";
 import { Position } from "./position";
-import { Sprite } from ".";
-import { Point, Size, isPoint } from "../type";
+import { Sprite } from "./index";
+import { type Point, type Size, isPoint } from "../type";
 import { z } from "zod";
 
 /**
@@ -17,7 +17,7 @@ import { z } from "zod";
  */
 
 export class ImageSprite extends Sprite {
-  public element = document.createElement("img");
+  public override element = document.createElement("img");
   private _image!: string;
 
   private size: Size;
